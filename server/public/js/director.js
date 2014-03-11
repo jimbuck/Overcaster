@@ -1,6 +1,8 @@
 var NodeWebkit = require('nw.gui');
 var Datastore = require('nedb');
-//var Server = require('./server');
+var Path = require('path');
+
+window.__dirname = Path.dirname(process.execPath).replace(/\\/gi,'/');
 
 var Overcaster = {};
 
@@ -18,17 +20,19 @@ var Overcaster = {};
 	
 	function initWindow() {
 		oc.Window.showDevTools();
-		oc.Window.maximize();//oc.Window.enterFullscreen();
+		oc.Window.maximize();
 	}
 	
 	function initFilesystem(){
-		var dirs = ['data','content', 'content/html','content/css', 'content/js'];
+		var dirs = ['/data','/elements', '/content','/images'];
 		
 		for(var d in dirs) {
-			if(!oc.FS.existsSync(dirs[d]))
+			var dir = __dirname+dirs[d];
+			
+			if(!oc.FS.existsSync(dir))
 			{
-				console.log('Creating directory', dirs[d]);
-				oc.FS.mkdirSync(dirs[d], function(err) {
+				console.log('Creating directory', dir);
+				oc.FS.mkdirSync(dir, function(err) {
 					if(err){
 						console.error(err);
 					}

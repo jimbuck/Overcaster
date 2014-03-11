@@ -6,11 +6,14 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var args = process.argv;
+
+var port = process.env.PORT || args[2] || 6014;
 
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 6014);
+app.set('port',  port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());

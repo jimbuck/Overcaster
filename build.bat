@@ -1,11 +1,10 @@
 @echo off
 
 REM Clearing the "release" folder...
-rmdir /S /Q .\release
-mkdir .\release
+del .\release\Overcaster.exe
 
 REM Compressing the project files...
-7z a Overcaster.zip .\node_modules .\logo.svg .\icon.png .\index.html .\LICENSE.txt .\package.json .\README.md
+7z a Overcaster.zip .\node_modules .\server .\logo.svg .\icon.png .\loading.gif .\index.html .\LICENSE .\package.json .\README.md
 move Overcaster.zip .\release\Overcaster.nw
 
 REM Copy nw.exe for packaging
@@ -23,3 +22,6 @@ REM Repackaging exe with required DLL's...
 enigmavbconsole ..\Overcaster.evb
 
 del .\Overcaster-temp.exe
+
+cd release
+start Overcaster.exe

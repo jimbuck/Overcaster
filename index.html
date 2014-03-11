@@ -15,12 +15,20 @@
 			vertical-align:middle;
 		}
 		
-		#logo {
-			max-width: 1080px;
-			width:50%;
+		#loading, #logo {
 			display: block;
 			margin: 0 auto;
 		}
+		
+		#logo {
+			max-width: 1080px;
+			width:50%;
+		}
+		
+		#loading {
+			margin-top: 25%;
+		}
+		
 	</style>
   </head>
   <body>
@@ -28,17 +36,32 @@
 		<div id="cell">
 			<div id="content">
 				<img id="logo" src="logo.svg" type="text/svg+xml"></img>
-				<p style="text-align:center;">Loading...</p>
+				<img id="loading" src="loading.gif" alt="Loading..."/>
 			</div>
 		</div>
 	</div>
     <div id="scripts">
       <script>
 			var NodeWebkit = require('nw.gui');
-			var appWindow = Window = NodeWebkit.Window.get();
+			var appWindow = NodeWebkit.Window.get();
 			
-			appWindow.maximize();
-			//appWindow.showDevTools();
+			appWindow.focus();
+			
+			var spawn = require("child_process").spawn;
+			global.Express = spawn("node", ['./server/server', 6014]);
+			
+			(function(e,c){
+				e.stdout.on("data", expressStdOut);
+				function expressStdOut (buffer) {
+				  c.log('[EXPRESS]:',buffer.toString());
+				}
+				
+				e.on('exit', expressExit);
+				function expressExit(code) {
+				  c.log('[EXPRESS]: Exited with code ' + code);
+				}
+			})(global.Express, console);
+			
 			
 			window.location.replace('http://localhost:6014');
 	  </script>
