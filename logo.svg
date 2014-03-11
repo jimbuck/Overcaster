@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="1206.609"
+   height="266.99997"
+   id="svg8746">
+  <title
+     id="title8787">Overcaster Logo</title>
+  <defs
+     id="defs8748" />
+  <metadata
+     id="metadata8751">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Overcaster Logo</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(10.753881,-941.23523)"
+     id="layer1">
+    <text
+       x="64.25724"
+       y="1181.1355"
+       id="text3824"
+       xml:space="preserve"
+       style="font-size:340.03765869px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:-18px;word-spacing:0px;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Tunga;-inkscape-font-specification:Tunga"><tspan
+         x="64.25724"
+         y="1181.1355"
+         id="tspan3826"
+         style="letter-spacing:-18px"><tspan
+   id="tspan6026"
+   style="letter-spacing:-24.02003479px"><tspan
+   id="tspan4071"
+   style="fill:none">O</tspan>v</tspan>er<tspan
+   id="tspan4318"
+   style="letter-spacing:-10px">c</tspan><tspan
+   id="tspan5858"
+   style="letter-spacing:-23.25002861px">a</tspan><tspan
+   id="tspan6024"
+   style="letter-spacing:-22.26002502px">s</tspan><tspan
+   id="tspan5968"
+   style="letter-spacing:-19.5700016px">t</tspan>er</tspan></text>
+    <path
+       d="m 122.72362,951.23523 c -68.216101,0 -123.47750079,55.30647 -123.47750079,123.52247 0,68.216 55.26139979,123.4775 123.47750079,123.4775 68.216,0 123.5225,-55.2615 123.5225,-123.4775 0,-68.216 -55.3065,-123.52247 -123.5225,-123.52247 z m 0,22.6511 c 55.7097,0 100.8714,45.16157 100.8714,100.87137 0,55.7098 -45.1617,100.8715 -100.8714,100.8715 -55.709801,0 -100.871501,-45.1617 -100.871501,-100.8715 0,-55.7098 45.1617,-100.87137 100.871501,-100.87137 z"
+       id="path6154"
+       style="fill:#4d4d4d;fill-opacity:1;stroke:none" />
+    <path
+       d="m -88.571426,461.64789 a 39.285713,39.285713 0 1 1 -78.571424,0 39.285713,39.285713 0 1 1 78.571424,0 z"
+       transform="matrix(0.40727274,0,0,0.40782301,174.81882,886.46463)"
+       id="path3967"
+       style="fill:#5498fe;fill-opacity:1;stroke:none" />
+    <path
+       d="m -88.571426,461.64789 a 39.285713,39.285713 0 1 1 -78.571424,0 39.285713,39.285713 0 1 1 78.571424,0 z"
+       transform="matrix(0.98005635,0,0,0.98138057,248.05332,621.68293)"
+       id="path3969"
+       style="fill:none;stroke:#a8cbff;stroke-width:14.27525234;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="m -88.571426,461.64789 a 39.285713,39.285713 0 1 1 -78.571424,0 39.285713,39.285713 0 1 1 78.571424,0 z"
+       transform="matrix(1.7964522,0,0,1.7988794,352.43532,244.28637)"
+       id="path3971"
+       style="fill:#f2f2f2;fill-opacity:0;stroke:#d0e2ff;stroke-width:8.90043259;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="m -88.571426,461.64789 a 39.285713,39.285713 0 1 1 -78.571424,0 39.285713,39.285713 0 1 1 78.571424,0 z"
+       transform="matrix(1.7964522,0,0,1.7988794,352.43532,244.28637)"
+       id="path3973"
+       style="fill:#f2f2f2;fill-opacity:0;stroke:#d0e2ff;stroke-width:8.90043259;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+  </g>
+</svg>

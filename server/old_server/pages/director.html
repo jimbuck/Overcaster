@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	
+</head>
+<body>
+	<h1>This is a test!</h1>
+	
+	<input type="button" value="Queue"/>
+	<input type="button" value="Publish"/>
+	
+	<div id="scripts" class="hidden">
+		
+		<script src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript">
+			var sessionId = '{{SESSION_ID}}';
+			var socket = io.connect('http://localhost:6014');
+			socket.on('connect', function (data) {
+				socket.emit('createSession', {
+					sessionId: sessionId
+				});
+			});
+			
+			$('input[value=Publish]').click(function(){
+				
+			});
+			
+		</script>
+	</div>
+</body>
+</html>

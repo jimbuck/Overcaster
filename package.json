@@ -1,0 +1,36 @@
+{
+  "name": "Overcaster",
+  "version": "0.1.0",
+  "author": "Jim Buck <jim@jimmyboh.com>",
+  "description": "HTML5 overlay creator, manager, and server.",
+  "contributors": [],
+  "bin": {},
+  "main": "index.html",
+  "window": {
+	"icon": "icon.png",
+    "width": 800,
+    "height": 600,
+    "toolbar": false
+  },
+  "node-remote": "<local>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JimmyBoh/Overcaster.git"
+  },
+  "keywords": [
+    "overlay",
+    "html5",
+	"livestream",
+    "OBS"
+  ],
+  "dependencies": {
+    "nedb"       : "~0.8.11",
+	"socket.io" : "0.9.*"
+  },
+  "devDependencies": {},
+  "bundledDependencies": [],
+  "license": "GPLv2",
+  "engines": {
+    "node": ">=0.6"
+  }
+}

@@ -1,0 +1,47 @@
+<html>
+  <head>
+  <title>Overcaster</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="bootstrap.min.css"/>
+	<style type="text/css">
+		#main {
+			width:100%;
+			height:100%;
+			display:table;
+		}
+		
+		#cell{
+			display:table-cell;
+			vertical-align:middle;
+		}
+		
+		#logo {
+			max-width: 1080px;
+			width:50%;
+			display: block;
+			margin: 0 auto;
+		}
+	</style>
+  </head>
+  <body>
+	<div id="main">
+		<div id="cell">
+			<div id="content">
+				<img id="logo" src="logo.svg" type="text/svg+xml"></img>
+				<p style="text-align:center;">Loading...</p>
+			</div>
+		</div>
+	</div>
+    <div id="scripts">
+      <script>
+			var NodeWebkit = require('nw.gui');
+			var appWindow = Window = NodeWebkit.Window.get();
+			
+			appWindow.maximize();
+			//appWindow.showDevTools();
+			
+			window.location.replace('http://localhost:6014');
+	  </script>
+    </div>
+  </body>
+</html>
