@@ -1,7 +1,7 @@
 Overcaster
 =========
 
-Desktop application to design, manage, and serve HTML5 overlays for various applications.
+The only desktop application built to design, manage, and serve HTML5 overlays for live broadcasts!
 
 
 ## How it Works
@@ -19,8 +19,15 @@ You will need the following applications and have them added to `PATH`
  - [7Zip](http://www.7-zip.org/)
  - [Enigma Virtual Box](http://enigmaprotector.com/en/aboutvb.html)
  
- Once both of those applications are installed and added to the system `PATH` just double click the `build.bat`. (This is a very simple build script, please pull request if you have suggestions!)
+ Once both of those applications are installed and added to the system `PATH` just double click the `windows-release.bat`. The compiled `exe` will be created in the `release` folder.
 
+ 
+ ### Mac
+ Send me a pull request and I will gladly incorporate it!
+ 
+ 
+ ### Linux
+ Pull requests graciously accepted, but I will work on this eventually.
  
  ----
  
