@@ -5,7 +5,7 @@
   "description": "HTML5 overlay creator, manager, and server.",
   "contributors": [],
   "bin": {},
-  "main": "index.html",
+  "main": "splash.html",
   "window": {
 	"icon": "icon.png",
     "width": 800,
