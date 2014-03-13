@@ -15,6 +15,7 @@ var Overcaster = {};
 	initWindow();
 	initFilesystem();
 	//initDatastore();
+	initViews();
 	
 	//#region Init Functions
 	
@@ -53,6 +54,15 @@ var Overcaster = {};
 
 
 			this.close(true)
+		});
+	}
+	
+	function initViews(){
+		$(function(){
+			
+			$('.current-year').text(new Date().getFullYear());
+			
+			
 		});
 	}
 	

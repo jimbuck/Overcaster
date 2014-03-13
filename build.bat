@@ -22,6 +22,3 @@ REM Repackaging exe with required DLL's...
 enigmavbconsole ..\Overcaster.evb
 
 del .\Overcaster-temp.exe
-
-cd release
-start Overcaster.exe

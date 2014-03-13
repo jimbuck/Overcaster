@@ -30,14 +30,3 @@ body > * {
 body > #main-content {
   padding-top: 60px;
 }
-
-
-#screen{
-	width:1920px;
-	height:1080px;
-	position: relative;
-}
-
-#screen > * {
-	position: absolute;
-}

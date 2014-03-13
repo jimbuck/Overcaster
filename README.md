@@ -4,23 +4,26 @@ Overcaster
 Desktop application to design, manage, and serve HTML5 overlays for various applications.
 
 
-## How it works
+## How it Works
 
-You create overlays using the power of HTML5! Behind the scenes it boils down to a fully customizable and controlable webpage with a transparent background.  When played on top of a video you get a beautifully rendered UI that is easy to customize and absolutely re-usable.
+Create overlays using the power of HTML5! Behind the scenes it's really just a fully customizable and controllable web page with a transparent background.  When layered on top of other media you get a beautifully rendered UI that is easy to customize and interactive.
 
-
-
-Possible uses:
- - Live streams (Open Broadcast Software + Browser Plugin)
- - Presentations
- - ... What ever else you can think of!
+An example of this "layered UI" would be for any news/sports television station. Throughout the broadcast they render their logo, a latest news ticker,possibly the weather, and details of the current story. Now you can have the same cool effects, and more, all using the power of HTML!
 
 
+## How to Build
+Currently only scripts for Windows exist, but feel free to create build scripts for Mac and Linux!
 
+### Windows:
+You will need the following applications and have them added to `PATH`
+ - [7Zip](http://www.7-zip.org/)
+ - [Enigma Virtual Box](http://enigmaprotector.com/en/aboutvb.html)
+ 
+ Once both of those applications are installed and added to the system `PATH` just double click the `build.bat`. (This is a very simple build script, please pull request if you have suggestions!)
 
-
-----
-
+ 
+ ----
+ 
 Copyright 2014 Jim Buck
 
    Licensed under the Apache License, Version 2.0 (the "License");

@@ -5,7 +5,7 @@ html
 		link(rel='stylesheet', href='/css/bootstrap.min.css')
 		link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
 		link(rel='stylesheet', href='/css/jquery-ui.min.css')
-		link(rel='stylesheet', href='/css/style.css')
+		link(rel='stylesheet', href='/css/director.css')
 	body
 		.navbar.navbar-default.navbar-fixed-top(role='navigation')
 			.container-fluid
@@ -25,21 +25,22 @@ html
 							a(href='javascript:void(0);') Overlays
 						li.dropdown
 							a.dropdown-toggle(href='javascript:void(0);', data-toggle='dropdown')
-								| Settings
+								| Preferences
 								b.caret
 							ul.dropdown-menu
 								li
-									a(href='javascript:void(0);') Action
-								li
-									a(href='javascript:void(0);') Another action
-								li
-									a(href='javascript:void(0);') Something else here
+									a(href='javascript:void(0);') Settings
 								li.divider
-								li.dropdown-header Nav header
 								li
-									a(href='javascript:void(0);') Separated link
+									a(href='javascript:void(0);') Drop All Connections
 								li
-									a(href='javascript:void(0);') One more separated link
+									a(href='javascript:void(0);') Reload all Connections
+								li.divider
+								//- li.dropdown-header Nav header
+								li
+									a(href='javascript:void(0);') Help
+								li
+									a(href='javascript:void(0);') About Overcaster
 
 		#main-content.container-fluid
 			block content
@@ -55,5 +56,5 @@ html
 		#scripts
 			script(type='text/javascript', src='/js/jquery.js')
 			script(type='text/javascript', src='/js/bootstrap.js')
-			script(type='text/javascript', src='/js/site.js')
+			script(type='text/javascript', src='/js/director.js')
 			block scripts
