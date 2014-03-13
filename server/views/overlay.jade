@@ -1,7 +1,12 @@
-extends layout
+extends overlay-layout
+
 
 block content
-	h1 Overlay
+	div#screen
+		div.block(style='width:600px;height:120px;top:800px;left:200px;background-color:red;')
+			h1
+				| Jim Buck - LIVE for WBAL 27&nbsp;
+				button(onclick="javascript:alert('Yay!');") CLICK
 
 
 block scripts

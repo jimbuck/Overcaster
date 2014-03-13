@@ -1,0 +1,17 @@
+doctype html
+html
+	head
+		title Overcaster
+		link(rel='stylesheet', href='/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+		link(rel='stylesheet', href='/css/jquery-ui.min.css')
+		link(rel='stylesheet', href='/css/style.css')
+		block styles
+	body
+		block content
+
+		#scripts
+			script(type='text/javascript', src='/js/jquery.js')
+			script(type='text/javascript', src='/js/bootstrap.js')
+			script(type='text/javascript', src='/js/site.js')
+			block scripts

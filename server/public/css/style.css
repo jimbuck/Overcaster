@@ -1,8 +1,43 @@
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* Margin bottom by footer height */
+  margin-bottom: 21px;
+}
+body > * {
+	padding: 0 6px;
 }
 
-a {
-  color: #00B7FF;
+#footer {
+  border-top: solid 1px #222;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 21px;
+  text-align:center;
+}
+
+
+/* Bootstrap Fixes
+----------------------------------------------------*/
+body > #main-content {
+  padding-top: 60px;
+}
+
+
+#screen{
+	width:1920px;
+	height:1080px;
+	position: relative;
+}
+
+#screen > * {
+	position: absolute;
 }

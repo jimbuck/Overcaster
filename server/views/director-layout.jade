@@ -1,0 +1,59 @@
+doctype html
+html
+	head
+		title Overcaster
+		link(rel='stylesheet', href='/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+		link(rel='stylesheet', href='/css/jquery-ui.min.css')
+		link(rel='stylesheet', href='/css/style.css')
+	body
+		.navbar.navbar-default.navbar-fixed-top(role='navigation')
+			.container-fluid
+				.navbar-header
+					button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+						span.sr-only Toggle navigation
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+				.collapse.navbar-collapse
+					ul.nav.navbar-nav
+						li
+							a(href='javascript:void(0);') Scenes
+						li
+							a(href='javascript:void(0);') Elements
+						li
+							a(href='javascript:void(0);') Overlays
+						li.dropdown
+							a.dropdown-toggle(href='javascript:void(0);', data-toggle='dropdown')
+								| Settings
+								b.caret
+							ul.dropdown-menu
+								li
+									a(href='javascript:void(0);') Action
+								li
+									a(href='javascript:void(0);') Another action
+								li
+									a(href='javascript:void(0);') Something else here
+								li.divider
+								li.dropdown-header Nav header
+								li
+									a(href='javascript:void(0);') Separated link
+								li
+									a(href='javascript:void(0);') One more separated link
+
+		#main-content.container-fluid
+			block content
+		
+		#footer
+			p.pull-right Current Bitrate: 4200kbps
+			p.pull-left Loading Elements...
+			p
+				| JimmyBoh &copy;&nbsp;
+				span.current-year
+				
+			
+		#scripts
+			script(type='text/javascript', src='/js/jquery.js')
+			script(type='text/javascript', src='/js/bootstrap.js')
+			script(type='text/javascript', src='/js/site.js')
+			block scripts
