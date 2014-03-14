@@ -1,26 +1,32 @@
 var NodeWebkit = require('nw.gui');
 var Datastore = require('nedb');
 var Path = require('path');
+var FS = require('fs');
 
 window.__dirname = Path.dirname(process.execPath).replace(/\\/gi,'/');
 
-var Overcaster = {};
+global.Overcaster = {};
 
 (function(oc){
 	
-	oc.App = NodeWebkit.App;
-	oc.Window = NodeWebkit.Window.get();
-	oc.FS = require('fs');
-	
+	initGlobalVars();
 	initWindow();
-	initFilesystem();
+	//initFilesystem();
 	//initDatastore();
 	initViews();
 	
 	//#region Init Functions
 	
+	function initGlobalVars(){
+		
+		if(!oc.App) oc.App = NodeWebkit.App;
+		
+		if(!oc.Window) oc.Window = NodeWebkit.Window.get();
+	}
+	
 	function initWindow() {
-		oc.Window.showDevTools();
+		
+		if(!oc.Window.isDevToolsOpen()) oc.Window.showDevTools();
 		oc.Window.maximize();
 	}
 	
@@ -30,10 +36,10 @@ var Overcaster = {};
 		for(var d in dirs) {
 			var dir = __dirname+dirs[d];
 			
-			if(!oc.FS.existsSync(dir))
+			if(!FS.existsSync(dir))
 			{
 				console.log('Creating directory', dir);
-				oc.FS.mkdirSync(dir, function(err) {
+				FS.mkdirSync(dir, function(err) {
 					if(err){
 						console.error(err);
 					}
@@ -62,11 +68,11 @@ var Overcaster = {};
 			
 			$('.current-year').text(new Date().getFullYear());
 			
-			
+			$('.navbar a[href="'+window.location.pathname+'"]').closest('li').addClass('active');
 		});
 	}
 	
 	//#endregion
 	
 
-})(Overcaster);
+})(global.Overcaster);

@@ -5,6 +5,7 @@ var appWindow = NodeWebkit.Window.get();
 
 // Call focus to application...
 appWindow.focus();
+appWindow.showDevTools();
 
 // Instantiate the Express Server...
 var spawn = require("child_process").spawn;
@@ -12,8 +13,8 @@ global.Express = spawn("node", ['./server/server', expressPort]);
 
 (function(e,c){
 	e.stdout.on("data", expressStdOut);
-	function expressStdOut (buffer) {
-	  c.log('[EXPRESS]:',buffer.toString());
+	function expressStdOut (data) {
+	  c.log('[EXPRESS]:',data);
 	}
 	
 	e.on('exit', expressExit);

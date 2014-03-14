@@ -30,3 +30,24 @@ body > * {
 body > #main-content {
   padding-top: 60px;
 }
+
+
+
+
+/* Index Page
+----------------------------------------------------*/
+#quickStart .row+.row{
+	margin-top: 30px;
+}
+
+#quickStart .btn{
+	height:200px;
+}
+
+#quickStart .glyphicon {
+	font-size: 60px;
+}
+#quickStart p{
+	font-size: 20px;
+	margin-top: 20px
+}

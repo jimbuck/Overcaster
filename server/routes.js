@@ -2,7 +2,9 @@
 
 
 var routes = function(app){
-	require('./controllers/home')(app); // Home Controller;
+	require('./controllers/director')(app);
+	
+	require('./controllers/overlay')(app);
 };
 
 module.exports = routes;
