@@ -1,7 +1,24 @@
 extends _layout
 
 block content
-	h1 Scenes
+	.scenes-page
+		.row
+			.col-md-12.center-text
+				h1.center-text  Scenes
+		- for (var r = 0; r < 2; r++) {
+			.row
+				.col-md-1
+				- for (var c = 0; c < 5; c++) {
+					.col-md-2.scene-container
+						a(href='javascript:void(0);')
+							img.img-responsive.img-thumbnail(src="http://placehold.it/448x252", alt="...")
+				- }
+		- }
+		.row
+			.col-md-1
+			.col-md-2
+				a(href='javascript:void(0);')
+					img.img-responsive.img-thumbnail(src="http://placehold.it/448x252&text=Create+New" alt="...")
 	
 block scripts
 	script(type='text/javascript', src='/js/director.js')

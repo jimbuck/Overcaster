@@ -29,8 +29,17 @@ body > * {
 ----------------------------------------------------*/
 body > #main-content {
   padding-top: 60px;
+  padding-bottom: 20px;
+}
+.row + .row {
+	margin-top: 30px;
 }
 
+/* General Helpers
+----------------------------------------------------*/
+.center-text {
+	text-align: center;
+}
 
 
 
@@ -50,4 +59,14 @@ body > #main-content {
 #quickStart p{
 	font-size: 20px;
 	margin-top: 20px
+}
+
+
+
+
+/* Scenes Page
+-----------------------------------------------------*/
+
+.scenes-page .scene-preview{
+	
 }
