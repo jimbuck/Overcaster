@@ -40,7 +40,10 @@ body > #main-content {
 .center-text {
 	text-align: center;
 }
-
+.transparent-checkerboard{
+	background-image: url('/img/transparent-checkerboard.png');
+	background-repeat: repeat;
+}
 
 
 /* Index Page
@@ -67,6 +70,31 @@ body > #main-content {
 /* Scenes Page
 -----------------------------------------------------*/
 
-.scenes-page .scene-preview{
-	
+.scenes-page .well {
+	margin-bottom:  0;
+}
+
+.scenes-page .scene-container{
+	display: block;
+}
+
+.scenes-page .scene-preview {
+	width: 100%;
+	position:  relative;
+}
+
+.scenes-page .scene-preview:after {
+    padding-top: 56.25%; /*16:9 ratio*/
+    display: block;
+    content: '';
+}
+
+.scenes-page .scene-screen{
+	position: absolute;
+	top: 0; bottom: 0; right: 0; left: 0; /*fill parent*/
+}
+
+.scenes-page .scene-screen.new-scene{
+	border: 3px dashed #808080;
+	text-align: center;
 }

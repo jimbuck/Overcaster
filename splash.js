@@ -37,6 +37,8 @@ global.Overcaster = {};
 	}
 	
 	function initExpressServer(){
+		if(oc.Debug) return;
+		
 		var spawn = require("child_process").spawn;
 		global.Express = spawn("node", ['./server/server', expressPort]);
 

@@ -9,11 +9,11 @@ var directorController = function(app){
   
   app.get('/:page?', function(req, res) {
 		
-		var page = req.params.page || 'index';
+		var page = req.params.page || 'start';
 		console.log(page);
 		
 		res.render('director/'+page, {
-			
+
 		});
 	});
   
