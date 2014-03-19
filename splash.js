@@ -1,14 +1,28 @@
 global.NodeWebkit = require('nw.gui');
 global.Path = require('path');
 global.fs = require('fs');
- 
+
 global.__dirname = global.Path.dirname(process.execPath).replace(/\\/gi,'/');
 
 global.Overcaster = {};
 
+global.settings = require('./utils/settings-helper');
+
 var expressPort = 6014;
 
-(function(oc, nw){
+global.settings.load(function(err, data){
+	if(err) {
+		console.error('Failed to load settings: ' + err);
+	} else {
+		expressPort = data.port;
+	}
+	
+	initOvercaster(global.Overcaster, global.NodeWebkit)
+});
+ 
+
+
+function initOvercaster(oc, nw){
 	
 	initGlobalVars();
 	initWindow();
@@ -75,4 +89,4 @@ var expressPort = 6014;
 
 	//#endregion
 	
-})(global.Overcaster, global.NodeWebkit);
+}

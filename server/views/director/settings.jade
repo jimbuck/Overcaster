@@ -17,24 +17,31 @@
 		form#settingsForm.tab-content.form-horizontal
 			#general.tab-pane.active.fade.in
 				.form-group
-					label.col-md-2.control-label(for='dataLocationInput') Default Data Location:
+					label.col-md-2.control-label(for='dataLocationInput') Data Directory:
 					.col-md-4
-						input#dataLocationInput.form-control(type='file', name='dataLocation', nwdirectory, value='./data')
+						input#dataLocationInput.form-control(type='file', name='dataLocation', nwdirectory, value='{{dataLocation}}')
 				.form-group
-					label.col-md-2.control-label(for='mediaLocationInput') Default Media Location:
+					label.col-md-2.control-label(for='mediaLocationInput') Media Directory:
 					.col-md-4
-						input#mediaLocationInput.form-control(type='file', name='mediaLocation', nwdirectory, value='./media')
+						input#mediaLocationInput.form-control(type='file', name='mediaLocation', nwdirectory, value='{{mediaLocation}}')
 				.form-group
-					label.col-md-2.control-label(for='contentLocationInput') Default Content Location:
+					label.col-md-2.control-label(for='contentLocationInput') Content Directory:
 					.col-md-4
-						input#contentLocationInput.form-control(type='file', name='contentLocation', nwdirectory, value='./content')
+						input#contentLocationInput.form-control(type='file', name='contentLocation', nwdirectory, value='{{contentLocation}}')
 			#broadcast.tab-pane.fade
 				.form-group
-					label.col-md-2.control-label(for='serverPortInput') Default Server Port:
+					label.col-md-2.control-label(for='serverPortInput') Server Port:
 					.col-md-1
-						input#serverPortInput.form-control(type='number', name='serverPort', value='6014')
+						input#serverPortInput.form-control(type='number', name='serverPort', value='{{port}}')
 			#editor.tab-pane.fade
-				h3 ... Editor!
+				.form-group
+					label.col-md-2.control-label(for='themeLocationInput') Theme Directory:
+					.col-md-4
+						input#themeLocationInput.form-control(type='file', name='themeLocation', nwdirectory, value='{{themeLocation}}')
+				.form-group
+					label.col-md-2.control-label(for='editorThemeInput') Editor Theme:
+					.col-md-4
+						input#editorThemeInput.form-control(type='file', name='editorTheme', value='{{editorTheme}}')
 			#setup.tab-pane.fade
 				h3 ... Setup!
 .row

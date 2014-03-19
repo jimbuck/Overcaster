@@ -40,9 +40,13 @@
 		},
 
 		settings: function () {
-			app.Views.Settings.render();
+			global.settings.load(function (err, data) {
+				if (err)
+					console.log(err);
+				else
+					app.Views.Settings.render(data);
+			});
 		}
-
 	});
 
 	app.Router = new _router();
