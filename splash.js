@@ -1,41 +1,41 @@
-var NodeWebkit = require('nw.gui');
-var Datastore = require('nedb');
-var Path = require('path');
-var FS = require('fs');
-
-global.__dirname = Path.dirname(process.execPath).replace(/\\/gi,'/');
-var expressPort = 6014;
-
-var appWindow = NodeWebkit.Window.get();
+global.NodeWebkit = require('nw.gui');
+global.Path = require('path');
+global.fs = require('fs');
+ 
+global.__dirname = global.Path.dirname(process.execPath).replace(/\\/gi,'/');
 
 global.Overcaster = {};
 
-(function(oc){
+var expressPort = 6014;
+
+(function(oc, nw){
 	
 	initGlobalVars();
 	initWindow();
 	initExpressServer();
-	//initFilesystem();
-	//initDatastore();
+	
+	window.location.replace('http://localhost:'+expressPort+'/');
 	
 	//#region Init Functions
 	
 	function initGlobalVars(){
 		
-		if(!oc.App) oc.App = NodeWebkit.App;
+		if(!oc.Core) oc.Core = nw.App;
 		
-		if(!oc.Window) oc.Window = NodeWebkit.Window.get();
+		if(!oc.Args) oc.Args = oc.Core.argv;
 		
-		if(!oc.Args) oc.Args = oc.App.argv;
+		if(!oc.Window) oc.Window = nw.Window.get();
 		
 		oc.Debug = (oc.Args.indexOf('--debug') > -1);
 	}
-	
+
 	function initWindow() {
-		if(oc.Debug && !oc.Window.isDevToolsOpen()) oc.Window.showDevTools();
+		if(oc.Debug) oc.Window.showDevTools();
 		oc.Window.maximize();
+		
+		oc.Window.showDevTools();
 	}
-	
+
 	function initExpressServer(){
 		if(oc.Debug) return;
 		
@@ -43,28 +43,27 @@ global.Overcaster = {};
 		global.Express = spawn("node", ['./server/server', expressPort]);
 
 		(function(e,c){
-			e.stdout.on("data", expressStdOut);
-			function expressStdOut (data) {
-			  c.log('[EXPRESS]:',data);
-			}
+			e.stdout.on("data", function (data) {
+				c.log('[EXPRESS]:',data);
+			});
 			
-			e.on('exit', expressExit);
-			function expressExit(code) {
-			  c.log('[EXPRESS]: Exited with code ' + code);
-			}
+			e.on('exit', function (code) {
+				c.log('[EXPRESS]: Exited with code ' + code);
+			});
+			
 		})(global.Express, console);
 	}
-	
+
 	function initFilesystem(){
 		var dirs = ['/data','/elements', '/content','/images'];
 		
 		for(var d in dirs) {
-			var dir = __dirname+dirs[d];
+			var dir = global.__dirname+dirs[d];
 			
-			if(!FS.existsSync(dir))
+			if(!global.fs.existsSync(dir))
 			{
 				console.log('Creating directory', dir);
-				FS.mkdirSync(dir, function(err) {
+				global.fs.mkdirSync(dir, function(err) {
 					if(err){
 						console.error(err);
 					}
@@ -72,27 +71,8 @@ global.Overcaster = {};
 			 }
 		 }
 	}
-	
-	function initDatastore(){
-		oc.Data = {
-			Controls: new Datastore({ filename: './data/controls.db', autoload: true }),
-			Animations: new Datastore({ filename: './data/animations.db', autoload: true })
-		};
-	}
-	
-	function initEvents(){
-		oc.Window.on('close', function(e){
 
 
-			this.close(true)
-		});
-	}
-	
 	//#endregion
 	
-
-})(global.Overcaster);
-
-
-// Request director page...
-window.location.replace('http://localhost:'+expressPort);
+})(global.Overcaster, global.NodeWebkit);

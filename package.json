@@ -10,6 +10,7 @@
 	"icon": "icon.png",
     "width": 800,
     "height": 600,
+	"min_width": 992,
     "toolbar": false
   },
   "node-remote": "<local>",
@@ -24,8 +25,7 @@
     "OBS"
   ],
   "dependencies": {
-    "nedb"       : "~0.8.11",
-	"socket.io" : "0.9.*"
+    "nedb"       : "~0.8.11"
   },
   "devDependencies": {},
   "bundledDependencies": [],

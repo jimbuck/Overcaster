@@ -1,33 +1,28 @@
-extends _layout
 
-block content
-	- var rows = 1
-	- var columns = 5
-	.scenes-page
-		.row
-			.col-md-12.center-text
-				h1.center-text  Layouts
-		- for (var r = 0; r < rows; r++)
-			.row
-				.col-md-1
-				- for (var c = 0; c < columns; c++)
-					.col-md-2
-						.well
-							a.scene-container(href='javascript:void(0);')
-								.scene-preview
-									.scene-screen.transparent-checkerboard
-								h3.center-text
-									| Layout
-									= ' ' + ((r*columns)+c)
+- var rows = 2
+- var columns = 5
+.scenes-page
+	.row
+		.col-md-12.center-text
+			h1.center-text  Layouts
+	- for (var r = 0; r < rows; r++)
 		.row
 			.col-md-1
-			.col-md-2
-				.well
-					a.scene-container(href='javascript:void(0);')
-						.scene-preview
-							.scene-screen.new-scene
-								//span.glyphicon.glyphicon-plus
-						h3.center-text New Layout
-
-block scripts
-	script(type='text/javascript', src='/js/director.js')
+			- for (var c = 0; c < columns; c++)
+				.col-md-2
+					.well
+						a.scene-container(href='javascript:void(0);')
+							.scene-preview
+								.scene-screen.transparent-checkerboard
+							h3.center-text
+								| Layout
+								= ' ' + ((r*columns)+c)
+	.row
+		.col-md-1
+		.col-md-2
+			.well
+				a.scene-container(href='javascript:void(0);')
+					.scene-preview
+						.scene-screen.new-scene
+							//span.glyphicon.glyphicon-plus
+					h3.center-text New Layout

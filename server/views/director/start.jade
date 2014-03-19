@@ -1,60 +1,54 @@
-extends _layout
-
-block content
-	.row
-		.col-md-12
-			h1.center-text Quick Start
-	.row
-		.col-md-4.col-md-offset-4
-			#quickStart.well
-				.row
-					.col-md-6
-						button.btn.btn-danger.btn-block
-							span.glyphicon.glyphicon-th
-							p Resume Session
-					.col-md-6
-						button.btn.btn-info.btn-block(disabled='disabled')
-							span.glyphicon.glyphicon-floppy-open
-							p Import Media
-				.row
-					.col-md-6
-						button.btn.btn-warning.btn-block
-							span.glyphicon.glyphicon-list-alt
-							p New Element
-					.col-md-6
-						button.btn.btn-success.btn-block
-							span.glyphicon.glyphicon-credit-card
-							p New Layout
-	.row
-		.col-md-6.col-md-offset-3
+.row
+	.col-md-12
+		h1.center-text Quick Start
+.row
+	.col-md-4.col-md-offset-4
+		#quickStart.well
 			.row
-				.col-md-4
-					h3 Recent Sessions
-					ul
-						li
-							a(href="javascript:void(0);") [THING]
-						li
-							a(href="javascript:void(0);") [THING]
-						li
-							a(href="javascript:void(0);") [THING]
-				.col-md-4
-					h3 Recent Layouts
-					ul
-						li
-							a(href="javascript:void(0);") [THING]
-						li
-							a(href="javascript:void(0);") [THING]
-						li
-							a(href="javascript:void(0);") [THING]
-				.col-md-4
-					h3 Recent Elements
-					ul
-						li
-							a(href="javascript:void(0);") [THING]
-						li
-							a(href="javascript:void(0);") [THING]
-						li
-							a(href="javascript:void(0);") [THING]
-
-block scripts
-	script(type='text/javascript', src='/js/director.js')
+				.col-md-6
+					button.btn.btn-danger.btn-block
+						span.glyphicon.glyphicon-th
+						p Resume Session
+				.col-md-6
+					button.btn.btn-info.btn-block
+						span.glyphicon.glyphicon-floppy-open
+						p Import Media
+			.row
+				.col-md-6
+					button.btn.btn-warning.btn-block
+						span.glyphicon.glyphicon-list-alt
+						p New Element
+				.col-md-6
+					button.btn.btn-success.btn-block
+						span.glyphicon.glyphicon-credit-card
+						p New Layout
+.row
+	.col-md-6.col-md-offset-3
+		.row
+			.col-md-4
+				h3 Recent Sessions
+				ul
+					li
+						a(href="javascript:void(0);") [THING] 1
+					li
+						a(href="javascript:void(0);") [THING] 2
+					li
+						a(href="javascript:void(0);") [THING] 3
+			.col-md-4
+				h3 Recent Layouts
+				ul
+					li
+						a(href="javascript:void(0);") [THING] A
+					li
+						a(href="javascript:void(0);") [THING] B
+					li
+						a(href="javascript:void(0);") [THING] C
+			.col-md-4
+				h3 Recent Elements
+				ul
+					li
+						a(href="javascript:void(0);") [THING] I
+					li
+						a(href="javascript:void(0);") [THING] II
+					li
+						a(href="javascript:void(0);") [THING] III
