@@ -4,7 +4,7 @@ REM Clearing the "release" folder...
 del .\release\Overcaster.exe
 
 REM Compressing the project files...
-7z a Overcaster.zip .\node_modules .\utils .\node.exe .\server .\logo.svg .\splash.css .\splash.js .\icon.png .\loading.gif .\splash.html .\package.json
+7z a Overcaster.zip .\node_modules .\utils .\server .\logo.svg .\splash.css .\splash.js .\icon.png .\loading.gif .\splash.html .\package.json
 move Overcaster.zip .\release\Overcaster.nw
 
 REM Copy nw.exe for packaging
