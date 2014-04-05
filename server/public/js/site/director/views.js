@@ -3,7 +3,7 @@
  *  Backbone Views
  */
 
-(function (oc, app) {
+var buildViews = function (oc, app) {
 	app.Views = {};
 
 	app.Views.Body = (function () {
@@ -28,7 +28,40 @@
 		var _view = Backbone.View.extend({
 			el: 'ul.nav.navbar-nav',
 			events: {
-				
+
+			}
+		});
+
+		return new _view();
+	})();
+
+	app.Views.StreamStatus = (function () {
+		var _view = Backbone.View.extend({
+			el: '#liveStatus',
+			setStatus: function (status) {
+				this.$el.attr('class', status);
+			}
+		});
+
+		return new _view();
+	})();
+
+	app.Views.AppStatus = (function () {
+		var _view = Backbone.View.extend({
+			el: '#appStatus',
+			setStatus: function (status) {
+				this.$el.html(status);
+			}
+		});
+
+		return new _view();
+	})();
+
+	app.Views.TooltipHint = (function () {
+		var _view = Backbone.View.extend({
+			el: '#tooltipHint',
+			setStatus: function (status) {
+				this.$el.html(status);
 			}
 		});
 
@@ -45,13 +78,13 @@
 				}, 6e4) // 60 seconds...
 			}
 		});
-		return new _view;
+		return new _view();
 	})();
 
 
 	//#region Main Pages
 
-	app.Views.MainPage = (function () {
+	app.Views.MainPageView = (function () {
 		return Backbone.View.extend({
 			el: '#main-content',
 			pageUrl: '',
@@ -75,7 +108,7 @@
 	})();
 
 	app.Views.Start = (function () {
-		var _view = app.Views.MainPage.extend({
+		var _view = app.Views.MainPageView.extend({
 			templateSelector: '#start-page-template',
 			pageUrl: '/start'
 		});
@@ -84,7 +117,7 @@
 	})();
 
 	app.Views.Scenes = (function () {
-		var _view = app.Views.MainPage.extend({
+		var _view = app.Views.MainPageView.extend({
 			templateSelector: '#scenes-page-template',
 			pageUrl: '/scenes'
 		});
@@ -93,7 +126,7 @@
 	})();
 
 	app.Views.Layouts = (function () {
-		var _view = app.Views.MainPage.extend({
+		var _view = app.Views.MainPageView.extend({
 			templateSelector: '#layouts-page-template',
 			pageUrl: '/layouts'
 		});
@@ -102,7 +135,7 @@
 	})();
 
 	app.Views.Elements = (function () {
-		var _view = app.Views.MainPage.extend({
+		var _view = app.Views.MainPageView.extend({
 			templateSelector: '#elements-page-template',
 			pageUrl: '/elements'
 		});
@@ -111,7 +144,7 @@
 	})();
 
 	app.Views.Settings = (function () {
-		var _view = app.Views.MainPage.extend({
+		var _view = app.Views.MainPageView.extend({
 			templateSelector: '#settings-page-template',
 			pageUrl: '/settings'
 		});
@@ -127,4 +160,4 @@
 
 		$('.navbar a[href="' + window.location.pathname + '"]').closest('li').addClass('active');
 	});
-})(global.Overcaster, global.Overcaster.App);
+};

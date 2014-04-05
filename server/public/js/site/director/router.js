@@ -3,7 +3,7 @@
  *  Backbone Router
  */
 
-(function (oc, app) {
+var buildRouter = function (oc, app) {
 	var _router = Backbone.Router.extend({
 
 		routes: {
@@ -53,5 +53,4 @@
 	app.navigate = function (route) {
 		app.Router.navigate.call(app.Router, route, true);
 	}
-
-})(global.Overcaster, global.Overcaster.App);
+};

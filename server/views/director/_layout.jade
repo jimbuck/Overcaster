@@ -24,6 +24,8 @@ html
 									a(href='javascript:void(0);') Save Session As...
 								li.divider
 								li
+									a(href='/start') Show Quickstart Page
+								li
 									a(href='javascript:void(0);') End Current Session
 								li
 									a(href='javascript:void(0);' onclick="javascript: global.Overcaster.Window.toggleFullscreen();") Toggle Fullscreen
@@ -65,7 +67,20 @@ html
 									a(href='javascript:void(0);' onclick="javascript: global.Overcaster.Window.showDevTools();") Show DevTools
 								li
 									a(href='javascript:void(0);') View Logs
-
+					span.pull-right
+						#liveStatus.preping
+							span.preping.label.label-info
+								i.glyphicon.glyphicon-signal
+								| &nbsp;PREPING
+							span.ready.label.label-success
+								i.glyphicon.glyphicon-signal
+								| &nbsp;READY
+							span.error.label.label-warning
+								i.glyphicon.glyphicon-warning-sign
+								| &nbsp;ERROR
+							span.live.label.label-danger
+								i.glyphicon.glyphicon-globe
+								| &nbsp;LIVE
 		#main-content.container-fluid
 			block content
 
@@ -91,13 +106,14 @@ html
 			script(type='text/javascript', src='/js/site/director/init.js')
 			script(type='text/javascript', src='/js/site/director/extensions.js')
 			script(type='text/javascript', src='/js/site/director/data.js')
-			script(type='text/javascript', src='/js/site/director/router.js')
+			script(type='text/javascript', src='/js/site/director/models.js')
 			script(type='text/javascript', src='/js/site/director/views.js')
+			script(type='text/javascript', src='/js/site/director/router.js')
 			script(type='text/javascript', src='/js/site/director/run.js')
 		
 		#footer
-			p.pull-right Current Bitrate: 4200kbps
-			p.pull-left Loading Elements...
+			p#appStatus.pull-right Current Bitrate: 4200kbps
+			p#tooltipHint.pull-left Loading Elements...
 			p
 				| JimmyBoh &copy;&nbsp;
 				span.current-year 2014

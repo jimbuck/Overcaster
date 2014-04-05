@@ -20,8 +20,13 @@ body > * {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 21px;
+  height: 28px;
   text-align:center;
+}
+
+#footer > p{
+	font-size: 16px;
+	margin-top: 2px;
 }
 
 /* Bootstrap Fixes
@@ -30,8 +35,14 @@ body > #main-content {
   padding-top: 60px;
   padding-bottom: 20px;
 }
+
 .row + .row {
 	margin-top: 30px;
+}
+
+code {
+	color: #666;
+	background-color: #ccc;
 }
 
 /* General Helpers
@@ -45,11 +56,38 @@ body > #main-content {
 .center-text {
 	text-align: center;
 }
+.display-block{
+	display: block;
+}
+
+.display-inline-block{
+	display: inline-block;
+}
+
 .transparent-checkerboard{
 	background-image: url('/img/transparent-checkerboard.png');
 	background-repeat: repeat;
 }
+/* Layout
+----------------------------------------------------*/
+#liveStatus {
+	font-size: 24px;
+	margin-top: 6px;
+	cursor: default;
+}
+#liveStatus .label{display: none;}
 
+#liveStatus.preping .label{display: none;}
+#liveStatus.preping .preping{display: inline;}
+
+#liveStatus.ready .label{display: none;}
+#liveStatus.ready .ready{display: inline;}
+
+#liveStatus.error .label{display: none;}
+#liveStatus.error .error{display: inline;}
+
+#liveStatus.live .label{display: none;}
+#liveStatus.live .live{display: inline;}
 
 /* Quick Start
 ----------------------------------------------------*/
