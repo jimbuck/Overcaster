@@ -4,6 +4,8 @@
  */
 
 var buildViews = function (oc, app) {
+	app.log('Building views...');
+
 	app.Views = {};
 
 	app.Views.Body = (function () {

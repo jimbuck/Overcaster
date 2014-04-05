@@ -4,6 +4,7 @@
  */
 
 var buildRouter = function (oc, app) {
+	app.log('Building router...');
 	var _router = Backbone.Router.extend({
 
 		routes: {

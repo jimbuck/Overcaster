@@ -4,22 +4,22 @@
  */
 
 var buildModels = function (oc, app) {
-
+	app.log('Building models...');
 	app.Models = {};
 
 	app.Models.MediaType = {
-		Unknown	: null,
-		Script	: 1,
-		Style	: 2,
-		Image	: 3,
-		Audio	: 4,
-		Video	: 5,
-		Embed	: 6
+		Unknown: null,
+		Script: 1,
+		Style: 2,
+		Image: 3,
+		Audio: 4,
+		Video: 5,
+		Embed: 6
 	}
 
 	var nedbModel = Backbone.Model.extend({
 		table: '',
-		sync: function(options, cb){
+		sync: function (options, cb) {
 			// Dare I override sync?
 		}
 	});

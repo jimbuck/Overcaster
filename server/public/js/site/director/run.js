@@ -7,9 +7,9 @@
 	$(function () {
 
 		buildExtensions(oc, app);
+		buildViews(oc, app);
 		buildModels(oc, app);
 		buildData(oc, app);
-		buildViews(oc, app);
 		buildRouter(oc, app);
 
 		Backbone.history.start({ pushState: true });
@@ -18,7 +18,7 @@
 
 		if (currentUrl === '/') currentUrl = '/start';
 
-		console.log('Loading to ' + currentUrl);
+		app.log('Loading to ' + currentUrl);
 		app.Router.navigate(currentUrl, true);
 	});
 })(global.Overcaster, global.Overcaster.App);

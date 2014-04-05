@@ -11,4 +11,17 @@ var buildExtensions = function (oc, app) {
 	$.expr[":"].internal = function (n) {
 		return $(n).attr("href") !== undefined && !$.expr[":"].external(n)
 	}
+
+	app.log = function (msg, data) {
+
+		if (console.log) {
+			console.log(msg);
+			console.dir(data);
+		}
+
+		if (typeof msg === 'string')
+			$('#appStatus').html(msg);
+
+		// Winston logging goes here...
+	}
 };
