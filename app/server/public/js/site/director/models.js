@@ -17,13 +17,6 @@ var buildModels = function (oc, app) {
 		Embed: 6
 	}
 
-	var nedbModel = Backbone.Model.extend({
-		table: '',
-		sync: function (options, cb) {
-			// Dare I override sync?
-		}
-	});
-
 	app.Models.Session = Backbone.Model.extend({
 		defaults: {
 			name: 'Session',

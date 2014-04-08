@@ -126,6 +126,15 @@ var buildViews = function (oc, app) {
 
 		return new _view();
 	})();
+	
+	app.Views.SceneEditor = (function () {
+		var _view = app.Views.MainPageView.extend({
+			templateSelector: '#scene-editor-template',
+			pageUrl: '/scene-editor'
+		});
+
+		return new _view();
+	})();
 
 	app.Views.Layouts = (function () {
 		var _view = app.Views.MainPageView.extend({

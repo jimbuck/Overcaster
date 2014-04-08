@@ -9,7 +9,8 @@ var buildRouter = function (oc, app) {
 
 		routes: {
 			'start': 'start',
-			'scenes(/:id)': 'scenes',
+			'scenes': 'scenes',
+			'scene-editor(/:id)': 'sceneEditor',
 			'layouts(/:id)': 'layouts',
 			'elements(/:id)': 'elements',
 			'settings': 'settings'
@@ -20,12 +21,38 @@ var buildRouter = function (oc, app) {
 		},
 
 		scenes: function (id) {
-			if (id)
-				app.Views.SceneEdit.render(id);
-			else
-				app.Views.Scenes.render();
+			
+			app.Data.Scenes.find({}, function(err, scenes){
+				
+				if(err){
+					console.log(err);
+					return;
+				}
+				
+				app.Views.Scenes.render(scenes);
+			});
+			
+			app.Views.Scenes.render();
 		},
-
+		
+		sceneEditor: function (id){
+			
+			if(_.isUndefined(id)){
+				app.Views.SceneEditor.render();
+				return;
+			}
+			
+			app.Data.Scenes.findOne({ _id: id }, function(err, scene){
+				
+				if(err){
+					console.log(err);
+					return;
+				}
+				
+				app.Views.SceneEditor.render(scene);
+			});
+		},
+		
 		layouts: function (id) {
 			if (id)
 				app.Views.LayoutEdit.render(id);
