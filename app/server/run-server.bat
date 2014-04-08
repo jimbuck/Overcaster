@@ -1,1 +1,0 @@
-node.exe server.js %1
