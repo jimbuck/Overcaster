@@ -128,7 +128,10 @@ module.exports = function (grunt) {
             options: {
                 stdout: true
             },
-			command: 'start <%= config.dist %>/Overcaster/Overcaster.exe'
+			command: [
+				'start <%= config.dist %>/Overcaster/Overcaster.exe --debug',
+				'node <%= config.app %>/server/server.js'
+			].join('&')
         }
     }
   });
