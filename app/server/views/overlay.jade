@@ -1,0 +1,19 @@
+doctype html
+html
+	head
+		title Overcaster
+		//link(rel='stylesheet', href='/css/bootstrap.min.css')
+		//link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+		//link(rel='stylesheet', href='/css/jquery-ui.min.css')
+		link(rel='stylesheet', href='/css/overlay.css')
+		block styles
+	body#screen
+			div(style='position:absolute;width:600px;height:120px;top:800px;left:200px;background-color:red;')
+				h1
+					| Jim Buck - LIVE for WBAL 27&nbsp;
+					button(onclick="javascript:alert('Yay!');") CLICK
+
+		#scripts
+			//script(type='text/javascript', src='/js/jquery.js')
+			//script(type='text/javascript', src='/js/bootstrap.js')
+			script(type='text/javascript', src='/js/site/overlay.js')
