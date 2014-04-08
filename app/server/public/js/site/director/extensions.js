@@ -24,4 +24,29 @@ var buildExtensions = function (oc, app) {
 
 		// Winston logging goes here...
 	}
+	
+	Handlebars.registerHelper('scene-grid', function(context, options) {
+	  var totalBoxes = context.length + 1;
+	  var columns = 5;
+	  var rows = Math.ceil(totalBoxes / columns);
+	  
+	  var html = '';
+
+	  for(var i=0; i<rows; i++) {
+		html += '<div class="row"><div class="col-md-1"></div>';
+		
+		for(var j=0;j<columns;j++){
+			var index = (i*columns) + j;
+			var block = context[index];
+			
+			if(index===totalBoxes || typeof block !== 'undefined'){
+				html += '<div class="col-md-2">' + options.fn(block) + '</div>';
+			}
+		}
+		
+		html += '</div>';
+	  }
+
+	  return html;
+	});
 };
