@@ -19,8 +19,6 @@ global.settings.load(function(err, data){
 	
 	initOvercaster(global.Overcaster, global.NodeWebkit)
 });
- 
-
 
 function initOvercaster(oc, nw){
 	
@@ -66,24 +64,6 @@ function initOvercaster(oc, nw){
 			});
 			
 		})(global.Express, console);
-	}
-
-	function initFilesystem(){
-		var dirs = ['/data','/elements', '/content','/images'];
-		
-		for(var d in dirs) {
-			var dir = global.__dirname+dirs[d];
-			
-			if(!global.fs.existsSync(dir))
-			{
-				console.log('Creating directory', dir);
-				global.fs.mkdirSync(dir, function(err) {
-					if(err){
-						console.error(err);
-					}
-				});
-			 }
-		 }
 	}
 
 
