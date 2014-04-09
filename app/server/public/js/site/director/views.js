@@ -93,7 +93,7 @@ var buildViews = function (oc, app) {
 			templateSelector: '',
 			template: function (model) {
 				if (!this._template)
-					this._template = Handlebars.compile($(this.templateSelector).html());
+					this._template = Handlebars.compile($(this.templateSelector).remove().html());
 
 				return this._template(model);
 			},
@@ -167,8 +167,6 @@ var buildViews = function (oc, app) {
 
 	$(function () {
 
-		$('.current-year').text(new Date().getFullYear());
-
-		$('.navbar a[href="' + window.location.pathname + '"]').closest('li').addClass('active');
+		//$('.navbar a[href="' + window.location.pathname + '"]').closest('li').addClass('active');
 	});
 };

@@ -1,22 +1,21 @@
 
-.scenes-page
+.scenes-page.grid-page
 	.row
 		.col-md-12.center-text
 			h1.center-text  Scenes
-	{{#scene-grid this }}
+	{{#grid this }}
 	{{#if this}}
 	.well
-		a.scene-container(href='/scene-editor/{{ _id }}')
-			.scene-preview
-				.scene-screen.transparent-checkerboard
+		a.item-container(href='/scene-editor/{{ _id }}')
+			.item-preview
+				.item-screen.transparent-checkerboard
 			h3.center-text {{ name }}
 	{{else}}
 	.well
-		a.scene-container(href='/scene-editor')
-			.scene-preview
-				.scene-screen.new-scene
+		a.item-container(href='/scene-editor')
+			.item-preview
+				.item-screen.new
 			h3.center-text
 				span.glyphicon.glyphicon-plus
-	
 	{{/if}}
-	{{/scene-grid}}
+	{{/grid}}

@@ -11,8 +11,8 @@ var buildRouter = function (oc, app) {
 			'start': 'start',
 			'scenes': 'scenes',
 			'scene-editor(/:id)': 'sceneEditor',
-			'layouts(/:id)': 'layouts',
-			'elements(/:id)': 'elements',
+			'layouts': 'layouts',
+			'elements': 'elements',
 			'settings': 'settings'
 		},
 
@@ -31,8 +31,6 @@ var buildRouter = function (oc, app) {
 				
 				app.Views.Scenes.render(scenes);
 			});
-			
-			app.Views.Scenes.render();
 		},
 		
 		sceneEditor: function (id){
@@ -53,26 +51,40 @@ var buildRouter = function (oc, app) {
 			});
 		},
 		
-		layouts: function (id) {
-			if (id)
-				app.Views.LayoutEdit.render(id);
-			else
-				app.Views.Layouts.render();
+		layouts: function () {			
+				
+			app.Data.Layouts.find({}, function(err, layouts){
+				
+				if(err){
+					console.log(err);
+					return;
+				}
+				
+				app.Views.Layouts.render(layouts);
+			});
 		},
 
-		elements: function (id) {
-			if (id)
-				app.Views.ElementEdit.render(id);
-			else
-				app.Views.Elements.render();
+		elements: function () {
+			app.Data.Elements.find({}, function(err, elements){
+				
+				if(err){
+					console.log(err);
+					return;
+				}
+				
+				app.Views.Elements.render(elements);
+			});
 		},
 
 		settings: function () {
 			global.settings.load(function (err, data) {
 				if (err)
+				{
 					console.log(err);
-				else
-					app.Views.Settings.render(data);
+					return;
+				}
+				
+				app.Views.Settings.render(data);
 			});
 		}
 	});

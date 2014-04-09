@@ -25,7 +25,7 @@ var buildExtensions = function (oc, app) {
 		// Winston logging goes here...
 	}
 	
-	Handlebars.registerHelper('scene-grid', function(context, options) {
+	Handlebars.registerHelper('grid', function(context, options) {
 	  var totalBoxes = context.length + 1;
 	  var columns = 5;
 	  var rows = Math.ceil(totalBoxes / columns);
