@@ -1,16 +1,21 @@
 
 .scene-editor
-	.row
-		.col-md-12.center-text
-			h1.center-text  {{ name }}
+	form.hidden
+		input(type='hidden', name='_id', value='{{ _id }}')
+		input(type='hidden', name='sessionId', value='{{ sessionId }}')
 	.row
 		.col-md-12
 			.row
 				.col-md-3
-					h3 Sidebar
-				.col-md-9
-					h3 Stage
-					.transparent-checkerboard
+					.row
+						.col-md-12
+							{{editable name element="h1" class="center-text" placeholder="Click to Name" }}
+					.row
+						.col-md-12
+							h3 Sidebar
+				.col-md-8
+					.transparent-checkerboard.wide-screen
+				.col-md-1
 			.row
 				.col-md-12
 					h3 Bottombar

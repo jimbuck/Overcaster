@@ -68,6 +68,27 @@ code {
 	background-image: url('/img/transparent-checkerboard.png');
 	background-repeat: repeat;
 }
+
+.wide-screen {
+	width: 100%;
+	position:  relative;
+}
+
+.wide-screen:after {
+    padding-top: 56.25%; /*16:9 ratio*/
+    display: block;
+    content: '';
+}
+
+[contenteditable] { 
+	padding: 10px;
+	outline: 2px dashed #999;
+	cursor: pointer;
+}
+[contenteditable]:hover {
+	outline: 2px dashed #ccc;
+}
+
 /* Layout
 ----------------------------------------------------*/
 #liveStatus {
@@ -88,6 +109,28 @@ code {
 
 #liveStatus.live .label{display: none;}
 #liveStatus.live .live{display: inline;}
+
+/* Grid Pages
+-----------------------------------------------------*/
+.grid-page .item-container{
+	display: block;
+}
+
+.grid-page .item-container:hover .item-preview {
+	background-color: #333;
+}
+
+.grid-page .item-screen{
+	position: absolute;
+	top: 0; bottom: 0; right: 0; left: 0; /*fill parent*/
+}
+
+.grid-page .item-screen.new{
+	border: 3px dashed #808080;
+	text-align: center;
+}
+
+
 
 /* Quick Start
 ----------------------------------------------------*/
@@ -113,31 +156,6 @@ code {
 
 .scenes-page .well {
 	margin-bottom:  0;
-}
-
-.grid-page .item-container{
-	display: block;
-}
-
-.grid-page .item-preview {
-	width: 100%;
-	position:  relative;
-}
-
-.grid-page .item-preview:after {
-    padding-top: 56.25%; /*16:9 ratio*/
-    display: block;
-    content: '';
-}
-
-.grid-page .item-screen{
-	position: absolute;
-	top: 0; bottom: 0; right: 0; left: 0; /*fill parent*/
-}
-
-.grid-page .item-screen.new{
-	border: 3px dashed #808080;
-	text-align: center;
 }
 
 

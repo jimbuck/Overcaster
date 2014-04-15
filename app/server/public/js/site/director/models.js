@@ -29,26 +29,26 @@ var buildModels = function (oc, app) {
 
 	app.Models.Scene = Backbone.Model.extend({
 		defaults: {
-			name: 'Scene',
+			name: 'Default Scene',
 			sessionId: null
 		}
 	});
 
 	app.Models.Layout = Backbone.Model.extend({
 		defaults: {
-			name: 'Layout'
+			name: 'Default Layout'
 		}
 	});
 
 	app.Models.Element = Backbone.Model.extend({
 		defaults: {
-			name: 'Element'
+			name: 'Default Element'
 		}
 	});
 
 	app.Models.Media = Backbone.Model.extend({
 		defaults: {
-			name: 'Media',
+			name: 'Default Media',
 			filePath: null,
 			type: app.Models.MediaType.Unknown
 		}

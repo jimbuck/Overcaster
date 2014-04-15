@@ -16,7 +16,8 @@ var buildExtensions = function (oc, app) {
 
 		if (console.log) {
 			console.log(msg);
-			console.dir(data);
+			if(console.dir && data)
+				console.dir(data);
 		}
 
 		if (typeof msg === 'string')
@@ -24,6 +25,25 @@ var buildExtensions = function (oc, app) {
 
 		// Winston logging goes here...
 	}
+	
+	Handlebars.registerHelper('editable', function(context, options){
+		var params = options.hash;
+		
+		var el = $('<'+params.element+'/>');
+		el.attr('contenteditable', 'true');
+		if(params.class) el.addClass(params.class);
+		if(params.id) el.attr('id', params.id);
+		if(params.placeholder) el.text(params.placeholder);	
+		
+		return new Handlebars.SafeString(el[0].outerHTML);
+	});
+	
+	Handlebars.registerHelper('default', function(context, options){
+		if(context)
+			return context;
+		
+		return options.hash.value;
+	});
 	
 	Handlebars.registerHelper('grid', function(context, options) {
 	  var totalBoxes = context.length + 1;

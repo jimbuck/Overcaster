@@ -12,7 +12,8 @@ var buildViews = function (oc, app) {
 		var _view = Backbone.View.extend({
 			el: 'body',
 			events: {
-				"click a": "interceptHyperlinks"
+				"click a": "interceptHyperlinks",
+				"keydown [contenteditable]": "interceptEditables"
 			},
 			interceptHyperlinks: function (e) {
 				var hyperlink = $(e.currentTarget);
@@ -20,6 +21,17 @@ var buildViews = function (oc, app) {
 					e.preventDefault();
 					app.navigate(hyperlink.attr("href").replace(window.location.protocol + "//" + window.location.host, ""));
 				}
+			},
+			interceptEditables: function(e){				
+				switch(e.which){
+					case 13:
+						//debugger;
+						$(e.currentTarget).blur();
+						break;
+					case 27:
+						$(e.currentTarget).text('');
+						break;
+				}	
 			}
 		});
 
