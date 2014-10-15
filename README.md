@@ -28,14 +28,14 @@ If you want to save yourself a few seconds during development you can prevent co
 
     grunt dist-mac
 	
-** NOTE:** I do not have a Mac and therefore cannot build for it. If anyone would like to test and verify that everything is working then please feel free to do so and create a pull request with any updates (as well as your info for contributions).
+**NOTE:** I do not have a Mac and therefore cannot build for it. If anyone would like to test and verify that everything is working then please feel free to do so and create a pull request with any updates (as well as your info for contributions).
  
  
 ### Linux
 
     grunt dist-linux
 
-** NOTE:** I have not tested this yet, but potentially will in the future. If anyone would like to test and verify that everything is working then please feel free to do so and create a pull request with any updates (as well as your info for contributions).
+**NOTE:** I have not tested this yet, but potentially will in the future. If anyone would like to test and verify that everything is working then please feel free to do so and create a pull request with any updates (as well as your info for contributions).
  
 ----
  
