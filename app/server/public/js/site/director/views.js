@@ -74,7 +74,7 @@ var buildViews = function (oc, app) {
 	app.Views.TooltipHint = (function () {
 		var _view = Backbone.View.extend({
 			el: '#tooltipHint',
-			setStatus: function (status) {
+			setTooltip: function (status) {
 				this.$el.html(status);
 			}
 		});
@@ -142,7 +142,13 @@ var buildViews = function (oc, app) {
 	app.Views.SceneEditor = (function () {
 		var _view = app.Views.MainPageView.extend({
 			templateSelector: '#scene-editor-template',
-			pageUrl: '/scene-editor'
+			pageUrl: '/scene-editor',
+			events:{
+				
+			},
+			saveScene: function(){
+				
+			}
 		});
 
 		return new _view();

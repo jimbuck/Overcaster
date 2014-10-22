@@ -1,274 +1,148 @@
 /*jshint camelcase: false*/
 
 module.exports = function (grunt) {
-  'use strict';
+	'use strict';
 
-  // load all grunt tasks
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+	// load all grunt tasks
+	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  // configurable paths
-  var config = {
-    app: 'app',
-    dist: 'dist',
-    tmp: 'tmp',
-    resources: 'resources'
-  };
+	var platforms = ['win', 'linux32', 'linux64', 'osx'];
 
-  grunt.initConfig({
-    config: config,
-    clean: {
-      dist: {
-        files: [{
-          dot: true,
-          src: [
-            '<%= config.dist %>/*',
-            '<%= config.tmp %>/*'
-          ]
-        }]
-      }
-    },
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc'
-      },
-      files: '<%= config.app %>/js/*.js'
-    },
-    copy: {
-      appLinux: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>',
-          dest: '<%= config.dist %>/app.nw',
-          src: '**'
-        }]
-      },
-      appMacos: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>',
-          dest: '<%= config.dist %>/node-webkit.app/Contents/Resources/app.nw',
-          src: '**'
-        }, {
-          expand: true,
-          cwd: '<%= config.resources %>/mac/',
-          dest: '<%= config.dist %>/node-webkit.app/Contents/',
-          filter: 'isFile',
-          src: '*.plist'
-        }, {
-          expand: true,
-          cwd: '<%= config.resources %>/mac/',
-          dest: '<%= config.dist %>/node-webkit.app/Contents/Resources/',
-          filter: 'isFile',
-          src: '*.icns'
-        }]
-      },
-      webkit: {
-        files: [{
-          expand: true,
-          cwd: '<%=config.resources %>/node-webkit/MacOS',
-          dest: '<%= config.dist %>/',
-          src: '**'
-        }]
-      },
-      copyWinToTmp: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.resources %>/node-webkit/Windows/',
-          dest: '<%= config.tmp %>/',
-          src: '**'
-        }]
-      },
-	  copyTmpToDist: {
-		files: [{
-          expand: true,
-          cwd: '<%= config.tmp %>/',
-          dest: '<%= config.dist %>/Overcaster',
-          src: '**'
-        }]
-	  }
-    },
-    compress: {
-      appToTmp: {
-        options: {
-          archive: '<%= config.tmp %>/app.zip'
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>',
-          src: ['**']
-        }]
-      },
-      finalWindowsApp: {
-        options: {
-          archive: '<%= config.dist %>/Overcaster.zip'
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= config.tmp %>',
-          src: ['**']
-        }]
-      }
-    },
-    rename: {
-      app: {
-        files: [{
-          src: '<%= config.dist %>/node-webkit.app',
-          dest: '<%= config.dist %>/Overcaster.app'
-        }]
-      },
-      zipToApp: {
-        files: [{
-          src: '<%= config.tmp %>/app.zip',
-          dest: '<%= config.tmp %>/app.nw'
-        }]
-      }
-    },
-	shell: {
-        debugWindows: {
-            options: {
-                stdout: true
-            },
-			command: [
-				'start <%= config.dist %>/Overcaster/Overcaster.exe --debug',
+	// configurable paths
+	var config = {
+		app: 'app',
+		dist: 'dist',
+		tmp: 'tmp',
+		resources: 'resources'
+	};
+
+	grunt.initConfig({
+		config: config,
+		clean: {
+			dist: ['<%= config.dist %>/**/*'],
+			distComplete: ['<%= config.dist %>/Overcaster/**/*']
+		},
+		wait: {
+			pause: {
+				options: {
+					delay: 1000
+				}
+			}
+		},
+		jshint: {
+			options: {
+				jshintrc: '.jshintrc'
+			},
+			files: '<%= config.app %>/js/*.js'
+		},
+		copy: {
+			fixDist: {
+				cwd: '<%= config.dist %>/Overcaster',
+				src: ['**/*'],
+				dest: '<%= config.dist %>',
+				expand: true
+			}
+		},
+		nodewebkit: {
+			win: {
+				options: {
+					platforms: ['win'],
+					buildDir: '<%= config.dist %>'
+				},
+				src: ['<%= config.app %>/**/*']
+			},
+			osx: {
+				options: {
+					platforms: ['osx'],
+					buildDir: '<%= config.dist %>'
+				},
+				src: ['<%= config.app %>/**/*']
+			},
+			linux32: {
+				options: {
+					platforms: ['linux32'],
+					buildDir: '<%= config.dist %>'
+				},
+				src: ['<%= config.app %>/**/*']
+			},
+			linux64: {
+				options: {
+					platforms: ['linux64'],
+					buildDir: '<%= config.dist %>'
+				},
+				src: ['<%= config.app %>/**/*']
+			},
+			all: {
+				options: {
+					platforms: platforms,
+					buildDir: '<%= config.dist %>'
+				},
+				src: ['<%= config.app %>/**/*']
+			}
+		},
+
+		shell: {
+			debugWin: {
+				options: {
+					stdout: true
+				},
+				command: [
+				'start <%= config.dist %>/win/Overcaster.exe --debug',
 				'node <%= config.app %>/server/server.js'
 			].join('&')
-        }
-    }
-  });
+			},
+			deleteOldDist: {
+				options: {
+					stdout: true
+				},
+				command: 'RMDIR \"<%= config.dist %>/Overcaster" /S /Q'
+			}
+		}
+	});
 
-  grunt.registerTask('chmod', 'Add lost Permissions.', function () {
-    var fs = require('fs');
-    fs.chmodSync('dist/Overcaster.app/Contents/Frameworks/node-webkit Helper EH.app/Contents/MacOS/node-webkit Helper EH', '555');
-    fs.chmodSync('dist/Overcaster.app/Contents/Frameworks/node-webkit Helper NP.app/Contents/MacOS/node-webkit Helper NP', '555');
-    fs.chmodSync('dist/Overcaster.app/Contents/Frameworks/node-webkit Helper.app/Contents/MacOS/node-webkit Helper', '555');
-    fs.chmodSync('dist/Overcaster.app/Contents/MacOS/node-webkit', '555');
-  });
+	grunt.registerTask('fixDist', 'Fixes the dist folder structure.', function () {
+		// Force task into async mode and grab a handle to the "done" function.
+		var done = this.async();
 
-  grunt.registerTask('createLinuxApp', 'Create linux distribution.', function () {
-    var done = this.async();
-    var childProcess = require('child_process');
-    var exec = childProcess.exec;
-    exec('mkdir -p ./dist; cp resources/node-webkit/linux_ia64/nw.pak dist/ && cp resources/node-webkit/linux_ia64/nw dist/node-webkit', function (error, stdout, stderr) {
-      var result = true;
-      if (stdout) {
-        grunt.log.write(stdout);
-      }
-      if (stderr) {
-        grunt.log.write(stderr);
-      }
-      if (error !== null) {
-        grunt.log.error(error);
-        result = false;
-      }
-      done(result);
-    });
-  });
+		var delay = 3000;
 
-  grunt.registerTask('createWindowsApp', 'Create windows distribution.', function () {
-    var done = this.async();
-    var childProcess = require('child_process');
-    var exec = childProcess.exec;
-    exec('copy /b tmp\\nw.exe+tmp\\app.nw tmp\\Overcaster.exe && del tmp\\app.nw tmp\\nw.exe', function (error, stdout, stderr) {
-      var result = true;
-      if (stdout) {
-        grunt.log.write(stdout);
-      }
-      if (stderr) {
-        grunt.log.write(stderr);
-      }
-      if (error !== null) {
-        grunt.log.error(error);
-        result = false;
-      }
-      done(result);
-    });
-  });
+		setTimeout(function () {
+			grunt.log.writeln('Copying the builds...');
+			grunt.task.run('copy:fixDist');
+			setTimeout(function () {
+				grunt.log.writeln('Deleting obsolete builds...');
+				grunt.task.run('shell:deleteOldDist');
+				done();
+			}, delay);
 
-  grunt.registerTask('setVersion', 'Set version to all needed files', function (version) {
-    var config = grunt.config.get(['config']);
-    var appPath = config.app;
-    var resourcesPath = config.resources;
-    var mainPackageJSON = grunt.file.readJSON('package.json');
-    var appPackageJSON = grunt.file.readJSON(appPath + '/package.json');
-    var infoPlistTmp = grunt.file.read(resourcesPath + '/mac/Info.plist.tmp', {
-      encoding: 'UTF8'
-    });
-    var infoPlist = grunt.template.process(infoPlistTmp, {
-      data: {
-        version: version
-      }
-    });
-    mainPackageJSON.version = version;
-    appPackageJSON.version = version;
-    grunt.file.write('package.json', JSON.stringify(mainPackageJSON, null, 2), {
-      encoding: 'UTF8'
-    });
-    grunt.file.write(appPath + '/package.json', JSON.stringify(appPackageJSON, null, 2), {
-      encoding: 'UTF8'
-    });
-    grunt.file.write(resourcesPath + '/mac/Info.plist', infoPlist, {
-      encoding: 'UTF8'
-    });
-  });
+		}, delay);
+	});
 
-  grunt.registerTask('dist-linux', [
-    'jshint',
-    'clean:dist',
-    'copy:appLinux',
-    'createLinuxApp'
-  ]);
-  
-  grunt.registerTask('debug-win', [
-    'jshint',
-    'clean:dist',
-    'copy:copyWinToTmp',
-    'compress:appToTmp',
-    'rename:zipToApp',
-    'createWindowsApp',
-	'copy:copyTmpToDist',
-	'shell:debugWindows'
+	grunt.registerTask('dist', [
+		'jshint',
+		'clean:dist',
+		'nodewebkit:all',
+		'fixDist'
+	]);
+
+	// Register Tasks for each platform...
+	for (var p in platforms) {
+		(function (os) {
+			grunt.registerTask('dist-' + os, [
+				'jshint',
+				'clean:dist',
+				'nodewebkit:' + os,
+				'fixDist'
+			]);
+		})(platforms[p]);
+	}
+
+	grunt.registerTask('debug-win', [
+    'dist-win',
+	'shell:debugWin'
   ]);
 
-  grunt.registerTask('dist-win', [
-    'jshint',
-    'clean:dist',
-    'copy:copyWinToTmp',
-    'compress:appToTmp',
-    'rename:zipToApp',
-    'createWindowsApp',
-    'compress:finalWindowsApp'
-  ]);
-
-  grunt.registerTask('dist-mac', [
-    'jshint',
-    'clean:dist',
-    'copy:webkit',
-    'copy:appMacos',
-    'rename:app',
-    'chmod'
-  ]);
-
-  grunt.registerTask('check', [
+	grunt.registerTask('check', [
     'jshint'
   ]);
-
-  grunt.registerTask('dmg', 'Create dmg from previously created app folder in dist.', function () {
-    var done = this.async();
-    var createDmgCommand = 'resources/mac/package.sh "Overcaster"';
-    require('child_process').exec(createDmgCommand, function (error, stdout, stderr) {
-      var result = true;
-      if (stdout) {
-        grunt.log.write(stdout);
-      }
-      if (stderr) {
-        grunt.log.write(stderr);
-      }
-      if (error !== null) {
-        grunt.log.error(error);
-        result = false;
-      }
-      done(result);
-    });
-  });
-
 };
