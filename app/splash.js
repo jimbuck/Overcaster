@@ -16,57 +16,57 @@ global.settings.load(function(err, data){
 	} else {
 		expressPort = data.port;
 	}
-	
+
 	initOvercaster(global.Overcaster, global.NodeWebkit)
 });
 
 function initOvercaster(oc, nw){
-	
+
 	initGlobalVars();
 	initWindow();
 	initExpressServer();
-	
+
 	window.location.replace('http://localhost:'+expressPort+'/');
-	
+
 	//#region Init Functions
-	
+
 	function initGlobalVars(){
-		
+
 		if(!oc.Core) oc.Core = nw.App;
-		
+
 		if(!oc.Args) oc.Args = oc.Core.argv;
-		
+
 		if(!oc.Window) oc.Window = nw.Window.get();
-		
+
 		oc.Debug = (oc.Args.indexOf('--debug') > -1);
 	}
 
 	function initWindow() {
 		if(oc.Debug) oc.Window.showDevTools();
 		oc.Window.maximize();
-		
-		oc.Window.showDevTools();
+
+		//oc.Window.showDevTools();
 	}
 
 	function initExpressServer(){
 		if(oc.Debug) return;
-		
-		var spawn = require("child_process").spawn;
+
+		var spawn = require("child_process").fork;
 		global.Express = spawn("node", ['./server/server', expressPort]);
 
 		(function(e,c){
 			e.stdout.on("data", function (data) {
 				c.log('[EXPRESS]:',data);
 			});
-			
+
 			e.on('exit', function (code) {
 				c.log('[EXPRESS]: Exited with code ' + code);
 			});
-			
+
 		})(global.Express, console);
 	}
 
 
 	//#endregion
-	
+
 }

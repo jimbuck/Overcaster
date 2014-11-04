@@ -39,9 +39,9 @@ html
 						li.main-page-link
 							a(href='/scenes') Scenes
 						li.main-page-link
-							a(href='/layouts') Layouts
-						li.main-page-link
 							a(href='/elements') Elements
+						li.main-page-link
+							a(href='/resources') Resources
 						li.main-page-link
 							a(href='/settings') Settings
 						li.dropdown
@@ -49,9 +49,6 @@ html
 								| Help&nbsp;
 								b.caret
 							ul.dropdown-menu
-								li
-									a(href='javascript:void(0);') About Overcaster
-								li.divider
 								li.dropdown-header Links
 								li
 									a(href='javascript:void(0);', onclick='javascript: global.NodeWebkit.Shell.openExternal("https://github.com/JimmyBoh/Overcaster/wiki");') Overcaster Wiki
@@ -69,6 +66,9 @@ html
 									a(href='javascript:void(0);' onclick="javascript: global.Overcaster.Window.showDevTools();") Show DevTools
 								li
 									a(href='javascript:void(0);') View Logs
+								li.divider
+								li
+									a(href='javascript:void(0);') About Overcaster
 					span.pull-right
 						#liveStatus.preping
 							span.preping.label.label-info
@@ -93,8 +93,8 @@ html
 				include scenes
 			#scene-editor-template
 				include scene-editor
-			#layouts-page-template
-				include layouts
+			#resources-page-template
+				include resources.hb
 			#elements-page-template
 				include elements
 			#settings-page-template
@@ -114,7 +114,7 @@ html
 			script(type='text/javascript', src='/js/site/director/views.js')
 			script(type='text/javascript', src='/js/site/director/router.js')
 			script(type='text/javascript', src='/js/site/director/run.js')
-		
+
 		#footer
 			p#appStatus.pull-right Current Bitrate: 4200kbps
 			p#tooltipHint.pull-left Loading Elements...

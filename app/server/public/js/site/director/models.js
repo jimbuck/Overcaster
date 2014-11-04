@@ -34,9 +34,10 @@ var buildModels = function (oc, app) {
 		}
 	});
 
-	app.Models.Layout = Backbone.Model.extend({
+	app.Models.Resource = Backbone.Model.extend({
 		defaults: {
-			name: 'Default Layout'
+			name: 'Default Layout',
+			path: null
 		}
 	});
 
