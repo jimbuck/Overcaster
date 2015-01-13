@@ -1,0 +1,29 @@
+<div class="scenes-page grid-page">
+  <div class="row">
+    <div class="col-md-12 center-text">
+      <h1 class="center-text">Scenes</h1>
+    </div>
+  </div>
+  <oc-grid-layout items="scenes" ng-cloak>
+      <div class="item-layout">
+        <div class="well">
+          <a ng-href="/scene-editor/{{ _id }}" class="item-container">
+            <div class="item-preview wide-screen">
+              <div class="item-screen transparent-checkerboard"></div>
+            </div>
+            <h3 class="center-text" ng-model="name" />
+          </a>
+        </div>
+      </div>
+      <div class="null-layout">
+        <div class="well">
+          <a href="/scene-editor" class="item-container">
+            <div class="item-preview wide-screen">
+              <div class="item-screen new"></div>
+            </div>
+            <h3 class="center-text"><span class="glyphicon glyphicon-plus"></span></h3>
+          </a>
+        </div>
+      </div>
+  </gridLayout>
+</div>

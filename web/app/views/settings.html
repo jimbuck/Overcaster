@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="center-text"> Settings</h1>
+  </div>
+</div>
+<div class="row form-row">
+  <div class="col-md-10 col-md-offset-1">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#general" data-toggle="tab">General</a></li>
+      <li><a href="#broadcast" data-toggle="tab">Broadcast</a></li>
+      <li><a href="#editor" data-toggle="tab">Editor</a></li>
+      <li><a href="#setup" data-toggle="tab">Setup</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <form id="settingsForm" class="tab-content form-horizontal">
+      <div id="general" class="tab-pane active fade in">
+        <div class="form-group">
+          <label for="dataLocationInput" class="col-md-2 control-label">Data Directory:</label>
+          <div class="col-md-4">
+            <input id="dataLocationInput" type="file" name="dataLocation" nwdirectory="nwdirectory" value="{{dataLocation}}" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mediaLocationInput" class="col-md-2 control-label">Media Directory:</label>
+          <div class="col-md-4">
+            <input id="mediaLocationInput" type="file" name="mediaLocation" nwdirectory="nwdirectory" value="{{mediaLocation}}" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contentLocationInput" class="col-md-2 control-label">Content Directory:</label>
+          <div class="col-md-4">
+            <input id="contentLocationInput" type="file" name="contentLocation" nwdirectory="nwdirectory" value="{{contentLocation}}" class="form-control"/>
+          </div>
+        </div>
+      </div>
+      <div id="broadcast" class="tab-pane fade">
+        <div class="form-group">
+          <label for="serverPortInput" class="col-md-2 control-label">Server Port:</label>
+          <div class="col-md-1">
+            <input id="serverPortInput" type="number" name="serverPort" value="{{port}}" class="form-control"/>
+          </div>
+        </div>
+      </div>
+      <div id="editor" class="tab-pane fade">
+        <div class="form-group">
+          <label for="themeLocationInput" class="col-md-2 control-label">Theme Directory:</label>
+          <div class="col-md-4">
+            <input id="themeLocationInput" type="file" name="themeLocation" nwdirectory="nwdirectory" value="{{themeLocation}}" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="editorThemeInput" class="col-md-2 control-label">Editor Theme:</label>
+          <div class="col-md-4">
+            <input id="editorThemeInput" type="file" name="editorTheme" value="{{editorTheme}}" class="form-control"/>
+          </div>
+        </div>
+      </div>
+      <div id="setup" class="tab-pane fade">
+        <h3>... Setup!</h3>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2 col-md-offset-1">
+    <div class="row">
+      <div class="col-md-4">
+        <button disabled="disabled" class="btn btn-block btn-info">Save</button>
+      </div>
+      <div class="col-md-4">
+        <button disabled="disabled" class="btn btn-block btn-default">Cancel</button>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-block btn-primary">Defaults</button>
+      </div>
+    </div>
+  </div>
+</div>

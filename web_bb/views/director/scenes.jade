@@ -1,0 +1,21 @@
+
+.scenes-page.grid-page
+	.row
+		.col-md-12.center-text
+			h1.center-text  Scenes
+	{{#grid this }}
+		{{#if this}}
+			.well
+				a.item-container(href='/scene-editor/{{ _id }}')
+					.item-preview.wide-screen
+						.item-screen.transparent-checkerboard
+					h3.center-text {{ name }}
+		{{else}}
+			.well
+				a.item-container(href='/scene-editor')
+					.item-preview.wide-screen
+						.item-screen.new
+					h3.center-text
+						span.glyphicon.glyphicon-plus
+		{{/if}}
+	{{/grid}}
