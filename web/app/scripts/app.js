@@ -16,7 +16,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'overcasterDirectives'
   ])
   .config(function ($locationProvider, $routeProvider) {
 
@@ -56,6 +57,6 @@ angular
         controller: 'SceneEditorCtrl'
       })
       .otherwise({
-        redirectTo: '/start'
+        redirectTo: '/'
       });
   });

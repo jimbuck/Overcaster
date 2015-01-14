@@ -4,18 +4,18 @@
       <h1 class="center-text">Scenes</h1>
     </div>
   </div>
-  <oc-grid-layout items="scenes" ng-cloak>
-      <div class="item-layout">
+  <oc:tile-layout items="scenes" columns="5" end-with-null="true" ng-cloak>
+      <div class="item-layout" ng-if="item">
         <div class="well">
-          <a ng-href="/scene-editor/{{ _id }}" class="item-container">
+          <a ng-href="/scene-editor/{{ item._id }}" class="item-container">
             <div class="item-preview wide-screen">
               <div class="item-screen transparent-checkerboard"></div>
             </div>
-            <h3 class="center-text" ng-model="name" />
+            <h3 class="center-text" ng-bind="item.name" />
           </a>
         </div>
       </div>
-      <div class="null-layout">
+      <div class="null-layout" ng-if="!item">
         <div class="well">
           <a href="/scene-editor" class="item-container">
             <div class="item-preview wide-screen">
@@ -25,5 +25,5 @@
           </a>
         </div>
       </div>
-  </gridLayout>
+  </oc:tile-layout>
 </div>

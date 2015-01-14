@@ -4,26 +4,14 @@
       <h1 class="center-text">Sessions</h1>
     </div>
   </div>
-  <oc-grid-layout items="sessions" ng-cloak>
-  <div class="item-layout">
+  <oc:tile-layout items="sessions" columns="4" ng-cloak>
     <div class="well">
-      <a ng-href="/session-editor/{{ _id }}" class="item-container">
+      <a ng-href="/scene-editor/{{ item._id }}" class="item-container">
         <div class="item-preview wide-screen">
           <div class="item-screen transparent-checkerboard"></div>
         </div>
-        <h3 class="center-text" ng-model="name" />
+        <h3 class="center-text" ng-bind="item.name" />
       </a>
     </div>
-  </div>
-  <div class="null-layout">
-    <div class="well">
-      <a href="/session-editor" class="item-container">
-        <div class="item-preview wide-screen">
-          <div class="item-screen new"></div>
-        </div>
-        <h3 class="center-text"><span class="glyphicon glyphicon-plus"></span></h3>
-      </a>
-    </div>
-  </div>
-</gridLayout>
+  </oc:tile-layout>
 </div>

@@ -8,10 +8,12 @@
  * Controller of the overcasterApp
  */
 angular.module('overcasterApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, $timeout, $location) {
+    
+
+    $timeout(function(){
+      $location.url('/start');
+    }, 3000);
+
+
   });
