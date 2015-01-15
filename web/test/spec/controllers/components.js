@@ -3,7 +3,7 @@
 describe('Controller: ComponentsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('overcasterApp'));
+  beforeEach(module('overcasterControllers'));
 
   var ComponentsCtrl,
     scope;

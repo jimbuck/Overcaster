@@ -2,18 +2,18 @@
 
 /**
  * @ngdoc function
- * @name overcasterApp.controller:MainCtrl
+ * @name overcasterControllers.controller:MainCtrl
  * @description
  * # MainCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterApp')
+angular.module('overcasterControllers')
   .controller('MainCtrl', function ($scope, $timeout, $location) {
-    
+
 
     $timeout(function(){
       $location.url('/start');
-    }, 3000);
+    }, 1000);
 
 
   });

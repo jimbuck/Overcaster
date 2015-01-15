@@ -6,7 +6,7 @@
  * @description
  * # ocItemGrid
  */
-angular.module('overcasterDirectives', [])
+angular.module('overcasterDirectives')
   .value('ocTileLayoutConfig', {
     tileItemClassName: 'tile-item',
     addItemClassName: 'add-item'
@@ -24,7 +24,7 @@ angular.module('overcasterDirectives', [])
 
         return function(scope, $element, $attrs) {
           var elements = [];
-          var tiles = scope.items;
+          var tiles = scope.items || [];
           var columns = scope.columns;
 
           scope.$watch('items', function(value){
@@ -34,7 +34,6 @@ angular.module('overcasterDirectives', [])
 
           scope.$watch('columns', function(value){
             columns = value || 5;
-            console.log(value)
             updateLayout();
           });
 

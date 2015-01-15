@@ -2,16 +2,12 @@
 
 /**
  * @ngdoc function
- * @name overcasterApp.controller:SettingsCtrl
+ * @name overcasterControllers.controller:SettingsCtrl
  * @description
  * # SettingsCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterApp')
+angular.module('overcasterControllers')
   .controller('SettingsCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
   });

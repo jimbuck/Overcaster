@@ -2,16 +2,12 @@
 
 /**
  * @ngdoc function
- * @name overcasterApp.controller:SceneEditorCtrl
+ * @name overcasterControllers.controller:SceneEditorCtrl
  * @description
  * # SceneEditorCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterApp')
+angular.module('overcasterControllers')
   .controller('SceneEditorCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
   });

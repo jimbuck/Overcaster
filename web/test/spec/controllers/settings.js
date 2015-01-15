@@ -3,7 +3,7 @@
 describe('Controller: SettingsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('overcasterApp'));
+  beforeEach(module('overcasterControllers'));
 
   var SettingsCtrl,
     scope;

@@ -3,7 +3,7 @@
 describe('Controller: ScenesCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('overcasterApp'));
+  beforeEach(module('overcasterControllers'));
 
   var ScenesCtrl,
     scope;
@@ -16,7 +16,7 @@ describe('Controller: ScenesCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    //expect(scope.awesomeThings.length).toBe(3);
+  it('should attach a list of items to the scope', function () {
+    expect(scope.scenes.length).toBe(7);
   });
 });

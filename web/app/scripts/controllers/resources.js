@@ -2,16 +2,12 @@
 
 /**
  * @ngdoc function
- * @name overcasterApp.controller:ResourcesCtrl
+ * @name overcasterControllers.controller:ResourcesCtrl
  * @description
  * # ResourcesCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterApp')
+angular.module('overcasterControllers')
   .controller('ResourcesCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
   });

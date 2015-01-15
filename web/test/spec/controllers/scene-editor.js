@@ -3,7 +3,7 @@
 describe('Controller: SceneEditorCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('overcasterApp'));
+  beforeEach(module('overcasterControllers'));
 
   var SceneEditorCtrl,
     scope;

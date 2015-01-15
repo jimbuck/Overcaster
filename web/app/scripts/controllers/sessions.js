@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc function
- * @name overcasterApp.controller:SessionsCtrl
+ * @name overcasterControllers.controller:SessionsCtrl
  * @description
  * # SessionsCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterApp')
-  .controller('SessionsCtrl', function ($scope) {
+angular.module('overcasterControllers')
+  .controller('SessionsCtrl', function ($scope, ocUtils) {
 
-    $scope.sessionColumns = 4;
+    $scope.sessionColumns = 5;
 
     $scope.incColumns = function(){
       $scope.sessionColumns++;
@@ -34,27 +34,27 @@ angular.module('overcasterApp')
       name: 'Theta'
     },
     {
-      _id: 0,
+      _id: 3,
       name: 'Alpha'
     },
     {
-      _id: 1,
+      _id: 4,
       name: 'Beta'
     },
     {
-      _id: 0,
+      _id: 5,
       name: 'Alpha'
     },
     {
-      _id: 1,
+      _id: 6,
       name: 'Beta'
     },
     {
-      _id: 0,
+      _id: 7,
       name: 'Alpha'
     },
     {
-      _id: 1,
+      _id: 8,
       name: 'Beta'
     },
     ];
