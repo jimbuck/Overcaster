@@ -13,12 +13,10 @@ angular.module('overcasterDirectives', [])
   })
   .directive('ocTileLayout', function (ocTileLayoutConfig) {
 
-    console.log('CREATING DIRECTIVE!!!');
-
-
     return {
       scope: {
-        items: '='
+        items: '=',
+        columns: '='
       },
       restrict: 'E',
       transclude: true,
@@ -26,9 +24,23 @@ angular.module('overcasterDirectives', [])
 
         return function(scope, $element, $attrs) {
           var elements = [];
-          var columns = parseInt($attrs.columns);
+          var tiles = scope.items;
+          var columns = scope.columns;
 
-          scope.$watchCollection('items', function(collection){
+          scope.$watch('items', function(value){
+            tiles = value || [];
+            updateLayout();
+          });
+
+          scope.$watch('columns', function(value){
+            columns = value || 5;
+            console.log(value)
+            updateLayout();
+          });
+
+          updateLayout();
+
+          function updateLayout(){
 
             var i, block, childScope;
 
@@ -42,11 +54,11 @@ angular.module('overcasterDirectives', [])
               elements = [];
             }
 
-            for (i = 0; i < collection.length+($attrs.endWithNull?1:0); i++) {
+            for (i = 0; i < tiles.length+($attrs.endWithNull?1:0); i++) {
               // create a new scope for every element in the collection.
               childScope = scope.$new();
               // pass the current element of the collection into that scope
-              childScope['item'] = collection[i];
+              angular.extend(childScope, tiles[i]);
 
               transcludeFn(childScope, function(clone){
                 // clone the transcluded element, passing in the new scope.
@@ -65,7 +77,7 @@ angular.module('overcasterDirectives', [])
               });
             };
 
-          });
+          }
         };
       }
     };

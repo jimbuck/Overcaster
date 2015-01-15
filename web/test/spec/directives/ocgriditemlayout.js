@@ -11,18 +11,20 @@ describe('Directive: ocTileLayout', function () {
   beforeEach(inject(function ($rootScope) {
     scope = $rootScope.$new();
 
-    scope.colors = [
-    { color: 'red' },
-    { color: 'white' },
-    { color:'blue' }
-    ];
+    scope.columns = 4;
 
+    scope.colors = [{
+      color: 'red'
+    }, {
+      color: 'white'
+    }, {
+      color: 'blue'
+    }];
   }));
 
-  it('should display 3 children', inject(function ($compile) {
-    element = angular.element('<oc:tile-layout items="colors"><h2 ng-bind="item.color"></h2></oc:tile-layout>');
+  it('should contain 3 children', inject(function ($compile) {
+    element = angular.element('<oc:tile-layout items="colors" columns="columns"><h2 ng-bind="color" /></oc:tile-layout>');
     element = $compile(element)(scope);
-    console.log(scope.colors);
     expect(element.children().length).toBe(3);
   }));
 });

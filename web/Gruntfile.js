@@ -348,9 +348,23 @@ module.exports = function (grunt) {
 
     // Test settings
     karma: {
-      unit: {
-        configFile: 'test/karma.conf.js',
+      options:{
+        default: 'phantom',
+        configFile: 'test/karma.conf.js'
+      },
+      phantom: {
         singleRun: true
+      },
+      chrome: {
+        browsers: ['Chrome'],
+        singleRun: false
+      }
+    },
+
+    // Used to open the test results after completion...
+    open : {
+      results : {
+        path: 'test/results.html',
       }
     }
   });
@@ -371,17 +385,29 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
-  });
-
   grunt.registerTask('test', [
+  'clean:server',
+  'concurrent:test',
+  'autoprefixer',
+  'connect:test',
+  'force:karma:phantom',
+  'open:results'
+  ]);
+
+  grunt.registerTask('test-ci', [
     'clean:server',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'karma:phantom'
+  ]);
+
+  grunt.registerTask('test-chrome', [
+  'clean:server',
+  'concurrent:test',
+  'autoprefixer',
+  'connect:test',
+  'karma:chrome'
   ]);
 
   grunt.registerTask('build', [

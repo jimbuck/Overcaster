@@ -4,14 +4,26 @@
       <h1 class="center-text">Sessions</h1>
     </div>
   </div>
-  <oc:tile-layout items="sessions" columns="4" ng-cloak>
-    <div class="well">
-      <a ng-href="/scene-editor/{{ item._id }}" class="item-container">
-        <div class="item-preview wide-screen">
-          <div class="item-screen transparent-checkerboard"></div>
-        </div>
-        <h3 class="center-text" ng-bind="item.name" />
-      </a>
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn" ng-click="decColumns()">-</button>
+      <label ng-bind="sessionColumns" />
+      <button class="btn" ng-click="incColumns()">+</button>
     </div>
-  </oc:tile-layout>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <oc:tile-layout items="sessions" columns="sessionColumns" ng-cloak>
+        <div class="well">
+          <a ng-href="/scene-editor/{{ _id }}" class="item-container">
+            <div class="item-preview wide-screen">
+              <div class="item-screen transparent-checkerboard"></div>
+            </div>
+            <h3 class="center-text" ng-bind="name" />
+          </a>
+        </div>
+      </oc:tile-layout>
+    </div>
+  </div>
+
 </div>

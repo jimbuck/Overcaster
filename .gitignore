@@ -17,3 +17,4 @@ bower_components
 dist
 tmp
 cache
+web/test/results.html
