@@ -22323,7 +22323,7 @@ var ngControllerDirective = [function() {
  * @description
  * Enables [CSP (Content Security Policy)](https://developer.mozilla.org/en/Security/CSP) support.
  *
- * This is necessary when developing things like Google Chrome Extensions or Universal Windows Apps.
+ * This is necessary when developing things like Google Chrome extensions or Universal Windows Apps.
  *
  * CSP forbids apps to use `eval` or `Function(string)` generated functions (among other things).
  * For Angular to be CSP compatible there are only two things that we need to do differently:

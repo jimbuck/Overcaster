@@ -9,5 +9,4 @@
  */
 angular.module('overcasterControllers')
   .controller('SettingsCtrl', function ($scope) {
-
   });

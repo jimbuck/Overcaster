@@ -364,7 +364,7 @@ module.exports = function (grunt) {
     // Used to open the test results after completion...
     open : {
       results : {
-        path: 'test/results.html',
+        path: 'test/results.html'
       }
     }
   });

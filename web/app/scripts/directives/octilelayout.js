@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc directive
- * @name overcasterDirectives.directive:ocItemGrid
+ * @name overcasterDirectives.directive:ocTileLayout
  * @description
- * # ocItemGrid
+ * # ocTileLayout
  */
 angular.module('overcasterDirectives')
   .value('ocTileLayoutConfig', {
