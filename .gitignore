@@ -18,3 +18,4 @@ dist
 tmp
 cache
 web/test/results.html
+.idea
