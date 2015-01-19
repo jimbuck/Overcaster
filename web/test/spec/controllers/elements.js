@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: ComponentsCtrl', function () {
+describe('Controller: ElementsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('overcasterControllers'));
+  beforeEach(module('overcasterApp'));
 
-  var ComponentsCtrl,
+  var ElementsCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    ComponentsCtrl = $controller('ComponentsCtrl', {
+    ElementsCtrl = $controller('ElementsCtrl', {
       $scope: scope
     });
   }));

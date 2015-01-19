@@ -1,0 +1,30 @@
+<div class="elements-page grid-page">
+  <div class="row">
+    <div class="col-md-12 center-text">
+      <h1 class="center-text">Elements</h1>
+    </div>
+  </div>
+  <oc:tile-layout items="elements" columns="5" end-with-null="true" ng-cloak>
+    <div class="item-layout" ng-if="name">
+      <div class="well">
+        <a ng-href="/elements/{{ id }}" class="item-container">
+          <div class="item-preview wide-screen">
+            <div class="item-screen transparent-checkerboard"></div>
+          </div>
+          <h3 class="center-text" ng-bind="name"/>
+        </a>
+      </div>
+    </div>
+    <div class="null-layout" ng-if="!name">
+      <div class="well">
+        <a href="/element/create" class="item-container">
+          <div class="item-preview wide-screen">
+            <div class="item-screen new"></div>
+          </div>
+          <h3 class="center-text"><span class="glyphicon glyphicon-plus"></span></h3>
+        </a>
+      </div>
+    </div>
+  </oc:tile-layout>
+</div>
+

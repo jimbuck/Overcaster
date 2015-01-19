@@ -32,14 +32,6 @@ angular
         templateUrl: 'views/start.html',
         controller: 'StartCtrl'
       })
-      .when('/scenes', {
-        templateUrl: 'views/scenes.html',
-        controller: 'ScenesCtrl'
-      })
-      .when('/sessions', {
-        templateUrl: 'views/sessions.html',
-        controller: 'SessionsCtrl'
-      })
       .when('/settings', {
         templateUrl: 'views/settings.html',
         controller: 'SettingsCtrl'
@@ -48,13 +40,17 @@ angular
         templateUrl: 'views/resources.html',
         controller: 'ResourcesCtrl'
       })
-      .when('/components', {
-        templateUrl: 'views/components.html',
-        controller: 'ComponentsCtrl'
+      .when('/scenes/:id?', {
+        templateUrl: 'views/scenes.html',
+        controller: 'ScenesCtrl'
       })
-      .when('/scene-editor', {
-        templateUrl: 'views/scene-editor.html',
-        controller: 'SceneEditorCtrl'
+      .when('/sessions/:id?', {
+        templateUrl: 'views/sessions.html',
+        controller: 'SessionsCtrl'
+      })
+      .when('/elements/:id?', {
+        templateUrl: 'views/elements.html',
+        controller: 'ElementsCtrl'
       })
       .otherwise({
         redirectTo: '/'

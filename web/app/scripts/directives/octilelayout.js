@@ -50,7 +50,6 @@ angular.module('overcasterDirectives')
                 elements[i].el.parent().remove();
                 elements[i].scope.$destroy();
               }
-              ;
               elements = [];
             }
 
@@ -69,6 +68,7 @@ angular.module('overcasterDirectives')
                   'padding': 10,
                   'width': (100 / columns) + '%'
                 });
+
                 element.append(el); // add to DOM
                 block = {};
                 block.el = clone;

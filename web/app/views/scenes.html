@@ -5,9 +5,9 @@
     </div>
   </div>
   <oc:tile-layout items="scenes" columns="5" end-with-null="true" ng-cloak>
-      <div class="item-layout" ng-if="this.name">
+      <div class="item-layout" ng-if="name">
         <div class="well">
-          <a ng-href="/scene-editor/{{ _id }}" class="item-container">
+          <a ng-href="/scenes/{{ _id }}" class="item-container">
             <div class="item-preview wide-screen">
               <div class="item-screen transparent-checkerboard"></div>
             </div>
@@ -15,9 +15,9 @@
           </a>
         </div>
       </div>
-      <div class="null-layout" ng-if="!this.name">
+      <div class="null-layout" ng-if="!name">
         <div class="well">
-          <a href="/scene-editor" class="item-container">
+          <a href="/scenes" class="item-container">
             <div class="item-preview wide-screen">
               <div class="item-screen new"></div>
             </div>

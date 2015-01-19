@@ -9,5 +9,5 @@
  */
 angular.module('overcasterControllers')
   .controller('StartCtrl', function ($scope) {
-    
+
   });
