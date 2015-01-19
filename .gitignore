@@ -16,6 +16,7 @@ node_modules
 bower_components
 dist
 tmp
+.tmp
 cache
 web/test/results.html
 .idea
