@@ -7,7 +7,7 @@
  * # ElementsService
  * Factory in the overcasterApp.
  */
-angular.module('overcasterApp')
+angular.module('overcasterServices')
   .factory('ElementsService', function ($q) {
 
     var elements = [
@@ -37,37 +37,37 @@ angular.module('overcasterApp')
       }
     ];
 
-    function loadFunc(arg){
+    function loadFunc(arg) {
 
       var matchingElements = [];
 
       var deferred = $q.defer();
 
-      //setTimeout(function(){
-        if (typeof arg === 'string' || typeof arg === 'number')
-        {
-          matchingElements = _.where(elements, {id: parseInt(arg)});
-        }
-        else if (typeof arg === 'function')
-        {
-          matchingElements = _.filter(elements, arg);
-        }
-        else
-        {
-          matchingElements = _.where(elements, arg);
-        }
-      //, 1000);
+      if (typeof arg === 'string' || typeof arg === 'number') {
+        matchingElements = _.where(elements, {id: parseInt(arg)});
+      }
+      else if (typeof arg === 'function') {
+        matchingElements = _.filter(elements, arg);
+      }
+      else if (typeof arg === 'object') {
+        matchingElements = _.where(elements, arg);
+      }
+      else {
+        matchingElements = elements;
+      }
 
       deferred.resolve(matchingElements);
 
-      return deferred.promise;
+      var promise = deferred.promise;
+
+      return promise;
     }
 
     function saveFunc(element) {
 
       var deferred = $q.defer();
 
-      deleteFunc(element.id).then(function(){
+      deleteFunc(element.id).then(function () {
         elements.push(element);
         deferred.resolve(element);
       });
@@ -79,13 +79,10 @@ angular.module('overcasterApp')
 
       var deferred = $q.defer();
 
-      if (typeof arg === 'string' || typeof arg === 'number')
-      {
+      if (typeof arg === 'string' || typeof arg === 'number') {
         elements = _.without(elements, _.findWhere(elements, {id: parseInt(arg)}));
       }
-
-      if (typeof arg === 'function')
-      {
+      else if (typeof arg === 'function') {
         elements = _.reject(elements, arg);
       }
 

@@ -2,17 +2,28 @@
 
 describe('Service: ElementsService', function () {
 
+  var ElementsService;
+  var $scope;
+
   // load the service's module
-  beforeEach(module('overcasterApp'));
+  beforeEach(module('overcasterServices'));
 
   // instantiate service
-  var ElementsService;
-  beforeEach(inject(function (_ElementsService_) {
+  beforeEach(inject(function ($rootScope, _ElementsService_) {
     ElementsService = _ElementsService_;
+    $scope = $rootScope;
   }));
 
-  it('should do something', function () {
-    expect(!!ElementsService).toBe(true);
+  it('should return a list of elements.', function (done) {
+
+    ElementsService.load().then(function (elements) {
+
+      expect(elements.length).toBeGreaterThan(0);
+      done();
+
+    });
+
+    $scope.$apply();
   });
 
 });
