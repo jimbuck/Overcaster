@@ -94,8 +94,9 @@ describe('Service: ElementsService', function () {
       inUse: true
     };
 
-    ElementsService.save(existingElement).then(function(element){
-      done()
+    ElementsService.save(existingElement, true).then(function(){
+      expect(false).toBe(true);
+      done();
     }, function (reason) {
       expect(reason).toBeDefined();
       done();
