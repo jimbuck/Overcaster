@@ -1,5 +1,6 @@
 {
   "node": true,
+  "jasmine": true,
   "browser": true,
   "esnext": true,
   "bitwise": true,
@@ -18,7 +19,7 @@
   "trailing": true,
   "smarttabs": true,
   "globals": {
-    "angular": false
+    "angular": false,
     "_": false
   }
 }
