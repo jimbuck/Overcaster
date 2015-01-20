@@ -15,6 +15,6 @@
   },
   "chromium-args": "--child-clean-exit",
   "dependencies": {
-    "nedb": "~0.8.11"
+    "nedb": "*"
   }
 }
