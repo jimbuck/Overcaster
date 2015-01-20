@@ -1,0 +1,10 @@
+::-webkit-scrollbar {
+  visibility: hidden;
+}
+html, body {
+	background-color: rgba(0, 0, 0, 0) !important;
+}
+body{
+	margin: 0px auto;
+	position:relative;
+}
