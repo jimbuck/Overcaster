@@ -128,29 +128,34 @@ if (!Array.prototype.indexOf) {
 
 //array method extension: 'addOrUpdate' declaration
 if (!Array.prototype.addOrUpdate) {
-  Array.prototype.addOrUpdate = function (item, predicate) {
-    if (!predicate || item instanceof 'undefined') return false;
+  Object.defineProperty(Array.prototype, 'addOrUpdate', {
+    enumerable: false,
+    configurable: true,
+    writable: true,
+    value: function (item, predicate) {
+      if (!predicate || item instanceof 'undefined') return false;
 
-    //If item exists, find it
-    var matchingIndex = -1;
+      //If item exists, find it
+      var matchingIndex = -1;
 
-    this.find(function (element, index, array) {
-      if (element && predicate(item, element)) {
-        //store the index
-        matchingIndex = index;
+      this.find(function (element, index, array) {
+        if (element && predicate(item, element)) {
+          //store the index
+          matchingIndex = index;
+          return true;
+        }
+        return false;
+      });
+
+      if (matchingIndex < 0) { //Item does not exist, Add to collection
+        this.push(item);
+        return true;
+      } else { //Item already exists, update it
+        this[matchingIndex] = this[matchingIndex].extendProperties(item);
         return true;
       }
-      return false;
-    });
 
-    if (matchingIndex < 0) { //Item does not exist, Add to collection
-      this.push(item);
-      return true;
-    } else { //Item already exists, update it
-      this[matchingIndex] = this[matchingIndex].extendProperties(item);
-      return true;
+      return false; //Catch route, if it hits this point, something failed;
     }
-
-    return false; //Catch route, if it hits this point, something failed;
-  }
+  })
 }
