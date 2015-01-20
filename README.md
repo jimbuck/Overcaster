@@ -1,5 +1,8 @@
-Overcaster
+Overcaster 
 =========
+
+[![Stories in Ready](https://badge.waffle.io/jimmyboh/overcaster.svg?label=ready&title=Ready)](http://waffle.io/jimmyboh/overcaster)
+[![Stories in In Progress](https://badge.waffle.io/jimmyboh/overcaster.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/jimmyboh/overcaster)
 
 The only desktop application built to design, manage, and serve HTML5 overlays for live broadcasts!
 
