@@ -14,9 +14,10 @@ describe('Controller: ElementsCtrl', function () {
     ElementsCtrl = $controller('ElementsCtrl', {
       $scope: scope
     });
+    scope.$apply();
   }));
 
   it('should attach a list of elements to the scope', function () {
-    expect(scope.element.length).toBeGreaterThan(0);
+    expect(scope.elements.length).toBeGreaterThan(0);
   });
 });

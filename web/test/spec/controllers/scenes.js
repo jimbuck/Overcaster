@@ -16,7 +16,7 @@ describe('Controller: ScenesCtrl', function () {
     });
   }));
 
-  it('should attach a list of items to the scope', function () {
+  it('should attach a list of scenes to the scope', function () {
     expect(scope.scenes.length).toBe(7);
   });
 });
