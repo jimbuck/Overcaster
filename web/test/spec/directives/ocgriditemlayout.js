@@ -5,8 +5,7 @@ describe('Directive: ocTileLayout', function () {
   // load the directive's module
   beforeEach(module('overcasterDirectives'));
 
-  var element,
-    scope;
+  var scope;
 
   beforeEach(inject(function ($rootScope) {
     scope = $rootScope.$new();
@@ -23,8 +22,23 @@ describe('Directive: ocTileLayout', function () {
   }));
 
   it('should contain 3 children', inject(function ($compile) {
-    element = angular.element('<oc:tile-layout items="colors" columns="columns"><h2 ng-bind="color" /></oc:tile-layout>');
+    var element = angular.element('<oc:tile-layout items="colors" columns="columns"><div /></oc:tile-layout>');
     element = $compile(element)(scope);
     expect(element.children().length).toBe(3);
+  }));
+
+  it('should increase item width when columns decrease', inject(function($compile){
+    var element = angular.element('<oc:tile-layout items="colors" columns="columns"><div /></oc:tile-layout>');
+    element = $compile(element)(scope);
+
+    scope.columns = 4;
+    scope.$apply();
+
+    expect(element.children(':first').width()).toBe(25);
+
+    scope.columns = 2;
+    scope.$apply();
+
+    expect(element.children(':first').width()).toBe(50);
   }));
 });

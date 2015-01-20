@@ -16,7 +16,7 @@ describe('Controller: ResourcesCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('should attach a list of resources to the scope', function () {
+    expect(scope.resources.length).toBeGreaterThan(0);
   });
 });

@@ -16,7 +16,11 @@ describe('Controller: SettingsCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  xit('should load settings', function () {
+
+  });
+
+  xit('should reset settings to default', function(){
+
   });
 });

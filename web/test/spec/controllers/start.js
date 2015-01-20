@@ -16,7 +16,15 @@ describe('Controller: StartCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  xit('should present a list of recent sessions', function () {
+
+  });
+
+  xit('should present a list of recent scenes', function(){
+
+  });
+
+  xit('should present a list of recent elements', function(){
+
   });
 });
