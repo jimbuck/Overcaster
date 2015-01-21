@@ -12,18 +12,6 @@
 //<oc:tab title="Tab 2" intial>Tab 2 Content</oc:tab>
 //</oc:tabs>
 angular.module('overcasterDirectives')
-  .run(function($templateCache) {
-    //ocTab.html
-    $templateCache.put('ocTab.html', '<div ng-show="isActive"><ng-transclude></ng-transclude></div>');
-  })
-  .value('ocTabsConfig', {
-    tabContainerClass: 'oc-tab-container',
-    tabBarClass: 'oc-tab-bar',
-    tabHandleClass: 'oc-tab-handle',
-    tabContentClass: 'oc-tab-content',
-    activeTabClass: 'active-tab',
-    initialTabAttribute: 'initial'
-  })
   .directive('ocTabs', ['ocTabsConfig', function (ocTabsConfig) {
     return {
       templateUrl: 'ocTabs.html',

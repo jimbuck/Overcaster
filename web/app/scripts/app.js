@@ -54,42 +54,9 @@ angular
       })
       .when('/debug', {
         templateUrl: 'views/debug.html',
-        controller: function() {}
+        controller: 'DebugCtrl'
       })
       .otherwise({
         redirectTo: '/'
       });
   });
-
-/**
- * @ngdoc overview
- * @name overcasterControllers
- * @description
- * # overcasterControllers
- *
- * Controllers used in the application.
- */
-angular.module('overcasterControllers', [
-  'overcasterServices',
-  'overcasterDirectives',
-]);
-
-/**
- * @ngdoc overview
- * @name overcasterDirectives
- * @description
- * # overcasterDirectives
- *
- * Custom directives built for the application.
- */
-angular.module('overcasterDirectives', []);
-
-/**
- * @ngdoc overview
- * @name overcasterServices
- * @description
- * # overcasterServices
- *
- * Services used in the application.
- */
-angular.module('overcasterServices', []);

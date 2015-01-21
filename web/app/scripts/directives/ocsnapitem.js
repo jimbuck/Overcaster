@@ -7,9 +7,9 @@
  * # ocSnapItem
  */
 angular.module('overcasterDirectives')
-  .directive('ocSnapItem', function () {
+  .directive('ocSnapItem', function (ocSnapDirectiveConfig) {
     return {
-      template: '<div ng-transclude></div>',
+      //templateUrl: 'ocSnapItem.html',
       restrict: 'E',
       require: '^ocSnapContainer',
       replace: true,
@@ -21,9 +21,19 @@ angular.module('overcasterDirectives')
         if (!$scope.title) {
           $scope.title = 'Snap Item';
         }
+        $scope.isActive = false;
+
+        //Apply the snap Item content class
+        $element.addClass(ocSnapDirectiveConfig.snapTabContentClass);
       },
       link: function postLink(scope, element, attrs, containerCtrl) {
-        console.log(containerCtrl);
+        scope.$el = element;
+
+        if (attrs[ocSnapDirectiveConfig.snapItem.initialTabAttribute] !== undefined) {
+          scope.isActive = true;
+          scope.$el.removeAttr(ocSnapDirectiveConfig.snapItem.initialTabAttribute); //Remove the intialize attibute
+        }
+        containerCtrl.addTab(scope)
       }
     };
   });

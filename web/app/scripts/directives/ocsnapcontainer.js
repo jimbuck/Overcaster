@@ -7,24 +7,44 @@
  * # ocSnapContainer
  */
 angular.module('overcasterDirectives')
-  .directive('ocSnapContainer', function () {
+  .directive('ocSnapContainer', function (ocSnapDirectiveConfig) {
     return {
-      template: '<div><ul><li class="oc-snap-tab-handle" ng-repeat="tab in tabs"></li></ul><div class="oc-snap-content" ng-transclude></div></div>',
+      templateUrl: 'ocSnapContainer.html',
       restrict: 'E',
       transclude: true,
+      replace: true,
       scope: {
 
       },
       controller: function($scope) {
+        $scope.selectedTab = '';
         $scope.tabs = [];
+
+        $scope.selectTab = function(tab) {
+          angular.forEach($scope.tabs, function(tab) {
+            tab.cssClasses = [ocSnapDirectiveConfig];
+            tab.isActive = false;
+          });
+
+          tab.cssClasses.push();
+          $scope.selectedTab = tab.title;
+          tab.isActive = true;
+        };
 
         //Exposed Members
         this.addTab = function(tab) {
+          if ($scope.tabs.length === 0) {
+            tab.isActive = true;
+          }
 
-        }
+          $scope.tabs.push(tab);
+
+          if (tab.isActive) {
+            $scope.selectTab(tab);
+          }
+        };
       },
       link: function postLink(scope, element, attrs) {
-        element.text('this is the ocSnapContainer directive');
       }
     };
   });

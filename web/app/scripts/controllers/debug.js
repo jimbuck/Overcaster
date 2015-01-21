@@ -8,10 +8,5 @@
  * Controller of the overcasterApp
  */
 angular.module('overcasterControllers')
-  .controller('DebugCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('DebugCtrl', function ($scope, ocSnapDirectiveConfig, $rootScope) {
   });
