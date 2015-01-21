@@ -5,7 +5,7 @@
  * @name overcasterApp.ElementsService
  * @description
  * # ElementsService
- * Factory in the overcasterApp.
+ * Provides access to Elements in the overcasterApp.
  */
 angular.module('overcasterServices')
   .factory('ElementsService', function ($q) {
@@ -37,6 +37,7 @@ angular.module('overcasterServices')
       }
     ];
 
+
     function loadFunc(arg) {
 
       var matchingElements = [];
@@ -44,13 +45,13 @@ angular.module('overcasterServices')
       var deferred = $q.defer();
 
       if (typeof arg === 'string' || typeof arg === 'number') {
-        matchingElements = _.where(elements, {id: parseInt(arg)});
+        matchingElements = _.find(elements, {id: parseInt(arg)});
       }
       else if (typeof arg === 'function') {
         matchingElements = _.filter(elements, arg);
       }
       else if (typeof arg === 'object') {
-        matchingElements = _.where(elements, arg);
+        matchingElements = _.find(elements, arg);
       }
       else {
         matchingElements = elements;
@@ -58,19 +59,31 @@ angular.module('overcasterServices')
 
       deferred.resolve(matchingElements);
 
-      var promise = deferred.promise;
-
-      return promise;
+      return deferred.promise;
     }
 
-    function saveFunc(element) {
+    function saveFunc(element, throwIfExists) {
 
       var deferred = $q.defer();
 
-      deleteFunc(element.id).then(function () {
-        elements.push(element);
-        deferred.resolve(element);
-      });
+      if(element.id && _.any(elements, {id: parseInt(element.id)})){
+
+        if(throwIfExists){
+          deferred.reject('Element already exists!');
+          return deferred.promise;
+        }
+
+        deleteFunc(element.id).then(function () {
+          elements.push(element);
+          deferred.resolve(element);
+
+          return deferred.promise;
+        });
+      }
+
+      element.id = element.id || _.max(elements, 'id').id + 1;
+      elements.push(element);
+      deferred.resolve(element);
 
       return deferred.promise;
     }

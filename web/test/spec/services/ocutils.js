@@ -11,7 +11,7 @@ describe('Service: ocUtils', function () {
     ocUtils = _ocUtils_;
   }));
 
-  it('should do something', function () {
+  xit('should do something', function () {
     expect(!!ocUtils).toBe(true);
   });
 

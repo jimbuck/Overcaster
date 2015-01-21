@@ -1,3 +1,4 @@
+/*jshint bitwise: false*/
 'use strict';
 
 //object method extension: 'extend' declaration
@@ -135,7 +136,7 @@ if (!Array.prototype.addOrUpdate) {
     configurable: true,
     writable: true,
     value: function (item, predicate) {
-      if (!predicate || item instanceof 'undefined') {
+      if (!predicate || item instanceof 'undefined'){
         return false;
       }
 
