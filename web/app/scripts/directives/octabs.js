@@ -12,7 +12,11 @@
 //<oc:tab title="Tab 2" intial>Tab 2 Content</oc:tab>
 //</oc:tabs>
 angular.module('overcasterDirectives')
-  .value("ocTabsConfig", {
+  .run(function($templateCache) {
+    //ocTab.html
+    $templateCache.put('ocTab.html', '<div ng-show="isActive"><ng-transclude></ng-transclude></div>');
+  })
+  .value('ocTabsConfig', {
     tabContainerClass: 'oc-tab-container',
     tabBarClass: 'oc-tab-bar',
     tabHandleClass: 'oc-tab-handle',
@@ -27,8 +31,8 @@ angular.module('overcasterDirectives')
       transclude: true,
       replace: true,
       scope: {},
-      controller: ["$scope",function($scope) {
-        $scope.selectedTab = "";
+      controller: ['$scope',function($scope) {
+        $scope.selectedTab = '';
         $scope.tabs = [];
         $scope.handleClass = ocTabsConfig.tabHandleClass;
         $scope.css = {
@@ -45,7 +49,7 @@ angular.module('overcasterDirectives')
             tab.isActive = false;
           });
 
-          tab.cssClasses.push('active');
+          tab.cssClasses.push($scope.css.activeTabClass);
           $scope.selectedTab = tab.title;
           tab.isActive = true;
         };

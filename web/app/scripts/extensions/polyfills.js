@@ -1,3 +1,5 @@
+'use strict';
+
 //object method extension: 'extend' declaration
 if (!Object.prototype.extendProperties) {
   Object.defineProperty(Object.prototype, 'extendProperties', {
@@ -133,7 +135,9 @@ if (!Array.prototype.addOrUpdate) {
     configurable: true,
     writable: true,
     value: function (item, predicate) {
-      if (!predicate || item instanceof 'undefined') return false;
+      if (!predicate || item instanceof 'undefined') {
+        return false;
+      }
 
       //If item exists, find it
       var matchingIndex = -1;
@@ -157,5 +161,5 @@ if (!Array.prototype.addOrUpdate) {
 
       return false; //Catch route, if it hits this point, something failed;
     }
-  })
+  });
 }
