@@ -1,0 +1,16 @@
+{
+  "name": "Overcaster",
+  "version": "0.1.0",
+  "main": "splash.html",
+  "single-instance": true,
+  "node-remote": "<local>",
+  "window": {
+    "title": "Overcaster",
+    "icon": "icon.png",
+    "width": 800,
+    "height": 600,
+    "min_width": 1280,
+    "min_height": 720,
+    "toolbar": false
+  }
+}
