@@ -51,12 +51,17 @@ angular
       .when('/elements/:id?', {
         templateUrl: 'views/elements.html',
         controller: 'ElementsCtrl'
-      })
-      .when('/debug', {
+      }
+    );
+
+    if (global.Overcaster.Debug) {
+      $routeProvider.when('/debug', {
         templateUrl: 'views/debug.html',
         controller: 'DebugCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
       });
+    }
+
+    $routeProvider.otherwise({
+      redirectTo: '/'
+    });
   });

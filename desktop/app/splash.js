@@ -1,3 +1,4 @@
+/*jshint bitwise: false*/
 'use strict';
 
 var fs = require('fs');
@@ -13,6 +14,7 @@ global.Overcaster = {};
 global.settings = require('./utils/settings-helper');
 
 var expressPort = 9000;
+var serverPath = './server/server.js';
 
 global.settings.load(function (err, data) {
     if (err) {
@@ -30,7 +32,9 @@ function initOvercaster(oc, nw) {
     initWindow();
     initExpressServer();
 
-    window.location.replace('http://localhost:' + expressPort + '/');
+    console.log(expressPort);
+
+    window.location.href = 'http://localhost:' + expressPort + '/';
 
     function initGlobalVars() {
 
@@ -46,7 +50,7 @@ function initOvercaster(oc, nw) {
             oc.Window = nw.Window.get();
         }
 
-        oc.Debug = (oc.Args.indexOf('--debug') > -1);
+        oc.Debug = !!~oc.Args.indexOf('--debug');
     }
 
     function initWindow() {
@@ -61,8 +65,13 @@ function initOvercaster(oc, nw) {
             return;
         }
 
+        if (!fs.existsSync(serverPath)) {
+            console.log('Unable to find internal server files!');
+            return;
+        }
+
         var spawn = require('child_process').fork;
-        global.Express = spawn('node', ['./server/server', expressPort]);
+        global.Express = spawn('node', [serverPath, expressPort]);
 
         (function (e, c) {
             e.stdout.on('data', function (data) {

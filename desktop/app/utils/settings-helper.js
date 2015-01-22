@@ -7,7 +7,7 @@ var settingsName = '/settings.json';
 var settingsPath = root + settingsName;
 
 global.defaultSettings = {
-	port: 6014,
+	port: 9000,
 	dataLocation: './data',
 	mediaLocation: './media',
 	contentLocation: './content',
