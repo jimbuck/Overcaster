@@ -58,6 +58,26 @@ function initOvercaster(oc, nw) {
             oc.Window.showDevTools();
         }
         oc.Window.maximize();
+
+        global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
+        key: 'Ctrl+Shift+I',
+            active: function () {
+                global.Overcaster.Window.showDevTools();
+            },
+            failed: function (msg) {
+                console.log(msg);
+            }
+        }));
+
+        global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
+            key: 'F11',
+            active: function () {
+                global.Overcaster.Window.toggleFullscreen();
+            },
+            failed: function (msg) {
+                console.log(msg);
+            }
+        }));
     }
 
     function initExpressServer() {
