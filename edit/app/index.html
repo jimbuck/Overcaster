@@ -17,51 +17,51 @@
     <link rel="stylesheet" href="styles/bootstrap-theme.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="overcasterApp">
+  <body ng-app="overcasterApp" ng-controller="IndexCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div role="navigation" class="navbar navbar-default navbar-fixed-top">
+    <div role="navigation" class="navbar navbar-default navbar-fixed-top" ng-controller="NavigationCtrl">
       <div class="container-fluid">
         <div class="collapse navbar-collapse">
           <ul id="main-nav" class="nav navbar-nav">
             <li class="dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">File&nbsp;<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="javascript:void(0);">New Session</a></li>
-                <li><a href="javascript:void(0);">Open Session</a></li>
-                <li><a href="javascript:void(0);">Save Session</a></li>
-                <li><a href="javascript:void(0);">Save Session As...</a></li>
+                <li><a ng-click="newSession()">New Session</a></li>
+                <li><a ng-click="openSession()">Open Session</a></li>
+                <li><a ng-click="saveSession()">Save Session</a></li>
+                <li><a ng-click="saveSessionAs()">Save Session As...</a></li>
                 <li class="divider"></li>
-                <li><a href="/start">Show Quickstart Page</a></li>
-                <li><a href="javascript:void(0);">End Current Session</a></li>
-                <li><a href="javascript:void(0);" onclick="javascript: global.Overcaster.Window.toggleFullscreen();">Toggle Fullscreen</a></li>
+                <li><a ng-click="navigateToPage('/start')">Show Quickstart Page</a></li>
+                <li><a ng-click="endCurrentSession()">End Current Session</a></li>
+                <li><a ng-click="toggleFullscreen()">Toggle Fullscreen</a></li>
                 <li class="divider"></li>
-                <li><a href="javascript:void(0);" onclick="javascript: window.location.href = '/';">Reboot</a></li>
-                <li><a href="javascript:void(0);" onclick="javascript: global.Overcaster.Window.close();">Shutdown</a></li>
+                <li><a ng-click="navigateToPage('/')">Reboot</a></li>
+                <li><a ng-click="shutdown()">Shutdown</a></li>
               </ul>
             </li>
-            <li class="main-page-link"><a href="/sessions">Sessions</a></li>
-            <li class="main-page-link"><a href="/scenes">Scenes</a></li>
-            <li class="main-page-link"><a href="/elements">Elements</a></li>
-            <li class="main-page-link"><a href="/resources">Resources</a></li>
-            <li class="main-page-link"><a href="/settings">Settings</a></li>
+            <li class="main-page-link"><a ng-click="navigateToPage('/sessions')">Sessions</a></li>
+            <li class="main-page-link"><a ng-click="navigateToPage('/scenes')">Scenes</a></li>
+            <li class="main-page-link"><a ng-click="navigateToPage('/elements')">Elements</a></li>
+            <li class="main-page-link"><a ng-click="navigateToPage('/resources')">Resources</a></li>
+            <li class="main-page-link"><a ng-click="navigateToPage('/settings')">Settings</a></li>
             <li class="dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">Help&nbsp;<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li class="dropdown-header">Links</li>
-                <li><a href="javascript:void(0);" onclick="javascript: global.NodeWebkit.Shell.openExternal(&quot;https://github.com/JimmyBoh/Overcaster/wiki&quot;);">Overcaster Wiki</a></li>
-                <li><a href="javascript:void(0);" onclick="javascript: alert(&quot;Coming soon!&quot;); return false;global.NodeWebkit.Shell.openExternal(&quot;https://github.com/JimmyBoh/Overcaster&quot;);">Overcaster Resource Page</a></li>
+                <li><a ng-click="openExternalLink('https://github.com/JimmyBoh/Overcaster/wiki')">Overcaster Wiki</a></li>
+                <li><a ng-click="openExternalLink('https://github.com/JimmyBoh/Overcaster')">Overcaster Resource Page</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">System</li>
-                <li><a href="javascript:void(0);">Check for Updates</a></li>
-                <li><a href="javascript:void(0);" onclick="javascript: global.NodeWebkit.Shell.openExternal(&quot;https://github.com/JimmyBoh/Overcaster/issues/new&quot;);">Report a Bug</a></li>
+                <li><a ng-click="checkForUpdates()">Check for Updates</a></li>
+                <li><a ng-click="openExternalLink('https://github.com/JimmyBoh/Overcaster/issues/new')">Report a Bug</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">Actions</li>
-                <li><a href="javascript:void(0);" onclick="javascript: global.Overcaster.Window.showDevTools();">Show DevTools</a></li>
-                <li><a href="javascript:void(0);">View Logs</a></li>
+                <li><a ng-click="showDevTools()">Show DevTools</a></li>
+                <li><a ng-click="showLogs()">View Logs</a></li>
                 <li class="divider"></li>
-                <li><a href="javascript:void(0);">About Overcaster</a></li>
+                <li><a ng-click="showAbout()">About Overcaster</a></li>
               </ul>
             </li>
           </ul><span class="pull-right">
@@ -71,9 +71,10 @@
       </div>
       <div id="main-content" class="container-fluid" ng-view="">
       </div>
+
       <div id="footer">
-        <p id="appStatus" class="pull-right">Current Bitrate: 4200kbps</p>
-        <p id="tooltipHint" class="pull-left">Loading Elements...</p>
+        <p id="appStatus" class="pull-right" ng-bind="messages.status"></p>
+        <p id="tooltipHint" class="pull-left" ng-bind="messages.tooltip"></p>
         <p>JimmyBoh &copy;&nbsp;<span class="current-year">2014</span></p>
       </div>
 
@@ -129,6 +130,9 @@
     <script src="scripts/services/elementsservice.js"></script>
     <script src="scripts/controllers/elements.js"></script>
     <script src="scripts/controllers/debug.js"></script>
+    <script src="scripts/controllers/navigation.js"></script>
+    <script src="scripts/services/messaging.js"></script>
+    <script src="scripts/controllers/index.js"></script>
     <!-- endbuild -->
 
 
