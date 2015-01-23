@@ -54,10 +54,32 @@ function initOvercaster(oc, nw) {
     }
 
     function initWindow() {
+
+        oc.Window.maximize();
+
+        global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
+            key: 'F11',
+            active: function () {
+                global.Overcaster.Window.toggleFullscreen();
+            },
+            failed: function (msg) {
+                console.log(msg);
+            }
+        }));
+
         if (oc.Debug) {
             oc.Window.showDevTools();
+
+            global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
+                key: 'Ctrl+Shift+I',
+                active: function () {
+                    global.Overcaster.Window.showDevTools();
+                },
+                failed: function (msg) {
+                    console.log(msg);
+                }
+            }));
         }
-        oc.Window.maximize();
     }
 
     function initExpressServer() {
