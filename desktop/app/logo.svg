@@ -101,10 +101,5 @@
        transform="matrix(1.7964522,0,0,1.7988794,352.43532,244.28637)"
        id="path3971"
        style="fill:#f2f2f2;fill-opacity:0;stroke:#d0e2ff;stroke-width:8.90043259;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <path
-       d="m -88.571426,461.64789 a 39.285713,39.285713 0 1 1 -78.571424,0 39.285713,39.285713 0 1 1 78.571424,0 z"
-       transform="matrix(1.7964522,0,0,1.7988794,352.43532,244.28637)"
-       id="path3973"
-       style="fill:#f2f2f2;fill-opacity:0;stroke:#d0e2ff;stroke-width:8.90043259;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
   </g>
 </svg>
