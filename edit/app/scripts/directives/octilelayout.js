@@ -22,6 +22,8 @@ angular.module('overcasterDirectives')
       transclude: true,
       compile: function (element, attrs, transcludeFn) {
 
+        element.addClass('clearfix');
+
         return function (scope, $element, $attrs) {
           var elements = [];
           var tiles = scope.items || [];
@@ -64,10 +66,9 @@ angular.module('overcasterDirectives')
 
                 var el = angular.element('<div />').append(clone);
                 el.css({
-                  'float': 'left',
                   'padding': 10,
                   'width': (100 / columns) + '%'
-                });
+                }).addClass('pull-left');
 
                 element.append(el); // add to DOM
                 block = {};
@@ -75,7 +76,7 @@ angular.module('overcasterDirectives')
                 block.scope = childScope;
                 elements.push(block);
               });
-            };
+            }
           }
         };
       }
