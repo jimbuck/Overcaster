@@ -1,6 +1,7 @@
 {
-  "name": "overcaster-client",
-  "version": "0.0.0",
+  "name": "overcaster-edit",
+  "version": "0.0.1",
+  "private": true,
   "dependencies": {},
   "devDependencies": {
     "connect-modrewrite": "^0.7.9",

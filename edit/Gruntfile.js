@@ -432,4 +432,9 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('check', [
+    'newer:jshint',
+    'test'
+  ]);
 };

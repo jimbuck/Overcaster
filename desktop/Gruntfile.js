@@ -227,7 +227,7 @@ module.exports = function (grunt) {
                 }]
             }
         },
-        shell:{
+        shell: {
             openWinDebug: {
                 command: '"<%= config.distWin %>/overcaster/overcaster.exe" --debug'
             }
