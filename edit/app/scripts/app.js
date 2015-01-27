@@ -54,7 +54,7 @@ angular
       }
     );
 
-    if (global.Overcaster.Debug) {
+    if (typeof global !== 'undefined' && global.Overcaster.Debug) {
       $routeProvider.when('/debug', {
         templateUrl: 'views/debug.html',
         controller: 'DebugCtrl'
