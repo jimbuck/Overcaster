@@ -1,6 +1,6 @@
 'use strict';
 
-var routes = function(app){
+var routes = function(app, editLocation, castLocation){
 
     /**
      * `Cast` page route.
@@ -8,7 +8,7 @@ var routes = function(app){
      */
     app.get('/cast/:sessionId/:sceneId', function (req, res) {
 
-        res.sendFile('/cast/index.html');
+        res.sendFile('index.html', { root: castLocation });
     });
 
     /**
@@ -23,7 +23,7 @@ var routes = function(app){
         }
 
         // Send the static Angular page...
-        res.sendFile('/edit/index.html');
+        res.sendFile('index.html', {root: editLocation});
     });
 };
 
