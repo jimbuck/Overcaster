@@ -7,19 +7,41 @@ html {
   min-height: 100%;
 }
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 21px;
+  /* Padding bottom by footer height */
+  padding-top: 52px !important;
+  padding-bottom: 28px !important;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
+
 body > * {
   padding: 0 6px;
 }
 
-#footer {
+body > #header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-bottom: 0;
+}
+
+body > #main-content {
+  height:100%;
+  overflow-y: hidden;
+}
+
+body > #footer {
+  background-color: #272b30;
   border-top: solid 1px #222;
-  position: absolute;
+  position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
+  /* Set the fixed height here */
   height: 28px;
   text-align:center;
 }
@@ -31,10 +53,6 @@ body > * {
 
 /* Bootstrap Fixes
 ----------------------------------------------------*/
-body > #main-content {
-  padding-top: 60px;
-  padding-bottom: 20px;
-}
 
 .row + .row {
   margin-top: 30px;
@@ -69,8 +87,7 @@ code {
 }
 
 .transparent-checkerboard {
-  background-image: url('/images/transparent-checkerboard.png');
-  background-repeat: repeat;
+  background: url('../images/transparent-checkerboard.png') repeat;
 }
 
 .wide-screen {
