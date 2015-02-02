@@ -47,7 +47,11 @@ angular.module('overcasterControllers')
       }
     };
 
-    $scope.navigateToPage = function(pageUrl) {
+    $scope.reload = function () {
+      window.location.reload();
+    };
+
+    $scope.navigateToPage = function (pageUrl) {
       $location.path(pageUrl);
     };
 
