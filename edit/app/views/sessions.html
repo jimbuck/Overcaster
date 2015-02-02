@@ -6,10 +6,10 @@
   </div>
   <div class="row">
     <div class="col-md-1 col-md-offset-11">
-      <button class="btn btn-default" ng-click="decColumns()">-</button>
-      <!--<label ng-bind="sessionColumns" />-->
+      <button class="btn btn-default" ng-click="incColumns()">-</button>
+      <label ng-bind="sessionColumns" />
       <input type="range" min="1" max="8" ng-model="sessionColumns"/>
-      <button class="btn btn-default" ng-click="incColumns()">+</button>
+      <button class="btn btn-default" ng-click="decColumns()">+</button>
     </div>
   </div>
   <div class="row">
