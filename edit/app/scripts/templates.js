@@ -1,17 +1,15 @@
+"use strict";
+
 angular.module('overcasterDirectives')
   .run(function($templateCache) {
     //ocSnapRegion.html
     $templateCache.put('ocSnapRegion.html', '<div ng-transclude></div>');
 
     //ocSnapContainer.html
-    $templateCache.put('ocSnapContainer.html', '<div data-selected-tab="{{selectedTab}}"><ul><li ng-class="tab.cssClasses" ng-repeat="tab in tabs" ng-click="selectTab(tab)" ng-bind="tab.title"></li></ul><div ng-transclude></div></div>');
+    $templateCache.put('ocSnapContainer.html', '<div ng-class="tab.cssClasses" data-selected-tab="{{selectedTab}}"><ul><li ng-class="tab.cssClasses" ng-repeat="tab in tabs" ng-bind="tab.header" ng-mousedown="enableMoving(tab)" ng-mouseup="disableMoving()"></li></ul><div ng-transclude></div></div>');
 
     //ocSnapItem.html
-    $templateCache.put('ocSnapItem.html', '<div ng-transclude></div>');
+    $templateCache.put('ocSnapItem.html', '<div ng-show="isActive" ng-transclude></div>');
 
-    //ocTab.html
-    $templateCache.put('ocTab.html', '<div ng-show="isActive"><ng-transclude></ng-transclude></div>');
-
-    //ocTabs.html
-    $templateCache.put('ocTabs.html', '<div ng-class="css.containerClass" ><ul ng-class="css.barClass"><li ng-class="tab.cssClasses" ng-repeat="tab in tabs" ng-click="selectTab(tab)" ><span ng-bind="tab.title"></li></ul><div ng-class="css.contentClass" ng-transclude></div></div>');
-  });
+    //ocSlider.html
+    $templateCache.put('ocSlider.html', '<span ng-bind="value"></span><div><button ng-click="decSlider()">-</button><input type="range" min="{{min}}" max="{{max}}" step="{{step}}" ng-model="value" /><button ng-click="incSlider()">+</button> </div>');});

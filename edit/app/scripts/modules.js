@@ -39,6 +39,12 @@ angular.module('overcasterDirectives', [])
     initialTabAttribute: 'initial'
   })
   .value('ocSnapDirectiveConfig', {
+    events: {
+      snapItem_BeginMoving: 'ocSnapItem_BeginMoving',
+      snapItem_EndMoving: 'ocSnapItem_EndMoving',
+      snapContainer_BeginMoving: 'ocSnapContainer_BeginMoving',
+      snapContainer_EndMoving: 'ocSnapContainer_EndMoving'
+    },
     snapRegion: {
       css: {
         snapRegionClass: 'oc-snap-region'

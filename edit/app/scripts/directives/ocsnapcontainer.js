@@ -7,10 +7,11 @@
  * # ocSnapContainer
  */
 angular.module('overcasterDirectives')
-  .directive('ocSnapContainer', function (ocSnapDirectiveConfig) {
+  .directive('ocSnapContainer', function (ocSnapDirectiveConfig, $rootScope) {
     return {
       templateUrl: 'ocSnapContainer.html',
       restrict: 'E',
+      require: '^ocSnapRegion',
       transclude: true,
       replace: true,
       scope: {
@@ -26,7 +27,7 @@ angular.module('overcasterDirectives')
             tab.isActive = false;
           });
 
-          tab.cssClasses.push();
+          tab.cssClasses.push(ocSnapDirectiveConfig.snapContainer.css.activeSnapTabClass);
           $scope.selectedTab = tab.title;
           tab.isActive = true;
         };
@@ -43,8 +44,24 @@ angular.module('overcasterDirectives')
             $scope.selectTab(tab);
           }
         };
+
+        $scope.enableMoving = function(tab) {
+          $scope.selectTab(tab);
+          $rootScope.$broadcast(ocSnapDirectiveConfig.events.snapItem_BeginMoving, {});
+        };
+
+        $scope.disableMoving = function() {
+          $rootScope.$broadcast(ocSnapDirectiveConfig.events.snapItem_EndMoving, {});
+        };
       },
       link: function postLink(scope, element, attrs) {
+        scope.$on(ocSnapDirectiveConfig.events.snapItem_BeginMoving, function(event, data) {
+          scope.status = 'Moving';
+        });
+
+        scope.$on(ocSnapDirectiveConfig.events.snapItem_EndMoving, function(event, data) {
+          scope.status = 'Normal';
+        });
       }
     };
   });
