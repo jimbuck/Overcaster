@@ -8,12 +8,12 @@
  * Controller of the overcasterApp
  */
 angular.module('overcasterControllers')
-  .controller('ElementsCtrl', function ($scope, ElementsService) {
+  .controller('ElementsCtrl', function ($scope, ElementsRepository) {
 
     $scope.elements = [];
 
     $scope.refreshElements = function refreshElements(){
-      ElementsService.load().then(function (elements) {
+      ElementsRepository.load().then(function (elements) {
         $scope.elements = elements;
       });
     };
