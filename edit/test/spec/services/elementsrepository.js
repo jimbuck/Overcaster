@@ -24,8 +24,8 @@ describe('Service: ElementsRepository', function () {
     $scope.$apply();
   });
 
-  it('should one element based on a string `id`', function (done) {
-    ElementsRepository.load('0').then(function (element) {
+  it('should return one element based on a string `id`', function (done) {
+    ElementsRepository.load('1').then(function (element) {
       expect(element).toBeDefined();
       done();
     });
@@ -33,8 +33,8 @@ describe('Service: ElementsRepository', function () {
     $scope.$apply();
   });
 
-  it('should one element based on a integer `id`', function (done) {
-    ElementsRepository.load(0).then(function (element) {
+  it('should return one element based on a integer `id`', function (done) {
+    ElementsRepository.load(1).then(function (element) {
       expect(element).toBeDefined();
       done();
     });
@@ -62,7 +62,7 @@ describe('Service: ElementsRepository', function () {
 
     ElementsRepository.save(newElement).then(function (element) {
       expect(element).toBeDefined();
-      expect(element.id).toBe(4);
+      expect(element.id).toBe(5);
       done();
     });
 
@@ -104,5 +104,7 @@ describe('Service: ElementsRepository', function () {
 
     $scope.$apply();
   });
+
+  // TODO: Add test for delete element...
 
 });

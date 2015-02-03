@@ -349,10 +349,10 @@ module.exports = function (grunt) {
     // Test settings
     karma: {
       options:{
-        default: 'phantom',
+        default: 'nodewebkit',
         configFile: 'test/karma.conf.js'
       },
-      phantom: {
+      nodewebkit: {
         singleRun: true
       },
       chrome: {
@@ -390,7 +390,7 @@ module.exports = function (grunt) {
   'concurrent:test',
   'autoprefixer',
   'connect:test',
-  'force:karma:phantom',
+  'force:karma:nodewebkit',
   'open:results'
   ]);
 
