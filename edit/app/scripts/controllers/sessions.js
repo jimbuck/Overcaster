@@ -15,13 +15,9 @@ angular.module('overcasterControllers')
     $scope.incColumns = function(){
       var newColumns = parseInt($scope.sessionColumns) + 1;
 
-      console.log(newColumns);
-
       if(newColumns > 8){
         newColumns = 8;
       }
-
-      //console.log('ctrl: ' + newColumns);
 
       $scope.sessionColumns = newColumns;
     };
@@ -32,8 +28,6 @@ angular.module('overcasterControllers')
       if (newColumns < 1) {
         newColumns = 1;
       }
-
-      console.log('ctrl: ' + newColumns);
 
       $scope.sessionColumns = newColumns;
     };

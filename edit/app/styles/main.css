@@ -137,6 +137,16 @@ code {
   display: block;
 }
 
+.grid-page .item-container h3 {
+  margin-top: 26px;
+  margin-bottom: 0px;
+}
+
+.grid-page .null-layout .item-container h3 {
+  margin-top: 22px;
+  margin-bottom: 0px;
+}
+
 .grid-page .item-container:hover .item-preview {
   background-color: #333;
 }
@@ -161,6 +171,7 @@ code {
 
 #quickStart .btn{
   height:200px;
+  padding-top: 50px;
 }
 
 #quickStart .glyphicon {

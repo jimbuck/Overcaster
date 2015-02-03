@@ -1,0 +1,63 @@
+<div id="header" role="navigation" class="navbar navbar-default navbar-fixed-top" ng-controller="NavigationCtrl">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul id="main-nav" class="nav navbar-nav">
+        <!--<li class="main-page-link"><a href="javascript:window.history.back()"> <span class="glyphicon glyphicon-triangle-left"></span> </a></li>-->
+        <li class="dropdown">
+          <a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">File&nbsp;<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a ng-click="newSession()">New Session</a></li>
+            <li><a ng-click="openSession()">Open Session</a></li>
+            <li><a ng-click="saveSession()">Save Session</a></li>
+            <li><a ng-click="saveSessionAs()">Save Session As...</a></li>
+            <li class="divider"></li>
+            <li><a ng-click="showImport()">Import...</a></li>
+            <li><a ng-click="showExport()">Export...</a></li>
+            <li class="divider"></li>
+            <li><a ng-click="navigateToPage('/start')">Show Quickstart Page</a></li>
+            <li><a ng-click="endCurrentSession()">End Current Session</a></li>
+            <li><a ng-click="toggleFullscreen()">Toggle Fullscreen</a></li>
+            <li class="divider"></li>
+            <li><a ng-click="reboot()">Reboot</a></li>
+            <li><a ng-click="shutdown()">Shutdown</a></li>
+          </ul>
+        </li>
+        <li class="main-page-link"><a ng-click="navigateToPage('/session')">Session</a></li>
+        <li class="main-page-link"><a ng-click="navigateToPage('/scenes')">Scenes</a></li>
+        <li class="main-page-link"><a ng-click="navigateToPage('/elements')">Elements</a></li>
+        <li class="main-page-link"><a ng-click="navigateToPage('/resources')">Resources</a></li>
+        <li class="main-page-link"><a ng-click="navigateToPage('/settings')">Settings</a></li>
+        <li class="dropdown">
+          <a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">Help&nbsp;<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Links</li>
+            <li><a ng-click="openExternalLink('https://github.com/JimmyBoh/Overcaster/wiki')">Overcaster Wiki</a></li>
+            <li><a ng-click="openExternalLink('https://github.com/JimmyBoh/Overcaster')">Overcaster Resource Page</a>
+            </li>
+            <li class="divider"></li>
+            <li class="dropdown-header">System</li>
+            <li><a ng-click="checkForUpdates()">Check for Updates</a></li>
+            <li><a ng-click="openExternalLink('https://github.com/JimmyBoh/Overcaster/issues/new?labels=bug')">Report a
+              Bug</a></li>
+            <li><a ng-click="openExternalLink('https://github.com/JimmyBoh/Overcaster/issues/new?labels=request')">Request
+              a Feature</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Actions</li>
+            <li><a ng-click="showDevTools()">Show DevTools</a></li>
+            <li><a ng-click="showLogs()">View Logs</a></li>
+            <li class="divider"></li>
+            <li><a ng-click="showAbout()">About Overcaster</a></li>
+          </ul>
+        </li>
+      </ul>
+      <span class="pull-right">
+        <div id="liveStatus" class="preping"><span class="preping label label-info">
+          <i class="glyphicon glyphicon-signal"></i>&nbsp;PREPPING</span><span class="ready label label-success">
+          <i class="glyphicon glyphicon-signal"></i>&nbsp;READY</span><span class="error label label-warning">
+          <i class="glyphicon glyphicon-warning-sign"></i>&nbsp;ERROR</span><span class="live label label-danger">
+          <i class="glyphicon glyphicon-globe"></i>&nbsp;LIVE</span>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

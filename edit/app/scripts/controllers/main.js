@@ -12,8 +12,8 @@ angular.module('overcasterControllers')
 
 
     $timeout(function(){
-      $location.url('/start');
-    }, 1000);
+      $location.path('/start');
+    }, 500);
 
 
   });

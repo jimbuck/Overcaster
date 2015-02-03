@@ -12,25 +12,25 @@ angular.module('overcasterServices')
 
     var elements = [
       {
-        id: 0,
+        id: 1,
         name: '2 Player Scoreboard',
         dir: '2_player_scoreboard',
         inUse: false
       },
       {
-        id: 1,
+        id: 2,
         name: '4 Player Scoreboard',
         dir: '4_player_scoreboard',
         inUse: true
       },
       {
-        id: 2,
+        id: 3,
         name: 'Horizontal Twitter Feed',
         dir: 'horizontal_twitter_feed',
         inUse: true
       },
       {
-        id: 3,
+        id: 4,
         name: 'Spotify Stream Player',
         dir: 'spotify_stream_player',
         inUse: false

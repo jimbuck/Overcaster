@@ -9,9 +9,21 @@
  */
 angular.module('overcasterControllers')
   .controller('ElementsCtrl', function ($scope, ElementsService) {
-    ElementsService.load().then(function(elements){
-      $scope.elements = elements;
-    });
 
+    $scope.elements = [];
 
+    $scope.refreshElements = function refreshElements(){
+      ElementsService.load().then(function (elements) {
+        $scope.elements = elements;
+      });
+    };
+
+    $scope.createNewElement = function(){
+      // 1 Open modal
+      // 2 Render form
+      // 3 Add to service
+      // 4 Reload elements
+    };
+
+    $scope.refreshElements();
   });

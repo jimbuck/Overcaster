@@ -10,25 +10,25 @@
 angular.module('overcasterControllers')
   .controller('ScenesCtrl', function ($scope) {
     $scope.scenes = [{
-      _id: 0,
-      name: 'Alpha'
+      id: 1,
+      name: 'Intro'
     }, {
-      _id: 1,
-      name: 'Beta'
+      id: 2,
+      name: 'Gameplay'
     }, {
-      _id: 2,
-      name: 'Theta'
+      id: 3,
+      name: 'BRB'
     }, {
-      _id: 3,
-      name: 'Alpha'
+      id: 4,
+      name: 'Close Cam'
     }, {
-      _id: 4,
-      name: 'Beta'
+      id: 5,
+      name: 'Technical Difficulties'
     }, {
-      _id: 5,
-      name: 'Alpha'
+      id: 6,
+      name: 'Twitch Chat'
     }, {
-      _id: 6,
-      name: 'Beta'
+      id: 7,
+      name: 'Test'
     }];
   });

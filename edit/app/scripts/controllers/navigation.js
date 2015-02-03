@@ -18,7 +18,7 @@ angular.module('overcasterControllers')
     };
 
     $scope.openSession = function() {
-
+      $location.path('/sessions');
     };
 
     $scope.saveSession = function() {
@@ -47,8 +47,12 @@ angular.module('overcasterControllers')
       }
     };
 
-    $scope.reload = function () {
+    $scope.refresh = function () {
       window.location.reload();
+    };
+
+    $scope.reboot = function () {
+      window.location.href = '/';
     };
 
     $scope.navigateToPage = function (pageUrl) {

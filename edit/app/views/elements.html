@@ -4,8 +4,8 @@
       <h1 class="center-text">Elements</h1>
     </div>
   </div>
-  <oc:tile-layout items="elements" columns="5" end-with-null="true" ng-cloak>
-    <div class="item-layout" ng-if="name">
+  <oc:tile-layout items="elements" columns="5" end-with-null ng-cloak>
+    <div class="item-layout" ng-if="!!id">
       <div class="well">
         <a ng-href="/elements/{{ id }}" class="item-container">
           <div class="item-preview wide-screen">
@@ -15,7 +15,7 @@
         </a>
       </div>
     </div>
-    <div class="null-layout" ng-if="!name">
+    <div class="null-layout" ng-if="!id">
       <div class="well">
         <a href="/element/create" class="item-container">
           <div class="item-preview wide-screen">
