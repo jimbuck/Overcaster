@@ -9,7 +9,9 @@
 angular.module('overcasterDirectives')
   .value('ocTileLayoutConfig', {
     tileItemClassName: 'tile-item',
-    addItemClassName: 'add-item'
+    addItemClassName: 'add-item',
+    minColumns: 1,
+    maxColumns: 8
   })
   .directive('ocTileLayout', function (ocTileLayoutConfig) {
 
@@ -18,11 +20,13 @@ angular.module('overcasterDirectives')
         items: '=',
         columns: '='
       },
-      restrict: 'E',
+      restrict: 'EA',
       transclude: true,
       compile: function (element, attrs, transcludeFn) {
 
         element.addClass('clearfix');
+
+        element.css('display', 'block');
 
         return function (scope, $element, $attrs) {
           var elements = [];
@@ -35,7 +39,18 @@ angular.module('overcasterDirectives')
           });
 
           scope.$watch('columns', function (value) {
-            columns = value || 5;
+
+            columns = value || Math.round(ocTileLayoutConfig.maxColumns/2);
+
+            if(columns < ocTileLayoutConfig.minColumns)
+            {
+              columns = ocTileLayoutConfig.minColumns;
+            } else if(columns > ocTileLayoutConfig.maxColumns){
+              columns = ocTileLayoutConfig.maxColumns;
+            }
+
+            console.log(columns);
+
             updateLayout();
           });
 
@@ -43,7 +58,7 @@ angular.module('overcasterDirectives')
 
           function updateLayout() {
 
-            var i, block, childScope;
+            var i, childScope;
 
             // check if elements have already been rendered
             if (elements.length > 0) {
@@ -61,21 +76,23 @@ angular.module('overcasterDirectives')
               // pass the current element of the collection into that scope
               angular.extend(childScope, tiles[i]);
 
-              transcludeFn(childScope, function (clone) {
-                // clone the transcluded element, passing in the new scope.
+              (function (cScope) {
+                transcludeFn(cScope, function (clone) {
+                  // clone the transcluded element, passing in the new scope.
 
-                var el = angular.element('<div />').append(clone);
-                el.css({
-                  'padding': 10,
-                  'width': (100 / columns) + '%'
-                }).addClass('pull-left');
+                  var el = angular.element('<div />').append(clone);
+                  el.css({
+                    'padding': 10,
+                    'width': (100 / columns) + '%'
+                  }).addClass('pull-left');
 
-                element.append(el); // add to DOM
-                block = {};
-                block.el = clone;
-                block.scope = childScope;
-                elements.push(block);
-              });
+                  element.append(el); // add to DOM
+                  var block = {};
+                  block.el = clone;
+                  block.scope = cScope;
+                  elements.push(block);
+                });
+              })(childScope);
             }
           }
         };
