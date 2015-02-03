@@ -57,6 +57,22 @@ module.exports = function (grunt) {
           }
         }
       },
+      bowerEditInstall: {
+        command: 'bower install',
+        options: {
+          execOptions: {
+            cwd: '<%= config.edit %>'
+          }
+        }
+      },
+      npmEditInstall: {
+        command: 'npm install',
+        options: {
+          execOptions: {
+            cwd: '<%= config.edit %>'
+          }
+        }
+      },
       gruntEditTest:{
         command: 'grunt test-ci',
         options: {
@@ -139,6 +155,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test', [
+    'shell:npmEditInstall',
+    'shell:bowerEditInstall',
     'shell:gruntEditTest'
   ]);
 
