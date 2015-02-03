@@ -11,8 +11,11 @@ angular.module('overcasterDirectives')
     return {
       templateUrl: 'ocSnapRegion.html',
       restrict: 'E',
+      transclude: true,
+      replace: 'true',
+      controller: function($scope, $element, $attrs) {
+      },
       link: function postLink(scope, element, attrs) {
-        element.text('this is the ocSnapRegion directive');
       }
     };
   });

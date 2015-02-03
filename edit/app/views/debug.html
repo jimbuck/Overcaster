@@ -4,10 +4,12 @@
 <hr />
 <h3>Snap Region Control</h3>
 <div>
-  <button ng-click="testValue()">Change</button>
-  <oc:snap-container>
-    <oc:snap-item>Testing 1</oc:snap-item>
-    <oc:snap-item>Testing 2</oc:snap-item>
-    <oc:snap-item>Testing 3</oc:snap-item>
-  </oc:snap-container>
+  <oc:snap-region>
+    <oc:snap-container>
+      <oc:snap-item>Testing 1</oc:snap-item>
+      <oc:snap-item initial header="Tab 2">Testing 2</oc:snap-item>
+      <oc:snap-item>Testing 3</oc:snap-item>
+    </oc:snap-container>
+  </oc:snap-region>
+
 </div>
