@@ -32,8 +32,6 @@ function initOvercaster(oc, nw) {
     initWindow();
     initExpressServer();
 
-    console.log(expressPort);
-
     window.location.href = 'http://localhost:' + expressPort + '/';
 
     function initGlobalVars() {
