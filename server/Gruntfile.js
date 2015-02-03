@@ -10,37 +10,33 @@ module.exports = function (grunt) {
   // configurable paths
   var config = {
     serverFile: 'server.js',
+    serverPort: 9000,
     editFromServer: '../edit/app/',
     castFromServer: '../cast/app/'
   };
 
   grunt.initConfig({
     config: config,
+    clean:{
+      dist: {
+
+      }
+    },
     shell: {
       nodeServer: {
-        command: 'node <%= config.serverFile %> --edit="<%= config.editFromServer %>" --cast="<%= config.castFromServer %>" '
+        command: 'node <%= config.serverFile %> <%= config.serverPort %> --edit="<%= config.editFromServer %>" --cast="<%= config.castFromServer %>" '
       }
     }
   });
 
   grunt.registerTask('dist', [
     'clean:dist',
+    'buildDist',
     'copy:desktopToTmp',
   ]);
 
-  // Register Tasks for each platform...
-  for (var p in platforms) {
-    var os = platforms[p];
-    grunt.registerTask('dist-' + os, [
-      'clean:dist',
-      'nodewebkit:' + os,
-      'fixDist'
-    ]);
-  }
-
-  grunt.registerTask('debug-win', [
-    'shell:gruntServerDebug',
-    'shell:gruntDesktopDebugWin'
+  grunt.registerTask('debug-server', [
+    'shell:nodeServer'
   ]);
 
   grunt.registerTask('check', [

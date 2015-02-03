@@ -1,153 +1,123 @@
 /*jshint camelcase: false*/
 
-module.exports = function(grunt) {
-    'use strict';
+module.exports = function (grunt) {
+  'use strict';
 
-    // load all grunt tasks
-    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  // load all grunt tasks
+  require('time-grunt')(grunt);
+  require('load-grunt-tasks')(grunt);
 
-    var platforms = ['win', 'linux32', 'linux64', 'osx'];
+  var platforms = ['win', 'linux', 'linux32', 'mac', 'mac32'];
 
-    // configurable paths
-    var config = {
-        app: 'app',
-        dist: 'dist',
-        tmp: 'tmp',
-        resources: 'resources'
-    };
+  // configurable paths
+  var config = {
+    edit: 'edit',
+    cast: 'cast',
+    desktop: 'desktop',
+    server: 'server',
+    dist: 'dist',
+    tmp: 'tmp'
+  };
 
-
-    grunt.initConfig({
-        config: config,
-        clean: {
-            dist: ['<%= config.dist %>/**/*'],
-            distComplete: ['<%= config.dist %>/Overcaster/**/*']
-        },
-        wait: {
-            pause: {
-                options: {
-                    delay: 1000
-                }
-            }
-        },
-        jshint: {
-            options: {
-                jshintrc: '.jshintrc'
-            },
-            files: '<%= config.app %>/js/*.js'
-        },
-        copy: {
-            fixDist: {
-                cwd: '<%= config.dist %>/Overcaster',
-                src: ['**/*'],
-                dest: '<%= config.dist %>',
-                expand: true
-            }
-        },
-        nodewebkit: {
-            win: {
-                options: {
-                    platforms: ['win'],
-                    buildDir: '<%= config.dist %>'
-                },
-                src: ['<%= config.app %>/**/*']
-            },
-            osx: {
-                options: {
-                    platforms: ['osx'],
-                    buildDir: '<%= config.dist %>'
-                },
-                src: ['<%= config.app %>/**/*']
-            },
-            linux32: {
-                options: {
-                    platforms: ['linux32'],
-                    buildDir: '<%= config.dist %>'
-                },
-                src: ['<%= config.app %>/**/*']
-            },
-            linux64: {
-                options: {
-                    platforms: ['linux64'],
-                    buildDir: '<%= config.dist %>'
-                },
-                src: ['<%= config.app %>/**/*']
-            },
-            all: {
-                options: {
-                    platforms: platforms,
-                    buildDir: '<%= config.dist %>'
-                },
-                src: ['<%= config.app %>/**/*']
-            }
-        },
-
-        shell: {
-            debugWin: {
-                options: {
-                    stdout: true
-                },
-                command: [
-                    'start <%= config.dist %>/win/Overcaster.exe --debug',
-                    'node <%= config.app %>/server/server.js'
-                ].join('&')
-            },
-            deleteOldDist: {
-                options: {
-                    stdout: true
-                },
-                command: 'RMDIR \"<%= config.dist %>/Overcaster" /S /Q'
-            }
+  grunt.initConfig({
+    config: config,
+    clean: {
+      dist: ['<%= config.dist %>/**/*', '<%= config.tmp %>/**/*'],
+      tmp: ['<%= config.tmp %>/**/*']
+    },
+    wait: {
+      pause: {
+        options: {
+          delay: 1000
         }
-    });
-
-    grunt.registerTask('fixDist', 'Fixes the dist folder structure.',
-        function() {
-            // Force task into async mode and grab a handle to the "done" function.
-            var done = this.async();
-
-            var delay = 3000;
-
-            setTimeout(function() {
-                grunt.log.writeln('Copying the builds...');
-                grunt.task.run('copy:fixDist');
-                setTimeout(function() {
-                    grunt.log.writeln(
-                        'Deleting obsolete builds...'
-                    );
-                    grunt.task.run(
-                        'shell:deleteOldDist'
-                    );
-                    done();
-                }, delay);
-
-            }, delay);
-        });
-
-    grunt.registerTask('dist', [
-        'jshint',
-        'clean:dist',
-        'nodewebkit:all',
-        'fixDist'
-    ]);
-
-    // Register Tasks for each platform...
-    for (var p in platforms) {
-        var os = platforms[p];
-        grunt.registerTask('dist-' + os, [
-            'jshint',
-            'clean:dist',
-            'nodewebkit:' + os,
-            'fixDist'
-        ]);
+      }
+    },
+    copy: {
+      desktopToTmp: {
+        cwd: '<%= config.desktop %>/',
+        src: ['**/'],
+        dest: '<%= config.tmp %>',
+        expand: true
+      }
+    },
+    shell: {
+      gruntEditCheck: {
+        command: 'grunt check',
+        options: {
+          execOptions: {
+            cwd: '<%= config.edit %>'
+          }
+        }
+      },
+      gruntCastCheck: {
+        command: 'grunt check',
+        options: {
+          execOptions: {
+            cwd: '<%= config.cast %>'
+          }
+        }
+      },
+      gruntServerCheck: {
+        command: 'grunt check',
+        options: {
+          execOptions: {
+            cwd: '<%= config.server %>'
+          }
+        }
+      },
+      gruntServerDebug: {
+        command: 'grunt debug-server',
+        options: {
+          execOptions: {
+            cwd: '<%= config.server %>'
+          }
+        }
+      },
+      gruntDesktopCheck: {
+        command: 'grunt check',
+        options: {
+          execOptions: {
+            cwd: '<%= config.desktop %>'
+          }
+        }
+      },
+      gruntDesktopDebugWin: {
+        command: 'grunt debug-win',
+        options: {
+          execOptions: {
+            cwd: '<%= config.desktop %>'
+          }
+        }
+      }
+    },
+    concurrent: {
+      debug: ['shell:gruntServerDebug', 'shell:gruntDesktopDebugWin']
     }
+  });
 
-    grunt.registerTask('debug-win', [
-        'dist-win',
-        'shell:debugWin'
-    ]);
+  grunt.registerTask('dist', [
+    'clean:dist',
+    'copy:desktopToTmp',
+  ]);
 
-    grunt.registerTask('check', [
-        'jshint'
+  // Register Tasks for each platform...
+  for (var p in platforms) {
+    var os = platforms[p];
+    grunt.registerTask('dist-' + os, [
+      'clean:dist',
+      'nodewebkit:' + os,
+      'fixDist'
     ]);
+  }
+
+  grunt.registerTask('debug-win', [
+    'concurrent:debug'
+  ]);
+
+  grunt.registerTask('check', [
+    'shell:gruntEditCheck',
+    'shell:gruntCastCheck',
+    'shell:gruntServerCheck',
+    'shell:gruntDesktopCheck'
+  ]);
 };

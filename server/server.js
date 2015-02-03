@@ -18,7 +18,7 @@ var errorHandler = require('errorhandler');
 var startExpress = function (port, editLocation, castLocation) {
 
   editLocation = path.join(__dirname, '../edit/app');
-  castLocation = path.join(__dirname, '../cast/app');
+  castLocation = path.join(__dirname, '../cast');
 
   var isDebug = (typeof editLocation !== 'undefined' && typeof castLocation !== 'undefined');
 
@@ -27,14 +27,15 @@ var startExpress = function (port, editLocation, castLocation) {
   var app = express();
 
   // all environments
-  app.use(morgan('combined'));
+  app.use(morgan('tiny'));
   app.set('port', port);
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: false}));
 
   if (isDebug) {
     app.use(favicon(path.join(editLocation, '/favicon.ico')));
-    app.use('/edit', serveStatic(editLocation));
+    app.use('/', serveStatic(editLocation));
+    app.use('/bower_components', serveStatic(path.join(editLocation, '../bower_components')));
     app.use('/cast', serveStatic(castLocation));
   } else {
     //app.use(favicon(path.join(__dirname, '/favicon.ico')));

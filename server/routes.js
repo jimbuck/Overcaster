@@ -15,12 +15,7 @@ var routes = function(app, editLocation, castLocation){
      * `Edit` page route.
      *   Catch-all route that returns the packaged angular app.
      */
-    app.get('/:initPage?', function (req, res) {
-
-        if (req.params.initPage === 'api') {
-            // Handle some API call...
-            return;
-        }
+    app.get('/:page?', function (req, res) {
 
         // Send the static Angular page...
         res.sendFile('index.html', {root: editLocation});
