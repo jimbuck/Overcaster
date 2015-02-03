@@ -3,6 +3,9 @@ language: node_js
    - "0.10"
 
  before_install:
-  - npm install -g yeoman
-  - bower install
+  - npm install -g grunt-cli bower
+
+ install:
   - npm install
+  - bower install
+

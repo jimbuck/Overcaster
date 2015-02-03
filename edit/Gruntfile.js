@@ -399,7 +399,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma:phantom'
+    'karma:nodewebkit'
   ]);
 
   grunt.registerTask('test-chrome', [

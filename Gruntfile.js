@@ -49,8 +49,32 @@ module.exports = function (grunt) {
           }
         }
       },
+      gruntEditBuild: {
+        command: 'grunt build',
+        options: {
+          execOptions: {
+            cwd: '<%= config.edit %>'
+          }
+        }
+      },
+      gruntEditTest:{
+        command: 'grunt test-ci',
+        options: {
+          execOptions: {
+            cwd: '<%= config.edit %>'
+          }
+        }
+      },
       gruntCastCheck: {
         command: 'grunt check',
+        options: {
+          execOptions: {
+            cwd: '<%= config.cast %>'
+          }
+        }
+      },
+      gruntCastBuild: {
+        command: 'grunt build',
         options: {
           execOptions: {
             cwd: '<%= config.cast %>'
@@ -112,6 +136,10 @@ module.exports = function (grunt) {
 
   grunt.registerTask('debug-win', [
     'concurrent:debug'
+  ]);
+
+  grunt.registerTask('test', [
+    'shell:gruntEditTest'
   ]);
 
   grunt.registerTask('check', [
