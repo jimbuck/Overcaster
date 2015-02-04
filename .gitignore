@@ -18,5 +18,5 @@ dist
 tmp
 .tmp
 cache
-web/test/results.html
+edit/test/results.html
 .idea
