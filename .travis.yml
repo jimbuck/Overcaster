@@ -2,11 +2,9 @@ language: node_js
 node_js:
   - "0.10"
 
-evn:
-  - NODEWEBKIT_BIN=./desktop/resources/node-webkit/Linux32/nw
-
 before_install:
   - "export DISPLAY=:99.0"
+  - "export NODEWEBKIT_BIN=./desktop/resources/node-webkit/Linux32/nw"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
   - npm config set loglevel warn
