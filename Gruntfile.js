@@ -4,7 +4,7 @@ module.exports = function (grunt) {
   'use strict';
 
   // load all grunt tasks
-  //require('time-grunt')(grunt);
+  require('time-grunt')(grunt);
   require('load-grunt-tasks')(grunt);
 
   var platforms = ['win', 'linux', 'linux32', 'mac', 'mac32'];
@@ -131,7 +131,8 @@ module.exports = function (grunt) {
       }
     },
     concurrent: {
-      debug: ['shell:gruntServerDebug', 'shell:gruntDesktopDebugWin']
+      debug: ['shell:gruntServerDebug', 'shell:gruntDesktopDebugWin'],
+      prepEdit: ['shell:npmEditInstall', 'shell:bowerEditInstall']
     }
   });
 
@@ -155,8 +156,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test', [
-    'shell:npmEditInstall',
-    'shell:bowerEditInstall',
+    'concurrent:prepEdit',
     'shell:gruntEditTest'
   ]);
 
