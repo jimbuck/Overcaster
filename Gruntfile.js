@@ -162,7 +162,9 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test', [
-    'concurrent:prepEdit',
+    //'concurrent:prepEdit',
+    'shell:npmEditInstall',
+    'shell:bowerEditInstall',
     'grunt:editTestCI'
   ]);
 
