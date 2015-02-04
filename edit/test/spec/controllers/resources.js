@@ -16,7 +16,5 @@ describe('Controller: ResourcesCtrl', function () {
     });
   }));
 
-  xit('should attach a list of resources to the scope', function () {
-    expect(scope.resources.length).toBeGreaterThan(0);
-  });
+  // Tests go here...
 });
