@@ -419,14 +419,6 @@ module.exports = function (grunt) {
     'karma:nodewebkit',
   ]);
 
-  grunt.registerTask('test-chrome', [
-    'clean:server',
-    'concurrent:test',
-    'autoprefixer',
-    'connect:test',
-    'karma:chrome'
-  ]);
-
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
