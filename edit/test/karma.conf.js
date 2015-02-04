@@ -10,28 +10,28 @@ var path = require('path');
 module.exports = function (config) {
   'use strict';
 
-  //var nwPath = '';
+  var nwPath = '';
   //
   //switch (os.platform()) {
   //  case 'linux':
-  //    nwPath = '../../desktop/resources/node-webkit/Linux32/nw';
+  //    nwPath = '../../desktop/resources/node-webkit/Linux32';///nw';
   //    break;
   //  case 'darwin':
-  //    nwPath = '../../desktop/resources/node-webkit/MacOS32/node-webkit';
+  //    nwPath = '../../desktop/resources/node-webkit/MacOS32';///node-webkit';
   //    break;
   //  case 'win32':
-  //    nwPath = '../../desktop/resources/node-webkit/Windows/nw.exe';
+  //    nwPath = '../../desktop/resources/node-webkit/Windows';///nw.exe';
   //    break;
   //}
   //
   //// Set the path for the launcher...
   //process.env.NODEWEBKIT_BIN = path.join(__dirname, nwPath);
   //
-  //console.log(__dirname);
   //console.log(process.env.NODEWEBKIT_BIN + ' #########################');
   //
   //// Ensure we can execute it...
   //fs.chmodSync(process.env.NODEWEBKIT_BIN, '777');
+  //
 
   config.set({
     // enable / disable watching file and executing tests whenever any file changes
