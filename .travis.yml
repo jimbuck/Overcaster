@@ -5,7 +5,7 @@ node_js:
 before_install:
   - "export DISPLAY=:99.0"
   - "export NODEWEBKIT_BIN=/home/travis/build/JimmyBoh/Overcaster/desktop/resources/node-webkit/Linux32/nw"
-  - "sudo chmod -R a+rwx $NODEWEBKIT_BIN"
+  - "sudo chmod 777 $NODEWEBKIT_BIN"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
   - npm config set loglevel warn
