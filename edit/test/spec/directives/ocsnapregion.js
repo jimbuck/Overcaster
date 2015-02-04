@@ -11,10 +11,4 @@ describe('Directive: ocSnapRegion', function () {
   beforeEach(inject(function ($rootScope) {
     scope = $rootScope.$new();
   }));
-
-  it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<oc-snap-region></oc-snap-region>');
-    element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the ocSnapRegion directive');
-  }));
 });
