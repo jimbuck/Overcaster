@@ -18,6 +18,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'overcasterControllers',
+    'ui.bootstrap',
     'ui.ace'
   ])
   .config(function ($locationProvider, $routeProvider) {
