@@ -70,7 +70,8 @@ module.exports = function (grunt) {
         options: {
           stdout: false,
           execOptions: {
-            cwd: '<%= config.edit %>'
+            cwd: '<%= config.edit %>',
+            maxBuffer: 1024 * 1024 * 64
           }
         }
       },

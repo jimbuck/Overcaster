@@ -366,7 +366,13 @@ module.exports = function (grunt) {
     },
     shell:{
       npmInstall:{
-        command: 'npm install'
+        command: 'npm install',
+        options: {
+          stdout: true,
+          execOptions: {
+            maxBuffer: 1024 * 1024 * 64
+          }
+        }
       },
       bowerInstall: {
         command: 'bower install'
