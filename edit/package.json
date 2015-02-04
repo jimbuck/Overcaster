@@ -25,6 +25,7 @@
     "grunt-newer": "^0.7.0",
     "grunt-ng-annotate": "^0.4.0",
     "grunt-open": "^0.2.3",
+    "grunt-shell": "^1.1.1",
     "grunt-svgmin": "^0.4.0",
     "grunt-usemin": "^2.1.1",
     "grunt-wiredep": "^1.7.0",
@@ -34,10 +35,9 @@
     "karma-chrome-launcher": "^0.1.7",
     "karma-htmlfile-reporter": "^0.1.2",
     "karma-jasmine": "^0.3.4",
-    "karma-nodewebkit-launcher": "0.0.9",
+    "karma-nodewebkit-launcher": "https://github.com/nDmitry/karma-nodewebkit-launcher/tarball/master",
     "karma-phantomjs-launcher": "^0.1.4",
     "load-grunt-tasks": "^0.4.0",
-    "nodewebkit": "^0.11.6",
     "time-grunt": "^0.3.1"
   },
   "engines": {

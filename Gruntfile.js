@@ -4,7 +4,7 @@ module.exports = function (grunt) {
   'use strict';
 
   // load all grunt tasks
-  //require('time-grunt')(grunt);
+  require('time-grunt')(grunt);
   require('load-grunt-tasks')(grunt);
 
   var platforms = ['win', 'linux', 'linux32', 'mac', 'mac32'];
@@ -68,16 +68,10 @@ module.exports = function (grunt) {
       npmEditInstall: {
         command: 'npm install',
         options: {
+          stdout: false,
           execOptions: {
-            cwd: '<%= config.edit %>'
-          }
-        }
-      },
-      gruntEditTest:{
-        command: 'grunt test-ci',
-        options: {
-          execOptions: {
-            cwd: '<%= config.edit %>'
+            cwd: '<%= config.edit %>',
+            maxBuffer: 1024 * 1024 * 64
           }
         }
       },
@@ -130,8 +124,15 @@ module.exports = function (grunt) {
         }
       }
     },
+    grunt: {
+      editTestCI: {
+        gruntfile: 'edit/Gruntfile.js',
+        task: 'test-ci'
+      }
+    },
     concurrent: {
-      debug: ['shell:gruntServerDebug', 'shell:gruntDesktopDebugWin']
+      debug: ['shell:gruntServerDebug', 'shell:gruntDesktopDebugWin'],
+      prepEdit: ['shell:npmEditInstall', 'shell:bowerEditInstall']
     }
   });
 
@@ -155,9 +156,10 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test', [
-    'shell:npmEditInstall',
-    'shell:bowerEditInstall',
-    'shell:gruntEditTest'
+    //'concurrent:prepEdit',
+    'force:shell:npmEditInstall',
+    'force:shell:bowerEditInstall',
+    'grunt:editTestCI'
   ]);
 
   grunt.registerTask('check', [
