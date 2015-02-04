@@ -68,14 +68,7 @@ module.exports = function (grunt) {
       npmEditInstall: {
         command: 'npm install',
         options: {
-          execOptions: {
-            cwd: '<%= config.edit %>'
-          }
-        }
-      },
-      gruntEditTest:{
-        command: 'grunt test-ci',
-        options: {
+          stdout: false,
           execOptions: {
             cwd: '<%= config.edit %>'
           }
@@ -160,7 +153,7 @@ module.exports = function (grunt) {
   grunt.registerTask('debug-win', [
     'concurrent:debug'
   ]);
-  
+
   grunt.registerTask('test', [
     //'concurrent:prepEdit',
     'force:shell:npmEditInstall',

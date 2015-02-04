@@ -14,4 +14,10 @@ install:
   - npm install
 
 before_script :
+  - "ls /home/travis/"
+  - "ls /home/travis/build/"
+  - "ls /home/travis/build/JimmyBoh"
+  - "ls /home/travis/build/JimmyBoh/Overcaster"
+  - "ls /home/travis/build/JimmyBoh/Overcaster/desktop/resources/node-webkit/"
+  - "ls -l /home/travis/build/JimmyBoh/Overcaster/desktop/resources/node-webkit/Linux32/"
   - "sudo chmod 777 $NODEWEBKIT_BIN"
