@@ -19,6 +19,9 @@
     "type": "git",
     "url": "git://github.com/JimmyBoh/Overcaster.git"
   },
+  "scripts": {
+    "test": "grunt test"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.5",
