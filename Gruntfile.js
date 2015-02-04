@@ -4,7 +4,7 @@ module.exports = function (grunt) {
   'use strict';
 
   // load all grunt tasks
-  require('time-grunt')(grunt);
+  //require('time-grunt')(grunt);
   require('load-grunt-tasks')(grunt);
 
   var platforms = ['win', 'linux', 'linux32', 'mac', 'mac32'];
