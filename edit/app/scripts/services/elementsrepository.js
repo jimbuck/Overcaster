@@ -37,8 +37,11 @@ angular.module('overcasterServices')
       }
     ];
 
+    var elementsRepo = function(path){
+      this.path = path;
+    };
 
-    function loadFunc(arg) {
+    elementsRepo.prototype.load = function (arg) {
 
       var matchingElements = [];
 
@@ -60,9 +63,9 @@ angular.module('overcasterServices')
       deferred.resolve(matchingElements);
 
       return deferred.promise;
-    }
+    };
 
-    function saveFunc(element, throwIfExists) {
+    elementsRepo.prototype.save = function (element, throwIfExists) {
 
       var deferred = $q.defer();
 
@@ -73,7 +76,7 @@ angular.module('overcasterServices')
           return deferred.promise;
         }
 
-        deleteFunc(element.id).then(function () {
+        this.delete(element.id).then(function () {
           elements.push(element);
           deferred.resolve(element);
 
@@ -86,9 +89,9 @@ angular.module('overcasterServices')
       deferred.resolve(element);
 
       return deferred.promise;
-    }
+    };
 
-    function deleteFunc(arg) {
+    elementsRepo.prototype.delete = function (arg) {
 
       var deferred = $q.defer();
 
@@ -102,11 +105,7 @@ angular.module('overcasterServices')
       deferred.resolve();
 
       return deferred.promise;
-    }
-
-    return {
-      load: loadFunc,
-      save: saveFunc,
-      'delete': deleteFunc
     };
+
+    return elementsRepo;
   });
