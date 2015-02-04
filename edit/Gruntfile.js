@@ -397,7 +397,8 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('prep', [
-    'concurrent:prep'
+    'shell:npmInstall',
+    'shell:bowerInstall'
   ]);
 
   grunt.registerTask('test', [
