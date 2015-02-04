@@ -1,13 +1,13 @@
 Overcaster 
 =========
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/JimmyBoh/Overcaster?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Stories in Ready](https://badge.waffle.io/jimmyboh/overcaster.svg?label=ready&title=Ready)](http://waffle.io/jimmyboh/overcaster)
 [![Stories in In Progress](https://badge.waffle.io/jimmyboh/overcaster.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/jimmyboh/overcaster)
+[![Build Status](https://travis-ci.org/JimmyBoh/Overcaster.svg?branch=master)](https://travis-ci.org/JimmyBoh/Overcaster)
 
 The only desktop application built to design, manage, and serve HTML5 overlays for live broadcasts!
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/JimmyBoh/Overcaster?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## How it Works
 
