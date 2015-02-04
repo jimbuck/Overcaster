@@ -3,8 +3,26 @@
 // Generated on 2015-01-13 using
 // generator-karma 0.8.3
 
-module.exports = function(config) {
+var os = require('os');
+
+module.exports = function (config) {
   'use strict';
+
+  var nwPath = '';
+
+  switch (os.platform()) {
+    case 'linux':
+      nwPath = '../desktop/resources/node-webkit/Linux32/nw';
+      break;
+    case 'darwin':
+      nwPath = '../desktop/resources/node-webkit/MacOS32/node-webkit';
+      break;
+    case 'win32':
+      nwPath = '..\\desktop\\resources\\node-webkit\\Windows\\nw.exe';
+      break;
+  }
+
+  process.env.NODEWEBKIT_BIN = nwPath;
 
   config.set({
     // enable / disable watching file and executing tests whenever any file changes

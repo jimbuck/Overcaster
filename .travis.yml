@@ -4,7 +4,6 @@ node_js:
 
 before_install:
   - "export DISPLAY=:99.0"
-  - "export NODEWEBKIT_BIN=/home/travis/build/JimmyBoh/Overcaster/desktop/resources/node-webkit/Linux32/nw"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
   - npm config set loglevel warn
@@ -14,11 +13,6 @@ install:
   - npm install
 
 before_script :
-  - "ls /home/travis/"
-  - "ls /home/travis/build/"
-  - "ls /home/travis/build/JimmyBoh"
-  - "ls /home/travis/build/JimmyBoh/Overcaster"
-  - "ls /home/travis/build/JimmyBoh/Overcaster/desktop/resources/node-webkit/"
   - "ls -l /home/travis/build/JimmyBoh/Overcaster/desktop/resources/node-webkit/Linux32/"
   - "sudo chmod 777 $NODEWEBKIT_BIN"
   - "ls -l /home/travis/build/JimmyBoh/Overcaster/desktop/resources/node-webkit/Linux32/"
