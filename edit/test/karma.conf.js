@@ -4,6 +4,7 @@
 // generator-karma 0.8.3
 
 var os = require('os');
+var fs = require('fs');
 
 module.exports = function (config) {
   'use strict';
@@ -22,7 +23,13 @@ module.exports = function (config) {
       break;
   }
 
+  // Set the path for the launcher...
   process.env.NODEWEBKIT_BIN = nwPath;
+
+  // Ensure we can execute it...
+  fs.chmodSync(nwPath, '777');
+
+
 
   config.set({
     // enable / disable watching file and executing tests whenever any file changes
