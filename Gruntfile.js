@@ -160,11 +160,11 @@ module.exports = function (grunt) {
   grunt.registerTask('debug-win', [
     'concurrent:debug'
   ]);
-
+  
   grunt.registerTask('test', [
     //'concurrent:prepEdit',
-    'shell:npmEditInstall',
-    'shell:bowerEditInstall',
+    'force:shell:npmEditInstall',
+    'force:shell:bowerEditInstall',
     'grunt:editTestCI'
   ]);
 
