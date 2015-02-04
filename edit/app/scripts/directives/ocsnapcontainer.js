@@ -47,19 +47,19 @@ angular.module('overcasterDirectives')
 
         $scope.enableMoving = function(tab) {
           $scope.selectTab(tab);
-          $rootScope.$broadcast(ocSnapDirectiveConfig.events.snapItem_BeginMoving, {});
+          $rootScope.$broadcast(ocSnapDirectiveConfig.events.snapItemBeginMoving, {});
         };
 
         $scope.disableMoving = function() {
-          $rootScope.$broadcast(ocSnapDirectiveConfig.events.snapItem_EndMoving, {});
+          $rootScope.$broadcast(ocSnapDirectiveConfig.events.snapItemEndMoving, {});
         };
       },
       link: function postLink(scope, element, attrs) {
-        scope.$on(ocSnapDirectiveConfig.events.snapItem_BeginMoving, function(event, data) {
+        scope.$on(ocSnapDirectiveConfig.events.snapItemBeginMoving, function(event, data) {
           scope.status = 'Moving';
         });
 
-        scope.$on(ocSnapDirectiveConfig.events.snapItem_EndMoving, function(event, data) {
+        scope.$on(ocSnapDirectiveConfig.events.snapItemEndMoving, function(event, data) {
           scope.status = 'Normal';
         });
       }

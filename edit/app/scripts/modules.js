@@ -40,10 +40,10 @@ angular.module('overcasterDirectives', [])
   })
   .value('ocSnapDirectiveConfig', {
     events: {
-      snapItem_BeginMoving: 'ocSnapItem_BeginMoving',
-      snapItem_EndMoving: 'ocSnapItem_EndMoving',
-      snapContainer_BeginMoving: 'ocSnapContainer_BeginMoving',
-      snapContainer_EndMoving: 'ocSnapContainer_EndMoving'
+      snapItemBeginMoving: 'ocSnapItem_BeginMoving',
+      snapItemEndMoving: 'ocSnapItem_EndMoving',
+      snapContainerBeginMoving: 'ocSnapContainer_BeginMoving',
+      snapContainerEndMoving: 'ocSnapContainer_EndMoving'
     },
     snapRegion: {
       css: {
