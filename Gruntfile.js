@@ -130,6 +130,12 @@ module.exports = function (grunt) {
         }
       }
     },
+    grunt: {
+      editTestCI: {
+        gruntfile: 'edit/Gruntfile.js',
+        task: 'test-ci'
+      }
+    },
     concurrent: {
       debug: ['shell:gruntServerDebug', 'shell:gruntDesktopDebugWin'],
       prepEdit: ['shell:npmEditInstall', 'shell:bowerEditInstall']
@@ -157,7 +163,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'concurrent:prepEdit',
-    'shell:gruntEditTest'
+    'grunt:editTestCI'
   ]);
 
   grunt.registerTask('check', [

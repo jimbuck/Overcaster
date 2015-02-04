@@ -13,7 +13,7 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
 
   // Time how long tasks take. Can help when optimizing build times
-  require('time-grunt')(grunt);
+  //require('time-grunt')(grunt);
 
   // Configurable paths for the application
   var appConfig = {
@@ -343,6 +343,10 @@ module.exports = function (grunt) {
         'copy:styles',
         'imagemin',
         'svgmin'
+      ],
+      prep: [
+        'shell:npmInstall',
+        'shell:bowerInstall'
       ]
     },
 
@@ -360,7 +364,14 @@ module.exports = function (grunt) {
         singleRun: false
       }
     },
-
+    shell:{
+      npmInstall:{
+        command: 'npm install'
+      },
+      bowerInstall: {
+        command: 'bower install'
+      }
+    },
     // Used to open the test results after completion...
     open : {
       results : {
@@ -385,13 +396,18 @@ module.exports = function (grunt) {
     ]);
   });
 
+  grunt.registerTask('prep', [
+    'concurrent:prep'
+  ]);
+
   grunt.registerTask('test', [
-  'clean:server',
-  'concurrent:test',
-  'autoprefixer',
-  'connect:test',
-  'force:karma:nodewebkit',
-  'open:results'
+    'jshint:all',
+    'clean:server',
+    'concurrent:test',
+    'autoprefixer',
+    'connect:test',
+    'force:karma:nodewebkit',
+    'open:results'
   ]);
 
   grunt.registerTask('test-ci', [
@@ -399,15 +415,15 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma:nodewebkit'
+    'karma:nodewebkit',
   ]);
 
   grunt.registerTask('test-chrome', [
-  'clean:server',
-  'concurrent:test',
-  'autoprefixer',
-  'connect:test',
-  'karma:chrome'
+    'clean:server',
+    'concurrent:test',
+    'autoprefixer',
+    'connect:test',
+    'karma:chrome'
   ]);
 
   grunt.registerTask('build', [
