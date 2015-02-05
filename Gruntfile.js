@@ -61,14 +61,14 @@ module.exports = function (grunt) {
         command: 'bower install',
         options: {
           execOptions: {
-            cwd: '<%= config.edit %>'
+            cwd: '<%= config.edit %>',
+            maxBuffer: 1024 * 1024 * 64
           }
         }
       },
       npmEditInstall: {
         command: 'npm install',
         options: {
-          stdout: false,
           execOptions: {
             cwd: '<%= config.edit %>',
             maxBuffer: 1024 * 1024 * 64
