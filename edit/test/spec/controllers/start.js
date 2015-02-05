@@ -17,14 +17,14 @@ describe('Controller: StartCtrl', function () {
   }));
 
   it('should have a list of recent sessions', function () {
-    expect(scope.recentSessions.length).toBeGreaterThan(0);
+    expect(scope.recentSessions).toBeDefined();
   });
 
   it('should have a list of recent scenes', function(){
-    expect(scope.recentScenes.length).toBeGreaterThan(0);
+    expect(scope.recentScenes).toBeDefined();
   });
 
   it('should have a list of recent elements', function(){
-    expect(scope.recentElements.length).toBeGreaterThan(0);
+    expect(scope.recentElements).toBeDefined();
   });
 });
