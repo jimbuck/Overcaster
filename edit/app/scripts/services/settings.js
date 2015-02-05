@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var path = require('path');
+var mkdirp = require('mkdirp');
 
 /**
  * @ngdoc service
@@ -29,8 +30,7 @@ angular.module('overcasterServices')
 
       var data = require(settings.path);
 
-      if(typeof key === 'undefined')
-      {
+      if (typeof key === 'undefined') {
         return data;
       } else {
         return data[key];
@@ -51,9 +51,8 @@ angular.module('overcasterServices')
       saveData(data);
     };
 
-    settings.delete = function(key) {
-      if(typeof key === 'undefined')
-      {
+    settings.delete = function (key) {
+      if (typeof key === 'undefined') {
         throw new Error('Null Argument Exception: key');
       }
 
@@ -66,13 +65,19 @@ angular.module('overcasterServices')
       saveData(data);
     };
 
-    function createIfMissing(){
+    function createIfMissing() {
       if (!fs.existsSync(settings.path)) {
         saveData(settings.defaults);
       }
     }
 
-    function saveData(data){
+    function saveData(data) {
+      var dir = path.dirname(settings.path);
+
+      if (!fs.existsSync(dir)) {
+        mkdirp.sync(dir);
+      }
+
       fs.writeFileSync(settings.path, JSON.stringify(data, null, 2));
     }
 
