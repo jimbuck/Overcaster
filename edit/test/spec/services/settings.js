@@ -1,5 +1,11 @@
 'use strict';
 
+var path = require('path');
+
+if (typeof global.appData === 'undefined') {
+  global.appData = path.join(require('nw.gui').App.dataPath, '../Overcaster');
+}
+
 describe('Service: Settings', function () {
 
   // load the service's module
@@ -11,8 +17,24 @@ describe('Service: Settings', function () {
     Settings = _Settings_;
   }));
 
-  it('should do something', function () {
-    expect(!!Settings).toBe(true);
+  it('should return a settings object', function () {
+    expect(Settings).toBeDefined();
+  });
+
+  it('should have a get method', function () {
+    expect(Settings).toBeDefined();
+    expect(Settings.get).toBeDefined();
+  });
+
+  it('should have a set method', function () {
+    expect(Settings).toBeDefined();
+    expect(Settings.set).toBeDefined();
+  });
+
+  it('should have default values', function () {
+    expect(Settings).toBeDefined();
+    expect(Settings.get).toBeDefined();
+    expect(Settings.get('port')).toBeDefined();
   });
 
 });

@@ -67,7 +67,7 @@ angular.module('overcasterServices')
     };
 
     function createIfMissing(){
-      if (!fs.existsSync()) {
+      if (!fs.existsSync(settings.path)) {
         saveData(settings.defaults);
       }
     }
