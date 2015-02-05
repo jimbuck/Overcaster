@@ -8,7 +8,7 @@
  * Provides access to Elements in the overcasterApp.
  */
 angular.module('overcasterServices')
-  .factory('ElementsRepository', function ($q) {
+  .factory('ElementsRepository', function ($q, Settings) {
 
     var elements = [
       {
@@ -38,7 +38,7 @@ angular.module('overcasterServices')
     ];
 
     var elementsRepo = function(path){
-      this.path = path;
+      this.path = path || Settings.get('elementsPath');
     };
 
     elementsRepo.prototype.load = function (arg) {

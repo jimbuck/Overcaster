@@ -5,106 +5,85 @@ var fs = require('fs');
 var path = require('path');
 
 global.NodeWebkit = require('nw.gui');
-global.Path = require('path');
 
-global.__dirname = path.dirname(process.execPath).replace(/\\/gi, '/');
-
-global.Overcaster = {};
-
-global.settings = require('./utils/settings-helper');
-
-var expressPort = 9000;
+var expressPort = require('./utils/settings-helper').getPort();
 var serverPath = './server/server.js';
 
-global.settings.load(function (err, data) {
-    if (err) {
-        console.error('Failed to load settings: ' + err);
-    } else {
-        expressPort = data.port;
+initGlobalVars();
+initWindow();
+initExpressServer();
+startApp();
+
+function startApp(){
+  if(global.Debug)
+  {
+    expressPort = 9000;
+  }
+
+  window.location.href = 'http://localhost:' + expressPort + '/';
+}
+
+function initGlobalVars() {
+
+  global.App = global.NodeWebkit.App;
+  global.Args = global.NodeWebkit.App.argv;
+  global.Win = global.NodeWebkit.Window.get();
+
+  global.Debug = !!~global.Args.indexOf('--debug');
+}
+
+function initWindow() {
+
+  global.Win.maximize();
+
+  global.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
+    key: 'F11',
+    active: function () {
+      global.Win.toggleFullscreen();
+    },
+    failed: function (msg) {
+      console.log(msg);
     }
+  }));
 
-    initOvercaster(global.Overcaster, global.NodeWebkit);
-});
+  if (global.Debug) {
+    global.Win.showDevTools();
 
-function initOvercaster(oc, nw) {
+    global.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
+      key: 'Ctrl+Shift+I',
+      active: function () {
+        global.Win.showDevTools();
+      },
+      failed: function (msg) {
+        console.log(msg);
+      }
+    }));
+  }
+}
 
-    initGlobalVars();
-    initWindow();
-    initExpressServer();
+function initExpressServer() {
+  if (global.Debug) {
+    return;
+  }
 
-    window.location.href = 'http://localhost:' + expressPort + '/';
+  if (!fs.existsSync(serverPath)) {
+    console.log('Unable to find internal server files!');
+    return;
+  }
 
-    function initGlobalVars() {
+  var spawn = require('child_process').fork;
+  global.Express = spawn('node', [serverPath, expressPort]);
 
-        if (!oc.Core) {
-            oc.Core = nw.App;
-        }
+  (function (e, c) {
+    e.stdout.on('data', function (data) {
+      c.log('[EXPRESS]:', data);
+    });
 
-        if (!oc.Args) {
-            oc.Args = oc.Core.argv;
-        }
+    e.on('exit', function (code) {
+      c.log('[EXPRESS]: Exited with code ' + code);
+    });
 
-        if (!oc.Window) {
-            oc.Window = nw.Window.get();
-        }
+  })(global.Express, console);
 
-        oc.Debug = !!~oc.Args.indexOf('--debug');
-    }
-
-    function initWindow() {
-
-        oc.Window.maximize();
-
-        global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
-            key: 'F11',
-            active: function () {
-                global.Overcaster.Window.toggleFullscreen();
-            },
-            failed: function (msg) {
-                console.log(msg);
-            }
-        }));
-
-        if (oc.Debug) {
-            oc.Window.showDevTools();
-
-            global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
-                key: 'Ctrl+Shift+I',
-                active: function () {
-                    global.Overcaster.Window.showDevTools();
-                },
-                failed: function (msg) {
-                    console.log(msg);
-                }
-            }));
-        }
-    }
-
-    function initExpressServer() {
-        if (oc.Debug) {
-            return;
-        }
-
-        if (!fs.existsSync(serverPath)) {
-            console.log('Unable to find internal server files!');
-            return;
-        }
-
-        var spawn = require('child_process').fork;
-        global.Express = spawn('node', [serverPath, expressPort]);
-
-        (function (e, c) {
-            e.stdout.on('data', function (data) {
-                c.log('[EXPRESS]:', data);
-            });
-
-            e.on('exit', function (code) {
-                c.log('[EXPRESS]: Exited with code ' + code);
-            });
-
-        })(global.Express, console);
-
-        return;
-    }
-
+  return;
 }
