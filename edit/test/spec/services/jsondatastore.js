@@ -2,6 +2,10 @@
 
 describe('Service: JsonDataStore', function () {
 
+  var fs = require('fs');
+
+  var testFilename = './test.json';
+
   // load the service's module
   beforeEach(module('overcasterServices'));
 
@@ -9,7 +13,14 @@ describe('Service: JsonDataStore', function () {
   var JsonDataStore;
   beforeEach(inject(function (_JsonDataStore_) {
     JsonDataStore = _JsonDataStore_;
+
+    deleteCurrentTestFile();
   }));
+
+  // Delete the test file after each run...
+  afterEach(function(){
+    deleteCurrentTestFile();
+  });
 
   it('should return a constructor', function () {
     expect(typeof JsonDataStore).toBe('function');
@@ -17,17 +28,20 @@ describe('Service: JsonDataStore', function () {
   });
 
   it('should accept a string path as a single parameter', function () {
-    var filepath = './test.json';
-    var dataStore = new JsonDataStore(filepath);
-    expect(dataStore.path).toBe(filepath);
+    createNewTestFile();
+
+    var dataStore = new JsonDataStore(testFilename);
+
+    expect(dataStore.path).toBe(testFilename);
   });
 
   it('should accept an object as a single parameter with a `path` property', function () {
     var opts = {
-      path: './test.json'
+      path: testFilename
     };
 
     var repo = new JsonDataStore(opts);
+
     expect(repo.path).toBe(opts.path);
   });
 
@@ -49,7 +63,7 @@ describe('Service: JsonDataStore', function () {
 
   it('should accept default values to use when the file is not present', function () {
     var opts = {
-      path: './test.json',
+      path: testFilename,
       defaults: {
         color: 'yellow',
         number: 10
@@ -57,22 +71,48 @@ describe('Service: JsonDataStore', function () {
     };
 
     var dataStore = new JsonDataStore(opts);
-    expect(dataStore.defaults).toBe(opts.defaults);
+
+    expect(dataStore.defaults).toEqual(opts.defaults);
   });
 
-  it('should have a get method', function () {
-    var dataStore = new JsonDataStore('test.json');
+  it('should have a `get` method that returns a value', function () {
 
-    expect(dataStore).toBeDefined();
-    expect(dataStore.get).toBeDefined();
+    var testValue = 'testValue';
+
+    createNewTestFile({
+      testKey: testValue
+    });
+
+    var dataStore = new JsonDataStore(testFilename);
+
+    expect(dataStore.get('testKey')).toEqual(testValue);
   });
 
-  it('should have a set method', function () {
-    var dataStore = new JsonDataStore('test.json');
+  it('should have a set method that stores a value', function () {
+    var dataStore = new JsonDataStore(testFilename);
 
-    expect(dataStore).toBeDefined();
-    expect(dataStore.set).toBeDefined();
+    var propertyName = 'setTest';
+    var expectedValue = 'It worked!';
+
+    dataStore.set(propertyName, expectedValue);
+
+    expect(checkProperty(propertyName, expectedValue)).toEqual(true);
   });
 
-  //it('should ');
+  function deleteCurrentTestFile() {
+    if (!!testFilename && fs.existsSync(testFilename)) {
+      fs.unlinkSync(testFilename);
+    }
+  }
+
+  function createNewTestFile(data){
+    deleteCurrentTestFile();
+
+    data = data || {};
+    fs.writeFileSync(testFilename, JSON.stringify(data));
+  }
+
+  function checkProperty(key, value) {
+    return JSON.parse(fs.readFileSync(testFilename, {encoding:'utf8'}))[key] == value;
+  }
 });

@@ -13,25 +13,21 @@ describe('Service: Settings', function () {
 
   // instantiate service
   var Settings;
-  var JsonDataStore;
 
-  beforeEach(inject(function (_Settings_, _JsonDataStore_) {
+  beforeEach(inject(function (_Settings_) {
     Settings = _Settings_;
-    JsonDataStore = _JsonDataStore_;
   }));
 
-  it('should return a JsonDataStore object', function () {
-    expect(Settings instanceof JsonDataStore).toBe(true);
-  });
+  it('should have a `get` method with no parameters that returns the entire structure', function () {
 
-  it('should have a get method', function () {
-    expect(Settings).toBeDefined();
-    expect(Settings.get).toBeDefined();
-  });
+    var expectedValue = {
+      val1: 1,
+      val2: 2
+    };
 
-  it('should have a set method', function () {
-    expect(Settings).toBeDefined();
-    expect(Settings.set).toBeDefined();
+    spyOn(Settings.dataStore, 'get').and.returnValue(expectedValue);
+
+    expect(Settings.get()).toBe(expectedValue);
   });
 
   it('should have a default port value', function () {

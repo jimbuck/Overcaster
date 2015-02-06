@@ -12,7 +12,7 @@ var path = require('path');
 angular.module('overcasterServices')
   .factory('Settings', function (JsonDataStore) {
 
-    var settings = {
+    var options = {
       path: path.join(global.appData, 'settings.json'),
       defaults: {
         elementsPath: './data/elements',
@@ -22,6 +22,21 @@ angular.module('overcasterServices')
       }
     };
 
-    return new JsonDataStore(settings);
+    var Settings = function(){
+      this.dataStore = new JsonDataStore(options);
+    };
 
+    Settings.prototype.get = function (key){
+      return this.dataStore.get(key);
+    };
+
+    Settings.prototype.set = function(key, value){
+      return this.dataStore.set(key, value);
+    };
+
+    Settings.prototype.delete = function(key) {
+      return this.dataStore.delete(key);
+    }
+
+    return new Settings();
   });

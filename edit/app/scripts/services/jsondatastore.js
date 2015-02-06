@@ -14,6 +14,10 @@ var mkdirp = require('mkdirp');
 angular.module('overcasterServices')
   .factory('JsonDataStore', function () {
 
+    var readWriteOptions = {
+      encoding: 'utf8'
+    };
+
     var jsonRepo = function (opts) {
       if (typeof opts === 'string') {
         opts = {
@@ -29,13 +33,15 @@ angular.module('overcasterServices')
 
       this.path = opts.path;
       this.defaults = opts.defaults || {};
+
+      this.createIfMissing();
     };
 
     jsonRepo.prototype.get = function (key) {
 
       this.createIfMissing();
 
-      var data = require(this.path);
+      var data = JSON.parse(fs.readFileSync(this.path, readWriteOptions));
 
       if (typeof key === 'undefined') {
         return data;
@@ -85,7 +91,7 @@ angular.module('overcasterServices')
         mkdirp.sync(dir);
       }
 
-      fs.writeFileSync(filepath, JSON.stringify(data, null, 2));
+      fs.writeFileSync(filepath, JSON.stringify(data, null, 2), readWriteOptions);
     }
 
     return jsonRepo;
