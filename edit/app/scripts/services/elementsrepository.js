@@ -47,15 +47,19 @@ angular.module('overcasterServices')
 
       var deferred = $q.defer();
 
+      // Find the element by id...
       if (typeof arg === 'string' || typeof arg === 'number') {
         matchingElements = _.find(elements, {id: parseInt(arg)});
       }
+      // Find the element by predicate...
       else if (typeof arg === 'function') {
         matchingElements = _.filter(elements, arg);
       }
+      // Find the element by matching properties...
       else if (typeof arg === 'object') {
         matchingElements = _.find(elements, arg);
       }
+      // Return all...
       else {
         matchingElements = elements;
       }
