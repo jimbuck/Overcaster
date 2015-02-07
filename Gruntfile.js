@@ -125,9 +125,13 @@ module.exports = function (grunt) {
       }
     },
     grunt: {
-      editTestCI: {
+      'edit-test-ci': {
         gruntfile: 'edit/Gruntfile.js',
         task: 'test-ci'
+      },
+      'edit-test':{
+        gruntfile: 'edit/Gruntfile.js',
+        task: 'test'
       }
     },
     concurrent: {
@@ -136,10 +140,33 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('dist', [
-    'clean:dist',
-    'copy:desktopToTmp',
-  ]);
+  grunt.registerTask('build', 'Builds the correct version based on current OS', function (target) {
+    if (typeof target === 'undefined') {
+      switch (os.platform()) {
+        case 'linux':
+          target = 'linux32';
+          break;
+        case 'darwin':
+          target = 'mac32';
+          break;
+        case 'win32':
+          target = 'win';
+          break;
+        default:
+          throw new Error('Failed to determine which OS to build for!');
+      }
+    }
+
+    grunt.task.run([
+      // Clean dist
+      // Build edit
+      // Build cast
+      // Copy desktop to tmp
+      // Copy edit to tmp
+      // Copy cast to tmp
+      // Build desktop from tmp
+    ]);
+  });
 
   // Register Tasks for each platform...
   for (var p in platforms) {
@@ -157,9 +184,15 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     //'concurrent:prepEdit',
-    'force:shell:npmEditInstall',
-    'force:shell:bowerEditInstall',
-    'grunt:editTestCI'
+    'shell:npmEditInstall',
+    'shell:bowerEditInstall',
+    'grunt:edit-test'
+  ]);
+
+  grunt.registerTask('test-ci', [
+    'shell:npmEditInstall',
+    'shell:bowerEditInstall',
+    'grunt:edit-test-ci'
   ]);
 
   grunt.registerTask('check', [

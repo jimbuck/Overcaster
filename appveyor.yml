@@ -1,0 +1,29 @@
+# Test against this version of Node.js
+environment:
+  nodejs_version: "0.10"
+
+# Install scripts. (runs after repo cloning)
+install:
+  # Get the latest stable version of Node.js or io.js
+  - ps: Install-Product node $env:nodejs_version
+  # install modules
+  - npm install -g grunt-cli bower
+  - npm install
+
+# Post-install test scripts.
+test_script:
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+  # run tests
+  - npm test
+
+# Don't actually build.
+build: off
+
+notifications:
+  - provider: Webhook
+    url: https://webhooks.gitter.im/e/f3977ce2105af3bfb00b
+    on_build_success: true
+    on_build_failure: true
+    on_build_status_changed: true
