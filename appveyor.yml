@@ -9,7 +9,6 @@ install:
   # install modules
   - npm install -g grunt-cli bower
   - npm install
-  - bower install
 
 # Post-install test scripts.
 test_script:
