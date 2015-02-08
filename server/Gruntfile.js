@@ -4,7 +4,6 @@ module.exports = function (grunt) {
   'use strict';
 
   // load all grunt tasks
-  require('time-grunt')(grunt);
   require('load-grunt-tasks')(grunt);
 
   // configurable paths
@@ -19,7 +18,7 @@ module.exports = function (grunt) {
     config: config,
     shell: {
       nodeServer: {
-        command: 'node <%= config.serverFile %> <%= config.serverPort %> --edit="<%= config.editFromServer %>" --cast="<%= config.castFromServer %>" '
+        command: 'node <%= config.serverFile %> <%= config.serverPort %> "<%= config.editFromServer %>" "<%= config.castFromServer %>" '
       }
     }
   });

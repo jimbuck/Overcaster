@@ -3,6 +3,8 @@
 module.exports = function (grunt) {
   'use strict';
 
+  var os = require('os');
+
   // load all grunt tasks
   require('time-grunt')(grunt);
   require('load-grunt-tasks')(grunt);
@@ -22,7 +24,10 @@ module.exports = function (grunt) {
   grunt.initConfig({
     config: config,
     clean: {
-      dist: ['<%= config.dist %>/**/*', '<%= config.tmp %>/**/*']
+      dist: [
+        '<%= config.dist %>/**',
+        '<%= config.tmp %>/**'
+      ]
     },
     wait: {
       pause: {
@@ -32,22 +37,34 @@ module.exports = function (grunt) {
       }
     },
     copy: {
-      editToServer:{
-        cwd: '<%= config.edit %>/',
-        src: ['app/**'],
-        dest: '../<%= config.server %>/public/edit',
+      desktopToTmp: {
+        cwd: '<%= config.desktop %>/',
+        src: ['**'],
+        dest: '<%= config.tmp %>/',
         expand: true
       },
-      castToServer: {
-        cwd: '<%= config.cast %>/',
-        src: ['app.css', 'app.js', 'index.html'],
-        dest: '../<%= config.server %>/public/cast',
-        expand: true
-      },
-      serverToDesktop: {
+       serverToTmp: {
         cwd: '<%= config.server %>/',
         src: ['server.js', 'routes.js', 'node_modules/**', 'public/**'],
-        dest: '../<%= config.server %>/public/cast',
+        dest: '<%= config.tmp %>/app/server',
+        expand: true
+      },
+      editToTmp:{
+        cwd: '<%= config.edit %>/dist/',
+        src: ['./**'],
+        dest: '<%= config.tmp %>/app/server/public/edit/',
+        expand: true
+      },
+      castToTmp: {
+        cwd: '<%= config.cast %>/',
+        src: ['app.css', 'app.js', 'index.html'],
+        dest: '<%= config.tmp %>/app/server/public/cast',
+        expand: true
+      },
+      tmpToDist: {
+        cwd: '<%= config.tmp %>/dist',
+        src: ['**'],
+        dest: '<%= config.dist %>/',
         expand: true
       }
     },
@@ -137,12 +154,28 @@ module.exports = function (grunt) {
     },
     grunt: {
       'edit-test-ci': {
-        gruntfile: 'edit/Gruntfile.js',
+        gruntfile: '<%= config.edit %>/Gruntfile.js',
         task: 'test-ci'
       },
       'edit-test':{
-        gruntfile: 'edit/Gruntfile.js',
+        gruntfile: '<%= config.edit %>/Gruntfile.js',
         task: 'test'
+      },
+      'edit-build': {
+        gruntfile: '<%= config.edit %>/Gruntfile.js',
+        task: 'build'
+      },
+       'tmp-dist-win': {
+        gruntfile: '<%= config.tmp %>/Gruntfile.js',
+        task: 'dist-win'
+      },
+      'tmp-dist-mac32': {
+        gruntfile: '<%= config.tmp %>/Gruntfile.js',
+        task: 'dist-mac32'
+      },
+      'tmp-dist-linux32': {
+        gruntfile: '<%= config.tmp %>/Gruntfile.js',
+        task: 'dist-linux32'
       }
     },
     concurrent: {
@@ -151,7 +184,8 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build', 'Builds the correct version based on current OS', function (target) {
+  grunt.registerTask('build', 'Builds the specified or current OS.', function (target) {
+
     if (typeof target === 'undefined') {
       switch (os.platform()) {
         case 'linux':
@@ -168,26 +202,20 @@ module.exports = function (grunt) {
       }
     }
 
+    console.log('Building for ' + target + '...');
+
     grunt.task.run([
-      // Clean dist
-      // Build edit
-      // Build cast
-      // Copy desktop to tmp
-      // Copy edit to tmp
-      // Copy cast to tmp
-      // Build desktop from tmp
+      'clean:dist',
+      'grunt:edit-build',
+      // build cast
+      'copy:desktopToTmp',
+      'copy:serverToTmp',
+      'copy:editToTmp',
+      'copy:castToTmp',
+      'grunt:tmp-dist-'+target,
+      'copy:tmpToDist'
     ]);
   });
-
-  // Register Tasks for each platform...
-  for (var p in platforms) {
-    var os = platforms[p];
-    grunt.registerTask('dist-' + os, [
-      'clean:dist',
-      'nodewebkit:' + os,
-      'fixDist'
-    ]);
-  }
 
   grunt.registerTask('debug-win', [
     'concurrent:debug'

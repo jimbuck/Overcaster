@@ -8,5 +8,7 @@
  * Controller of the overcasterApp
  */
 angular.module('overcasterControllers')
-  .controller('SettingsCtrl', function ($scope) {
+  .controller('SettingsCtrl', function ($scope, Settings) {
+
+    $scope.settings = Settings.get();
   });

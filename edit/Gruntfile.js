@@ -13,7 +13,7 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
 
   // Time how long tasks take. Can help when optimizing build times
-  //require('time-grunt')(grunt);
+  require('time-grunt')(grunt);
 
   // Configurable paths for the application
   var appConfig = {
@@ -245,7 +245,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '.tmp/concat/scripts',
-          src: ['*.js', '!oldieshim.js'],
+          src: ['scripts.js', '!oldieshim.js'],
           dest: '.tmp/concat/scripts'
         }]
       }
@@ -396,7 +396,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
+    //'cdnify',
     'cssmin',
     'uglify',
     'filerev',

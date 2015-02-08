@@ -17,8 +17,8 @@ var errorHandler = require('errorhandler');
 
 var startExpress = function (port, editLocation, castLocation) {
 
-  editLocation = path.join(__dirname, '../edit/app');
-  castLocation = path.join(__dirname, '../cast');
+  //editLocation = path.join(__dirname, '../edit/app');
+  //castLocation = path.join(__dirname, '../cast');
 
   var isDebug = (typeof editLocation !== 'undefined' && typeof castLocation !== 'undefined');
 

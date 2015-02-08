@@ -26,85 +26,81 @@ global.settings.load(function (err, data) {
     initOvercaster(global.Overcaster, global.NodeWebkit);
 });
 
-function initOvercaster(oc, nw) {
+function initGlobalVars(oc, nw) {
 
-    initGlobalVars();
-    initWindow();
-    initExpressServer();
-
-    window.location.href = 'http://localhost:' + expressPort + '/';
-
-    function initGlobalVars() {
-
-        if (!oc.Core) {
-            oc.Core = nw.App;
-        }
-
-        if (!oc.Args) {
-            oc.Args = oc.Core.argv;
-        }
-
-        if (!oc.Window) {
-            oc.Window = nw.Window.get();
-        }
-
-        oc.Debug = !!~oc.Args.indexOf('--debug');
+    if (!oc.Core) {
+        oc.Core = nw.App;
     }
 
-    function initWindow() {
-
-        oc.Window.maximize();
-
-        global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
-            key: 'F11',
-            active: function () {
-                global.Overcaster.Window.toggleFullscreen();
-            },
-            failed: function (msg) {
-                console.log(msg);
-            }
-        }));
-
-        if (oc.Debug) {
-            oc.Window.showDevTools();
-
-            global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
-                key: 'Ctrl+Shift+I',
-                active: function () {
-                    global.Overcaster.Window.showDevTools();
-                },
-                failed: function (msg) {
-                    console.log(msg);
-                }
-            }));
-        }
+    if (!oc.Args) {
+        oc.Args = oc.Core.argv;
     }
 
-    function initExpressServer() {
-        if (oc.Debug) {
-            return;
+    if (!oc.Window) {
+        oc.Window = nw.Window.get();
+    }
+
+    oc.Debug = !!~oc.Args.indexOf('--debug');
+}
+
+function initWindow(oc) {
+
+    oc.Window.maximize();
+
+    if (oc.Debug || true) {
+        oc.Window.showDevTools();
+    }
+
+    global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
+        key: 'F11',
+        active: function () {
+            global.Overcaster.Window.toggleFullscreen();
+        },
+        failed: function (msg) {
+            console.log(msg);
         }
+    }));
 
-        if (!fs.existsSync(serverPath)) {
-            console.log('Unable to find internal server files!');
-            return;
+    global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
+        key: 'Ctrl+Shift+I',
+        active: function () {
+            global.Overcaster.Window.showDevTools();
+        },
+        failed: function (msg) {
+            console.log(msg);
         }
+    }));
+}
 
-        var spawn = require('child_process').fork;
-        global.Express = spawn('node', [serverPath, expressPort]);
-
-        (function (e, c) {
-            e.stdout.on('data', function (data) {
-                c.log('[EXPRESS]:', data);
-            });
-
-            e.on('exit', function (code) {
-                c.log('[EXPRESS]: Exited with code ' + code);
-            });
-
-        })(global.Express, console);
-
+function initExpressServer(oc) {
+    if (oc.Debug) {
         return;
     }
 
+    if (!fs.existsSync(serverPath)) {
+        alert('Unable to find internal server files!');
+        return;
+    }
+
+    var fork = require('child_process').fork;
+    global.Express = fork(serverPath, [expressPort], {silent: true});
+
+    //alert(fs.existsSync(serverPath) ? 'Server is found!' : 'Where is the server???')
+
+    (function (e, c) {
+        e.on('exit', function (code) {
+            c.log('[EXPRESS]: Exited with code ' + code);
+        });
+    })(global.Express, console);
+
+    return;
+}
+
+function initOvercaster(oc, nw) {
+
+    initGlobalVars(oc, nw);
+    initWindow(oc, nw);
+    initExpressServer(oc, nw);
+
+    window.location.href = 'http://localhost:' + expressPort + '/';
 }
