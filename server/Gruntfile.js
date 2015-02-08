@@ -17,11 +17,6 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     config: config,
-    clean:{
-      dist: {
-
-      }
-    },
     shell: {
       nodeServer: {
         command: 'node <%= config.serverFile %> <%= config.serverPort %> --edit="<%= config.editFromServer %>" --cast="<%= config.castFromServer %>" '
@@ -29,20 +24,7 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('dist', [
-    'clean:dist',
-    'buildDist',
-    'copy:desktopToTmp',
-  ]);
-
   grunt.registerTask('debug-server', [
     'shell:nodeServer'
-  ]);
-
-  grunt.registerTask('check', [
-    'shell:gruntEditCheck',
-    'shell:gruntCastCheck',
-    'shell:gruntServerCheck',
-    'shell:gruntDesktopCheck'
   ]);
 };
