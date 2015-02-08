@@ -83,7 +83,7 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: '.jshintrc'
             },
-            files: '<%= config.app %>/js/*.js'
+            files: '<%= config.app %>/*.js'
         },
         copy: {
             appLinux: {
@@ -353,7 +353,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('dist-win', [
-        'jshint',
+        //'jshint',
         'clean:distWin',
         'copy:copyWinToTmp',
         'compress:appToTmp',
@@ -363,7 +363,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('debug-win', [
-        'jshint',
+        //'jshint',
         'clean:distWin',
         'copy:copyWinToTmp',
         'compress:appToTmp',
