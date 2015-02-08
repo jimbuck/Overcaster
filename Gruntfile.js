@@ -22,8 +22,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     config: config,
     clean: {
-      dist: ['<%= config.dist %>/**/*', '<%= config.tmp %>/**/*'],
-      tmp: ['<%= config.tmp %>/**/*']
+      dist: ['<%= config.dist %>/**/*', '<%= config.tmp %>/**/*']
     },
     wait: {
       pause: {
@@ -33,10 +32,22 @@ module.exports = function (grunt) {
       }
     },
     copy: {
-      desktopToTmp: {
-        cwd: '<%= config.desktop %>/',
-        src: ['**/'],
-        dest: '<%= config.tmp %>',
+      editToServer:{
+        cwd: '<%= config.edit %>/',
+        src: ['app/**'],
+        dest: '../<%= config.server %>/public/edit',
+        expand: true
+      },
+      castToServer: {
+        cwd: '<%= config.cast %>/',
+        src: ['app.css', 'app.js', 'index.html'],
+        dest: '../<%= config.server %>/public/cast',
+        expand: true
+      },
+      serverToDesktop: {
+        cwd: '<%= config.server %>/',
+        src: ['server.js', 'routes.js', 'node_modules/**', 'public/**'],
+        dest: '../<%= config.server %>/public/cast',
         expand: true
       }
     },
