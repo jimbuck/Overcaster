@@ -1,0 +1,28 @@
+<div id="ElementEditorScreen">
+  <div id="InfoRegion">
+
+  </div>
+  <div id="ContentRegion">
+    <div id="EditorPreview">
+      <h3 class="pull-right">Preview</h3>
+      <div class="preview-window">
+        <div class="resizable">
+        </div>
+      </div>
+    </div>
+    <div id="EditorCode" class="element-editor-code-container">
+      <button class="pull-right" ng-click="updateElement()">Update</button>
+      <tabset class="tab-container">
+        <tab heading="HTML">
+          <div class="element-editor-code-input" ng-model="currentElement.html" ui-ace="{mode: 'html'}"></div>
+        </tab>
+        <tab heading="CSS">
+          <div class="element-editor-code-input" ng-model="currentElement.css" ui-ace="{mode: 'css'}"></div>
+        </tab>
+        <tab heading="JS">
+          <div class="element-editor-code-input" ng-model="currentElement.js" ui-ace="{mode: 'javascript'}"></div>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>
