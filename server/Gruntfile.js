@@ -9,21 +9,19 @@ module.exports = function (grunt) {
   // configurable paths
   var config = {
     serverFile: 'server.js',
-    serverPort: 9000,
-    editFromServer: '../edit/app/',
-    castFromServer: '../cast/app/'
+    serverPort: 9000
   };
 
   grunt.initConfig({
     config: config,
     shell: {
       nodeServer: {
-        command: 'node <%= config.serverFile %> <%= config.serverPort %> "<%= config.editFromServer %>" "<%= config.castFromServer %>" '
+        command: 'node <%= config.serverFile %> <%= config.serverPort %> true'
       }
     }
   });
 
-  grunt.registerTask('debug-server', [
+  grunt.registerTask('debug', [
     'shell:nodeServer'
   ]);
 };
