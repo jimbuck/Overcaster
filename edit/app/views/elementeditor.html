@@ -1,18 +1,28 @@
-<h4>Preview</h4>
-<div id="EditorPreview" class="row element-editor-preview-container" style="height: 60%; width: 100%">
-  <iframe id="ElementPreviewFrame" frameborder="0"></iframe>
-</div>
-<div id="EditorCode" class="row element-editor-code-container">
-  <button ng-click="updateElement()">Update</button>
-  <tabset>
-    <tab heading="HTML">
-      <textarea class="element-editor-code-input" ng-model="currentElement.html" ui-ace="{mode: 'html'}"></textarea>
-    </tab>
-    <tab heading="CSS">
-      <textarea class="element-editor-code-input" ng-model="currentElement.css" ui-ace="{mode: 'css'}"></textarea>
-    </tab>
-    <tab heading="JS">
-      <textarea class="element-editor-code-input" ng-model="currentElement.js" ui-ace="{mode: 'javascript'}"></textarea>
-    </tab>
-  </tabset>
+<div id="ElementEditorScreen">
+  <div id="InfoRegion">
+
+  </div>
+  <div id="ContentRegion">
+    <div id="EditorPreview">
+      <h3 class="pull-right">Preview</h3>
+      <div class="preview-window">
+        <div class="resizable">
+        </div>
+      </div>
+    </div>
+    <div id="EditorCode" class="element-editor-code-container">
+      <button class="pull-right" ng-click="updateElement()">Update</button>
+      <tabset class="tab-container">
+        <tab heading="HTML">
+          <div class="element-editor-code-input" ng-model="currentElement.html" ui-ace="{mode: 'html'}"></div>
+        </tab>
+        <tab heading="CSS">
+          <div class="element-editor-code-input" ng-model="currentElement.css" ui-ace="{mode: 'css'}"></div>
+        </tab>
+        <tab heading="JS">
+          <div class="element-editor-code-input" ng-model="currentElement.js" ui-ace="{mode: 'javascript'}"></div>
+        </tab>
+      </tabset>
+    </div>
+  </div>
 </div>
