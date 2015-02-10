@@ -10,4 +10,7 @@
 angular.module('overcasterControllers')
   .controller('StartCtrl', function ($scope) {
 
+    $scope.recentSessions = [];
+    $scope.recentScenes = [];
+    $scope.recentElements = [];
   });

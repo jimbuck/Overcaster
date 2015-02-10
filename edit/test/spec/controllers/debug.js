@@ -18,4 +18,4 @@ describe('Controller: DebugCtrl', function () {
 
   // Debug tests can be written here...
 
-  });
+});

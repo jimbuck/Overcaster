@@ -16,15 +16,15 @@ describe('Controller: StartCtrl', function () {
     });
   }));
 
-  xit('should present a list of recent sessions', function () {
-
+  it('should have a list of recent sessions', function () {
+    expect(scope.recentSessions).toBeDefined();
   });
 
-  xit('should present a list of recent scenes', function(){
-
+  it('should have a list of recent scenes', function(){
+    expect(scope.recentScenes).toBeDefined();
   });
 
-  xit('should present a list of recent elements', function(){
-
+  it('should have a list of recent elements', function(){
+    expect(scope.recentElements).toBeDefined();
   });
 });

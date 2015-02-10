@@ -3,7 +3,8 @@ Overcaster
 
 [![Stories in Ready](https://badge.waffle.io/jimmyboh/overcaster.svg?label=ready&title=Ready)](http://waffle.io/jimmyboh/overcaster)
 [![Stories in In Progress](https://badge.waffle.io/jimmyboh/overcaster.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/jimmyboh/overcaster)
-[![Build Status](https://travis-ci.org/JimmyBoh/Overcaster.svg?branch=master)](https://travis-ci.org/JimmyBoh/Overcaster)
+[![Travis Build Status](https://travis-ci.org/JimmyBoh/Overcaster.svg?branch=master)](https://travis-ci.org/JimmyBoh/Overcaster)
+[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/y0dxscl12f0ripq4?svg=true)](https://ci.appveyor.com/project/JimmyBoh/overcaster)
 
 The only desktop application built to design, manage, and serve HTML5 overlays for live broadcasts!
 

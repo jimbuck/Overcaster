@@ -11,4 +11,6 @@ describe('Directive: ocSnapItem', function () {
   beforeEach(inject(function ($rootScope) {
     scope = $rootScope.$new();
   }));
+
+
 });

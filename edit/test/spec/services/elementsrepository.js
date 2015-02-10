@@ -2,21 +2,21 @@
 
 describe('Service: ElementsRepository', function () {
 
-  var ElementsRepository;
+  var ElementsRepo;
   var $scope;
 
   // load the service's module
   beforeEach(module('overcasterServices'));
 
   // instantiate service
-  beforeEach(inject(function ($rootScope, _ElementsRepository_) {
-    ElementsRepository = _ElementsRepository_;
+  beforeEach(inject(function ($rootScope, ElementsRepository) {
+    ElementsRepo = new ElementsRepository();
     $scope = $rootScope;
   }));
 
   it('should return a list of elements', function (done) {
 
-    ElementsRepository.load().then(function (elements) {
+    ElementsRepo.load().then(function (elements) {
       expect(elements.length).toBeGreaterThan(0);
       done();
     });
@@ -25,7 +25,7 @@ describe('Service: ElementsRepository', function () {
   });
 
   it('should return one element based on a string `id`', function (done) {
-    ElementsRepository.load('1').then(function (element) {
+    ElementsRepo.load('1').then(function (element) {
       expect(element).toBeDefined();
       done();
     });
@@ -34,7 +34,7 @@ describe('Service: ElementsRepository', function () {
   });
 
   it('should return one element based on a integer `id`', function (done) {
-    ElementsRepository.load(1).then(function (element) {
+    ElementsRepo.load(1).then(function (element) {
       expect(element).toBeDefined();
       done();
     });
@@ -43,7 +43,7 @@ describe('Service: ElementsRepository', function () {
   });
 
   it('should return a list of elements in use', function(done){
-    ElementsRepository.load(function(element){
+    ElementsRepo.load(function(element){
       return element.inUse;
     }).then(function (elementsInUse) {
       expect(elementsInUse.length).toBeGreaterThan(0);
@@ -60,7 +60,7 @@ describe('Service: ElementsRepository', function () {
       inUse: false
     };
 
-    ElementsRepository.save(newElement).then(function (element) {
+    ElementsRepo.save(newElement).then(function (element) {
       expect(element).toBeDefined();
       expect(element.id).toBe(5);
       done();
@@ -77,7 +77,7 @@ describe('Service: ElementsRepository', function () {
       inUse: true
     };
 
-    ElementsRepository.save(existingElement).then(function (element) {
+    ElementsRepo.save(existingElement).then(function (element) {
       expect(element).toBeDefined();
       expect(element.id).toBe(3);
       done();
@@ -94,7 +94,7 @@ describe('Service: ElementsRepository', function () {
       inUse: true
     };
 
-    ElementsRepository.save(existingElement, true).then(function(){
+    ElementsRepo.save(existingElement, true).then(function(){
       expect(false).toBe(true);
       done();
     }, function (reason) {

@@ -11,4 +11,6 @@ describe('Directive: ocSnapRegion', function () {
   beforeEach(inject(function ($rootScope) {
     scope = $rootScope.$new();
   }));
+
+
 });

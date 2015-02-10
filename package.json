@@ -20,7 +20,7 @@
     "url": "git://github.com/JimmyBoh/Overcaster.git"
   },
   "scripts": {
-    "test": "grunt test --verbose"
+    "test": "grunt test-ci --verbose"
   },
   "dependencies": {},
   "devDependencies": {

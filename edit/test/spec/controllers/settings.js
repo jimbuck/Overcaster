@@ -16,11 +16,5 @@ describe('Controller: SettingsCtrl', function () {
     });
   }));
 
-  xit('should load settings', function () {
-
-  });
-
-  xit('should reset settings to default', function(){
-
-  });
+  // Tests go here...
 });

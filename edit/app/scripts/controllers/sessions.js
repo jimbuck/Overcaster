@@ -8,7 +8,7 @@
  * Controller of the overcasterApp
  */
 angular.module('overcasterControllers')
-  .controller('SessionsCtrl', function ($scope, ocUtils) {
+  .controller('SessionsCtrl', function ($scope) {
 
     $scope.sessionColumns = 5;
 

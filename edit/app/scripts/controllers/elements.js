@@ -10,10 +10,12 @@
 angular.module('overcasterControllers')
   .controller('ElementsCtrl', function ($scope, ElementsRepository) {
 
+    var elementsRepo = new ElementsRepository();
+
     $scope.elements = [];
 
     $scope.refreshElements = function refreshElements(){
-      ElementsRepository.load().then(function (elements) {
+      elementsRepo.load().then(function (elements) {
         $scope.elements = elements;
       });
     };
