@@ -7,7 +7,7 @@
  * # NavigationCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterControllers')
+angular.module('overcasterApp')
   .controller('NavigationCtrl', function ($scope, $location) {
     //Variables
     $scope.selectedItem = null; //Holds reference to the selected Menu Item

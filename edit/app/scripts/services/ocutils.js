@@ -7,7 +7,7 @@
  * # ocUtils
  * Factory in the overcasterApp.
  */
-angular.module('overcasterServices')
+angular.module('overcasterApp')
   .factory('ocUtils', function () {
     // Service logic
 

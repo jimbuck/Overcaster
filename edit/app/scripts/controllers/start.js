@@ -7,7 +7,7 @@
  * # StartCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterControllers')
+angular.module('overcasterApp')
   .controller('StartCtrl', function ($scope) {
 
     $scope.recentSessions = [];

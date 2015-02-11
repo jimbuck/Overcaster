@@ -7,7 +7,7 @@
  * # SessionsCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterControllers')
+angular.module('overcasterApp')
   .controller('SessionsCtrl', function ($scope) {
 
     $scope.sessionColumns = 5;

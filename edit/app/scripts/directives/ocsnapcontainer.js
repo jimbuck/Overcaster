@@ -6,7 +6,7 @@
  * @description
  * # ocSnapContainer
  */
-angular.module('overcasterDirectives')
+angular.module('overcasterApp')
   .directive('ocSnapContainer', function (ocSnapDirectiveConfig, $rootScope) {
     return {
       templateUrl: 'ocSnapContainer.html',

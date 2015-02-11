@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterControllers')
+angular.module('overcasterApp')
   .controller('MainCtrl', function ($scope, $timeout, $location) {
 
 

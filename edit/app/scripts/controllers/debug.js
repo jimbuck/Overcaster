@@ -7,7 +7,7 @@
  * # DebugctrlCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterControllers')
+angular.module('overcasterApp')
   .controller('DebugCtrl', function ($scope, ocSnapDirectiveConfig, $rootScope) {
 
   });

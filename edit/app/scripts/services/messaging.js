@@ -7,7 +7,7 @@
  * # MessagingService
  * Factory in the overcasterApp.
  */
-angular.module('overcasterServices')
+angular.module('overcasterApp')
   .factory('MessagingService', function ($rootScope) {
     var statusMessage = 'Idle';
     var tooltipMessage = 'Idle';
