@@ -7,18 +7,18 @@
  * # ElementeditorCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterControllers')
-  .controller('ElementEditorCtrl', function ($scope) {
-    $scope.currentElement = {
-      id: '1',
-      name: 'Element Edit 1',
-      path: 'path/to/element',
-      html: '<button id="btnTest">Class Change!</button> <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>',
-      css: '.blue { background: blue; }',
-      js: '$(function() { $("#btnTest").click(function() { $("body").addClass("blue"); }); });'
-    };
+angular.module('overcasterApp')
+  .controller('ElementEditorCtrl', function ($scope, ElementsRepository, $routeParams) {
+    $scope.currentElement = {};
 
-    $scope.updateElement = function() {
+    var elementRepo = new ElementsRepository('');
+    elementRepo.load($routeParams.id)
+      .then(function(data) {
+        $scope.currentElement = data;
+        $scope.reloadElement();
+      });
+
+    $scope.reloadElement = function() {
       var newElement = angular.element('<iframe frameborder=0></iframe>');
       angular.element('.preview-window .resizable').html(''); //Remove existing iframe
       angular.element('.preview-window .resizable').append(newElement); //Add the new iframe
@@ -29,8 +29,17 @@ angular.module('overcasterControllers')
         .append(loadElementHead($scope.currentElement.css, $scope.currentElement.name)) //Add new head to iframe
         .append(loadElementBody($scope.currentElement.html, $scope.currentElement.js)); //add new body to html
 
-      console.log(rootHtml[0]);
       newElement.attr('srcdoc', rootHtml.appendTo('<div></div>').html());
+
+      console.log($scope.currentElement);
+    };
+
+    $scope.saveElement = function() {
+      elementRepo.save($scope.currentElement)
+        .then(function(data) {
+          $scope.currentElement = data;
+          $scope.reloadElement();
+      });
     };
 
     function loadElementBody(body, scripts) {
@@ -55,7 +64,7 @@ angular.module('overcasterControllers')
 
       var headTag = angular.element('<head></head>');
       var newMeta = angular.element('<meta/>'); //Create new Meta tag
-      var newTitle = angular.element('<title></title>>'); //Create new title tag
+      var newTitle = angular.element('<title></title>'); //Create new title tag
       var newStyle = angular.element('<style type="text/css"></style>'); //Create new style tag
 
       newMeta.attr('charset', 'UTF-8'); //Add charset attribute to meta tag
@@ -70,6 +79,4 @@ angular.module('overcasterControllers')
 
       return headTag;
     }
-
-    $scope.updateElement();
   });

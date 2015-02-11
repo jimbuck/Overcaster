@@ -1,17 +1,60 @@
 <div id="ElementEditorScreen">
   <div id="InfoRegion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 ng-bind="currentElement.name || 'Element Preview'"></h2>
+      </div>
+      <div class="panel-body">
+        <p ng-bind="currentElement.description || 'No description provided'"></p>
+      </div>
+
+      <!-- List group -->
+      <ul class="list-group">
+        <li class="list-group-item">
+          <span>Element Id: </span><span ng-bind="currentElement.id"></span>
+        </li>
+        <li class="list-group-item">
+          <span>File Path: </span><span ng-bind="currentElement.path"></span>
+        </li>
+        <li class="list-group-item">
+          <span>Date Modified: </span><span ng-bind="currentElement.dateModified"></span>
+        </li>
+        <li class="list-group-item">
+          <span>Top: </span><span ng-bind="currentElement.top"></span>
+        </li>
+        <li class="list-group-item">
+          <span>Left: </span><span ng-bind="currentElement.left"></span>
+        </li>
+        <li class="list-group-item">
+          <span>Height: </span><span ng-bind="currentElement.width"></span>
+        </li>
+        <li class="list-group-item">
+          <span>Width: </span><span ng-bind="currentElement.width"></span>
+        </li>
+        <li class="list-group-item">
+          <span>Included in: </span>
+          <ul>
+            <li ng-repeat="scene in currentElement.usedBy">
+              <a href="javascript:void(0)" ng-bind="scene"></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
 
   </div>
   <div id="ContentRegion">
     <div id="EditorPreview">
-      <h3 class="pull-right">Preview</h3>
       <div class="preview-window">
         <div class="resizable">
         </div>
       </div>
     </div>
     <div id="EditorCode" class="element-editor-code-container">
-      <button class="pull-right" ng-click="updateElement()">Update</button>
+      <div class="btn-group pull-right">
+        <button class="btn btn-primary" ng-click="reloadElement()">Refresh</button>
+        <button class="btn btn-info" ng-click="saveElement()">Save</button>
+      </div>
       <tabset class="tab-container">
         <tab heading="HTML">
           <div class="element-editor-code-input" ng-model="currentElement.html" ui-ace="{mode: 'html'}"></div>

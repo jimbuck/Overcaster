@@ -14,8 +14,14 @@ angular.module('overcasterServices')
       {
         id: 1,
         name: '2 Player Scoreboard',
+        path: 'path/to/element',
         dir: '2_player_scoreboard',
-        inUse: false
+        //inUse: false,
+        usedBy: [
+          'Scene 50',
+          'Scene 5',
+          'Scene 10'
+        ]
       },
       {
         id: 2,
@@ -70,7 +76,7 @@ angular.module('overcasterServices')
     };
 
     elementsRepo.prototype.save = function (element, throwIfExists) {
-
+    debugger;
       var deferred = $q.defer();
 
       if(element.id && _.any(elements, {id: parseInt(element.id)})){
@@ -80,7 +86,7 @@ angular.module('overcasterServices')
           return deferred.promise;
         }
 
-        this.delete(element.id).then(function () {
+        return this.delete(element.id).then(function () {
           elements.push(element);
           deferred.resolve(element);
 
