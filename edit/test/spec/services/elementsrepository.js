@@ -6,7 +6,7 @@ describe('Service: ElementsRepository', function () {
   var $scope;
 
   // load the service's module
-  beforeEach(module('overcasterServices'));
+  beforeEach(module('overcasterApp'));
 
   // instantiate service
   beforeEach(inject(function ($rootScope, ElementsRepository) {

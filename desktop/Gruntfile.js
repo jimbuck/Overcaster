@@ -3,9 +3,12 @@
 module.exports = function (grunt) {
     'use strict';
 
+    var os = require('os');
+
     // load all grunt tasks
     require('time-grunt')(grunt);
     require('load-grunt-tasks')(grunt);
+
 
     // configurable paths
     var config = {
@@ -338,6 +341,33 @@ module.exports = function (grunt) {
         });
     });
 
+    grunt.registerTask('debug', 'Starts a debug process for the current OS.', function (target) {
+
+        if (typeof target === 'undefined') {
+            switch (os.platform()) {
+                case 'linux':
+                    throw new Error('Debugging not implemented for linux... (pull requests gladly accepted!)');
+                case 'darwin':
+                    throw new Error('Debugging not implemented for mac... (pull requests gladly accepted!)');
+                case 'win32':
+                    console.log('Debugging for win...');
+                    grunt.task.run([
+                        //'jshint',
+                        'clean:distWin',
+                        'copy:copyWinToTmp',
+                        'compress:appToTmp',
+                        'rename:zipToApp',
+                        'createWindowsApp',
+                        'copy:copyTmpToWin',
+                        'shell:openWinDebug'
+                    ]);
+                    break;
+                default:
+                    throw new Error('Failed to determine which OS to build for!');
+            }
+        }
+    });
+
     grunt.registerTask('dist-linux', [
         'jshint',
         'clean:distLinux64',
@@ -360,17 +390,6 @@ module.exports = function (grunt) {
         'rename:zipToApp',
         'createWindowsApp',
         'compress:finalWindowsApp'
-    ]);
-
-    grunt.registerTask('debug-win', [
-        //'jshint',
-        'clean:distWin',
-        'copy:copyWinToTmp',
-        'compress:appToTmp',
-        'rename:zipToApp',
-        'createWindowsApp',
-        'copy:copyTmpToWin',
-        'shell:openWinDebug'
     ]);
 
     grunt.registerTask('dist-mac', [

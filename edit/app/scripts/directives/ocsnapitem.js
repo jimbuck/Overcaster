@@ -6,7 +6,7 @@
  * @description
  * # ocSnapItem
  */
-angular.module('overcasterDirectives')
+angular.module('overcasterApp')
   .directive('ocSnapItem', function (ocSnapDirectiveConfig) {
     return {
       templateUrl: 'ocSnapItem.html',

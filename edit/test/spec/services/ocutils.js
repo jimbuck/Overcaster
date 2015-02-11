@@ -3,7 +3,7 @@
 describe('Service: ocUtils', function () {
 
   // load the service's module
-  beforeEach(module('overcasterServices'));
+  beforeEach(module('overcasterApp'));
 
   // instantiate service
   var ocUtils;
@@ -12,7 +12,7 @@ describe('Service: ocUtils', function () {
   }));
 
   xit('should do something', function () {
-    expect(!!ocUtils).toBe(true);
+    expect(ocUtils).toBeDefined();
   });
 
 });

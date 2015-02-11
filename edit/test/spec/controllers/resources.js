@@ -3,7 +3,7 @@
 describe('Controller: ResourcesCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('overcasterControllers'));
+  beforeEach(module('overcasterApp'));
 
   var ResourcesCtrl,
     scope;

@@ -3,6 +3,7 @@
 
 var fs = require('fs');
 var path = require('path');
+var cp = require('child_process');
 
 global.NodeWebkit = require('nw.gui');
 global.Path = require('path');
@@ -14,7 +15,7 @@ global.Overcaster = {};
 global.settings = require('./utils/settings-helper');
 
 var expressPort = 9000;
-var serverPath = './server/server.js';
+var serverPath = path.join(process.cwd(), './server/server.js');
 
 global.settings.load(function (err, data) {
     if (err) {
@@ -41,13 +42,16 @@ function initGlobalVars(oc, nw) {
     }
 
     oc.Debug = !!~oc.Args.indexOf('--debug');
+
+    //oc.Window.showDevTools();
+    //alert('Close this dialog when dev tools has loaded...');
 }
 
 function initWindow(oc) {
 
     oc.Window.maximize();
 
-    if (oc.Debug || true) {
+    if (oc.Debug) {
         oc.Window.showDevTools();
     }
 
@@ -77,21 +81,36 @@ function initExpressServer(oc) {
         return;
     }
 
-    if (!fs.existsSync(serverPath)) {
+    if (!fs.existsSync(serverPath))  {
         alert('Unable to find internal server files!');
         return;
     }
 
-    var fork = require('child_process').fork;
-    global.Express = fork(serverPath, [expressPort], {silent: true});
+    var command = ['node', serverPath, expressPort, (oc.Debug ? 'debug' : '')].join(' ');
+    console.log('EXECUTING: "' + command + '"');
+    global.Express = cp.exec(command);
 
-    //alert(fs.existsSync(serverPath) ? 'Server is found!' : 'Where is the server???')
+    //global.Express = cp.fork(serverPath, [expressPort, (oc.Debug ? 'debug' : '')]);
 
-    (function (e, c) {
-        e.on('exit', function (code) {
-            c.log('[EXPRESS]: Exited with code ' + code);
-        });
-    })(global.Express, console);
+    global.Express.on('error', function (err) {
+        console.err('[EXPRESS]: |err| ' + err);
+    });
+
+    global.Express.on('exit', function (code) {
+        console.warn('[EXPRESS]: Exited with code ' + code);
+    });
+
+    global.Express.on('close', function (code, signal) {
+        console.warn('[EXPRESS]: Closed with code ' + code + ' and signal ' + signal);
+    });
+
+    global.Express.on('message', function (msg) {
+        console.log('[EXPRESS]: (msg) ' + msg);
+    });
+
+    global.Express.on('disconnect', function () {
+        console.warn('[EXPRESS]: |msg| Disconnected!');
+    });
 
     return;
 }
@@ -102,5 +121,9 @@ function initOvercaster(oc, nw) {
     initWindow(oc, nw);
     initExpressServer(oc, nw);
 
-    window.location.href = 'http://localhost:' + expressPort + '/';
+    var dest = 'http://localhost:' + expressPort + '/';
+
+    if(true || confirm('Continue to ' + dest + '?')) {
+        window.location.href = dest;
+    }
 }

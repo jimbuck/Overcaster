@@ -69,22 +69,6 @@ module.exports = function (grunt) {
       }
     },
     shell: {
-      gruntEditCheck: {
-        command: 'grunt check',
-        options: {
-          execOptions: {
-            cwd: '<%= config.edit %>'
-          }
-        }
-      },
-      gruntEditBuild: {
-        command: 'grunt build',
-        options: {
-          execOptions: {
-            cwd: '<%= config.edit %>'
-          }
-        }
-      },
       bowerEditInstall: {
         command: 'bower install',
         options: {
@@ -102,57 +86,17 @@ module.exports = function (grunt) {
             maxBuffer: 1024 * 1024 * 64
           }
         }
-      },
-      gruntCastCheck: {
-        command: 'grunt check',
-        options: {
-          execOptions: {
-            cwd: '<%= config.cast %>'
-          }
-        }
-      },
-      gruntCastBuild: {
-        command: 'grunt build',
-        options: {
-          execOptions: {
-            cwd: '<%= config.cast %>'
-          }
-        }
-      },
-      gruntServerCheck: {
-        command: 'grunt check',
-        options: {
-          execOptions: {
-            cwd: '<%= config.server %>'
-          }
-        }
-      },
-      gruntServerDebug: {
-        command: 'grunt debug-server',
-        options: {
-          execOptions: {
-            cwd: '<%= config.server %>'
-          }
-        }
-      },
-      gruntDesktopCheck: {
-        command: 'grunt check',
-        options: {
-          execOptions: {
-            cwd: '<%= config.desktop %>'
-          }
-        }
-      },
-      gruntDesktopDebugWin: {
-        command: 'grunt debug-win',
-        options: {
-          execOptions: {
-            cwd: '<%= config.desktop %>'
-          }
-        }
       }
     },
     grunt: {
+      'server-debug':{
+        gruntfile: '<%= config.server %>/Gruntfile.js',
+        task:'debug'
+      },
+      'desktop-debug': {
+        gruntfile: '<%= config.desktop %>/Gruntfile.js',
+        task: 'debug'
+      },
       'edit-test-ci': {
         gruntfile: '<%= config.edit %>/Gruntfile.js',
         task: 'test-ci'
@@ -179,7 +123,7 @@ module.exports = function (grunt) {
       }
     },
     concurrent: {
-      debug: ['shell:gruntServerDebug', 'shell:gruntDesktopDebugWin'],
+      debug: ['grunt:server-debug', 'grunt:desktop-debug'],
       prepEdit: ['shell:npmEditInstall', 'shell:bowerEditInstall']
     }
   });
@@ -217,7 +161,7 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('debug-win', [
+  grunt.registerTask('debug', [
     'concurrent:debug'
   ]);
 
@@ -232,12 +176,5 @@ module.exports = function (grunt) {
     'shell:npmEditInstall',
     'shell:bowerEditInstall',
     'grunt:edit-test-ci'
-  ]);
-
-  grunt.registerTask('check', [
-    'shell:gruntEditCheck',
-    'shell:gruntCastCheck',
-    'shell:gruntServerCheck',
-    'shell:gruntDesktopCheck'
   ]);
 };

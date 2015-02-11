@@ -7,7 +7,7 @@
  * # ResourcesCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterControllers')
+angular.module('overcasterApp')
   .controller('ResourcesCtrl', function ($scope) {
 
   });

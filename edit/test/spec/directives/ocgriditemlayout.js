@@ -3,7 +3,7 @@
 describe('Directive: ocTileLayout', function () {
 
   // load the directive's module
-  beforeEach(module('overcasterDirectives'));
+  beforeEach(module('overcasterApp'));
 
   var scope;
 
