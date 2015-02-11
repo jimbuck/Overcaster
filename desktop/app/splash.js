@@ -2,128 +2,97 @@
 'use strict';
 
 var fs = require('fs');
-var path = require('path');
 var cp = require('child_process');
 
 global.NodeWebkit = require('nw.gui');
-global.Path = require('path');
 
-global.__dirname = path.dirname(process.execPath).replace(/\\/gi, '/');
+var expressPort = require('./utils/settings-helper').getPort();
+var serverPath = './server/server.js';
 
-global.Overcaster = {};
+initGlobalVars();
+initWindow();
+initExpressServer();
+startApp();
 
-global.settings = require('./utils/settings-helper');
+function startApp() {
+  if (global.Debug) {
+    expressPort = 9000;
+  }
 
-var expressPort = 9000;
-var serverPath = path.join(process.cwd(), './server/server.js');
-
-global.settings.load(function (err, data) {
-    if (err) {
-        console.error('Failed to load settings: ' + err);
-    } else {
-        expressPort = data.port;
-    }
-
-    initOvercaster(global.Overcaster, global.NodeWebkit);
-});
-
-function initGlobalVars(oc, nw) {
-
-    if (!oc.Core) {
-        oc.Core = nw.App;
-    }
-
-    if (!oc.Args) {
-        oc.Args = oc.Core.argv;
-    }
-
-    if (!oc.Window) {
-        oc.Window = nw.Window.get();
-    }
-
-    oc.Debug = !!~oc.Args.indexOf('--debug');
-
-    //oc.Window.showDevTools();
-    //alert('Close this dialog when dev tools has loaded...');
+  window.location.href = 'http://localhost:' + expressPort + '/';
 }
 
-function initWindow(oc) {
+function initGlobalVars() {
 
-    oc.Window.maximize();
+  global.App = global.NodeWebkit.App;
+  global.Args = global.NodeWebkit.App.argv;
+  global.Win = global.NodeWebkit.Window.get();
 
-    if (oc.Debug) {
-        oc.Window.showDevTools();
-    }
-
-    global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
-        key: 'F11',
-        active: function () {
-            global.Overcaster.Window.toggleFullscreen();
-        },
-        failed: function (msg) {
-            console.log(msg);
-        }
-    }));
-
-    global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
-        key: 'Ctrl+Shift+I',
-        active: function () {
-            global.Overcaster.Window.showDevTools();
-        },
-        failed: function (msg) {
-            console.log(msg);
-        }
-    }));
+  global.Debug = !!~global.Args.indexOf('--debug');
 }
 
-function initExpressServer(oc) {
-    if (oc.Debug) {
-        return;
+function initWindow() {
+
+  global.Win.maximize();
+
+  global.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
+    key: 'F11',
+    active: function () {
+      global.Win.toggleFullscreen();
+    },
+    failed: function (msg) {
+      console.log(msg);
     }
+  }));
 
-    if (!fs.existsSync(serverPath))  {
-        alert('Unable to find internal server files!');
-        return;
-    }
+  if (global.Debug) {
+    global.Win.showDevTools();
 
-    var command = ['node', serverPath, expressPort, (oc.Debug ? 'debug' : '')].join(' ');
-    console.log('EXECUTING: "' + command + '"');
-    global.Express = cp.exec(command);
+    global.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
+      key: 'Ctrl+Shift+I',
+      active: function () {
+        global.Win.showDevTools();
+      },
+      failed: function (msg) {
+        console.log(msg);
+      }
+    }));
+  }
+}
 
-    //global.Express = cp.fork(serverPath, [expressPort, (oc.Debug ? 'debug' : '')]);
-
-    global.Express.on('error', function (err) {
-        console.err('[EXPRESS]: |err| ' + err);
-    });
-
-    global.Express.on('exit', function (code) {
-        console.warn('[EXPRESS]: Exited with code ' + code);
-    });
-
-    global.Express.on('close', function (code, signal) {
-        console.warn('[EXPRESS]: Closed with code ' + code + ' and signal ' + signal);
-    });
-
-    global.Express.on('message', function (msg) {
-        console.log('[EXPRESS]: (msg) ' + msg);
-    });
-
-    global.Express.on('disconnect', function () {
-        console.warn('[EXPRESS]: |msg| Disconnected!');
-    });
-
+function initExpressServer() {
+  if (global.Debug) {
     return;
-}
+  }
 
-function initOvercaster(oc, nw) {
+  if (!fs.existsSync(serverPath)) {
+    alert('Unable to find internal server files!');
+    return;
+  }
 
-    initGlobalVars(oc, nw);
-    initWindow(oc, nw);
-    initExpressServer(oc, nw);
+  var command = ['node', serverPath, expressPort, (oc.Debug ? 'debug' : '')].join(' ');
+  console.log('EXECUTING: "' + command + '"');
+  global.Express = cp.exec(command);
 
-    var dest = 'http://localhost:' + expressPort + '/';
+  //global.Express = cp.fork(serverPath, [expressPort, (oc.Debug ? 'debug' : '')]);
 
-    if(true || confirm('Continue to ' + dest + '?')) {
-        window.location.href = dest;
-    }
+  global.Express.on('error', function (err) {
+    console.err('[EXPRESS]: |err| ' + err);
+  });
+
+  global.Express.on('exit', function (code) {
+    console.warn('[EXPRESS]: Exited with code ' + code);
+  });
+
+  global.Express.on('close', function (code, signal) {
+    console.warn('[EXPRESS]: Closed with code ' + code + ' and signal ' + signal);
+  });
+
+  global.Express.on('message', function (msg) {
+    console.log('[EXPRESS]: (msg) ' + msg);
+  });
+
+  global.Express.on('disconnect', function () {
+    console.warn('[EXPRESS]: |msg| Disconnected!');
+  });
 }
