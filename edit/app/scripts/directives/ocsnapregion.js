@@ -6,7 +6,7 @@
  * @description
  * # ocSnapRegion
  */
-angular.module('overcasterDirectives')
+angular.module('overcasterApp')
   .directive('ocSnapRegion', function () {
     return {
       templateUrl: 'ocSnapRegion.html',

@@ -9,7 +9,7 @@ var path = require('path');
  * # Settings
  * Factory in the overcasterApp.
  */
-angular.module('overcasterServices')
+angular.module('overcasterApp')
   .factory('Settings', function (JsonDataStore) {
 
     var options = {
@@ -36,7 +36,7 @@ angular.module('overcasterServices')
 
     Settings.prototype.delete = function(key) {
       return this.dataStore.delete(key);
-    }
+    };
 
     return new Settings();
   });

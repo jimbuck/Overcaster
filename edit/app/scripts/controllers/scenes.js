@@ -7,7 +7,7 @@
  * # ScenesCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterControllers')
+angular.module('overcasterApp')
   .controller('ScenesCtrl', function ($scope) {
     $scope.scenes = [{
       id: 1,

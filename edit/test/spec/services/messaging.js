@@ -3,7 +3,7 @@
 describe('Service: MessagingService', function () {
 
   // load the service's module
-  beforeEach(module('overcasterServices'));
+  beforeEach(module('overcasterApp'));
 
   // instantiate service
   var MessagingService;

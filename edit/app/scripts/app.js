@@ -17,7 +17,6 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'overcasterControllers',
     'ui.bootstrap',
     'ui.ace'
   ])
@@ -60,7 +59,7 @@ angular
       }
     );
 
-    if (typeof global !== 'undefined' && global.Debug) {
+    if (typeof global !== 'undefined' && typeof global.Overcaster !== 'undefined' && global.Overcaster.Debug) {
       $routeProvider.when('/debug', {
         templateUrl: 'views/debug.html',
         controller: 'DebugCtrl'

@@ -11,7 +11,7 @@ var mkdirp = require('mkdirp');
  * # JsonDataStore
  * Factory in the overcasterServices.
  */
-angular.module('overcasterServices')
+angular.module('overcasterApp')
   .factory('JsonDataStore', function () {
 
     var readWriteOptions = {

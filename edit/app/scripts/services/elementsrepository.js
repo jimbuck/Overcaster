@@ -7,7 +7,7 @@
  * # ElementsService
  * Provides access to Elements in the overcasterApp.
  */
-angular.module('overcasterServices')
+angular.module('overcasterApp')
   .factory('ElementsRepository', function ($q, Settings) {
 
     var elements = [

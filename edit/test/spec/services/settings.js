@@ -9,7 +9,7 @@ if (typeof global.appData === 'undefined') {
 describe('Service: Settings', function () {
 
   // load the service's module
-  beforeEach(module('overcasterServices'));
+  beforeEach(module('overcasterApp'));
 
   // instantiate service
   var Settings;

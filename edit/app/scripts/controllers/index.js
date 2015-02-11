@@ -7,7 +7,7 @@
  * # IndexCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterControllers')
+angular.module('overcasterApp')
   .controller('IndexCtrl', function ($scope, MessagingService) {
     MessagingService.subscribe($scope);
 

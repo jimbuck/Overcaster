@@ -7,7 +7,7 @@
  * # ElementeditorCtrl
  * Controller of the overcasterApp
  */
-angular.module('overcasterControllers')
+angular.module('overcasterApp')
   .controller('ElementEditorCtrl', function ($scope) {
     $scope.currentElement = {
       id: '1',

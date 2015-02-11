@@ -6,7 +6,7 @@
  * @description
  * # ocTileLayout
  */
-angular.module('overcasterDirectives')
+angular.module('overcasterApp')
   .value('ocTileLayoutConfig', {
     tileItemClassName: 'tile-item',
     minColumns: 1,

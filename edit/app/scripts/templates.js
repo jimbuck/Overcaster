@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('overcasterDirectives')
+angular.module('overcasterApp')
   .run(function($templateCache) {
     //ocSnapRegion.html
     $templateCache.put('ocSnapRegion.html', '<div ng-transclude></div>');

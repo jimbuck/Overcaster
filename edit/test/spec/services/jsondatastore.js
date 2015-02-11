@@ -7,7 +7,7 @@ describe('Service: JsonDataStore', function () {
   var testFilename = './test.json';
 
   // load the service's module
-  beforeEach(module('overcasterServices'));
+  beforeEach(module('overcasterApp'));
 
   // instantiate service
   var JsonDataStore;

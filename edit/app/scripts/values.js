@@ -1,25 +1,3 @@
-/**
- * @ngdoc overview
- * @name overcasterControllers
- * @description
- * # overcasterControllers
- *
- * Controllers used in the application.
- */
-angular.module('overcasterControllers', [
-  'overcasterServices',
-  'overcasterDirectives'
-]);
-
-/**
- * @ngdoc overview
- * @name overcasterServices
- * @description
- * # overcasterServices
- *
- * Services used in the application.
- */
-angular.module('overcasterServices', []);
 
 /**
  * @ngdoc overview
@@ -29,7 +7,7 @@ angular.module('overcasterServices', []);
  *
  * Custom directives built for the application.
  */
-angular.module('overcasterDirectives', [])
+angular.module('overcasterApp')
   .value('ocTabsConfig', {
     tabContainerClass: 'oc-tab-container',
     tabBarClass: 'oc-tab-bar',

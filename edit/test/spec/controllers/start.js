@@ -3,7 +3,7 @@
 describe('Controller: StartCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('overcasterControllers'));
+  beforeEach(module('overcasterApp'));
 
   var StartCtrl,
     scope;
