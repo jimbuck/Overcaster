@@ -17,7 +17,9 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'overcasterControllers'
+    'overcasterControllers',
+    'ui.bootstrap',
+    'ui.ace'
   ])
   .config(function ($locationProvider, $routeProvider) {
 
@@ -47,6 +49,10 @@ angular
       .when('/sessions/:id?', {
         templateUrl: 'views/sessions.html',
         controller: 'SessionsCtrl'
+      })
+      .when('/elements/edit/:id?', {
+        templateUrl: 'views/elementeditor.html',
+        controller: 'ElementEditorCtrl'
       })
       .when('/elements/:id?', {
         templateUrl: 'views/elements.html',

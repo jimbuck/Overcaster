@@ -3,7 +3,7 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var args = process.argv;
+var args = process.argv.slice(2);
 
 var favicon = require('serve-favicon');
 var serveStatic = require('serve-static');
@@ -15,16 +15,42 @@ var errorHandler = require('errorhandler');
  * Express Web Server
  */
 
-var startExpress = function (port, editLocation, castLocation) {
+function print(message) {
+  console.log('[EXPRESS]: ' + message);
 
-  editLocation = path.join(__dirname, '../edit/app');
-  castLocation = path.join(__dirname, '../cast');
+  if(typeof process.send === 'function') {
+    process.send(message);
+  }
 
-  var isDebug = (typeof editLocation !== 'undefined' && typeof castLocation !== 'undefined');
+  if(typeof alert !== 'undefined'){
+    alert(message);
+  }
+}
+
+var startExpress = function (port, isDebug) {
+
+  var editLocation;
+  var castLocation;
+
+  if(isDebug) {
+    print('SERVER STARTED IN DEBUG MODE');
+    editLocation = path.join(__dirname, '../edit/app');
+    castLocation = path.join(__dirname, '../cast');
+  } else {
+    editLocation = path.join(__dirname, '/public/edit');
+    castLocation = path.join(__dirname, '/public/cast');
+  }
 
   port = port || 9000;
 
+  print('Starting ...');
+  print('Port: ' + port);
+  print('Edit: ' + editLocation);
+  print('Cast: ' + castLocation);
+
   var app = express();
+
+  print(45);
 
   // all environments
   app.use(morgan('tiny'));
@@ -33,34 +59,43 @@ var startExpress = function (port, editLocation, castLocation) {
   app.use(bodyParser.urlencoded({extended: false}));
 
   if (isDebug) {
-    app.use(favicon(path.join(editLocation, '/favicon.ico')));
-    app.use('/', serveStatic(editLocation));
+    print('SETTING DEBUG PATHS!');
+    //app.use(favicon(path.join(editLocation, '/favicon.ico')));
     app.use('/bower_components', serveStatic(path.join(editLocation, '../bower_components')));
-    app.use('/cast', serveStatic(castLocation));
   } else {
     //app.use(favicon(path.join(__dirname, '/favicon.ico')));
-    app.use('/', serveStatic(path.join(__dirname, 'public')));
   }
+
+  print(60);
+
+  app.use('/', serveStatic(editLocation));
+  app.use('/cast', serveStatic(castLocation));
 
   // development only
   if (app.get('env') === 'development') {
     app.use(errorHandler());
   }
 
+  print(70);
+
   require('./routes')(app, editLocation, castLocation);
 
   http.createServer(app).listen(app.get('port'), function () {
-    console.log('Express server listening on port ' + app.get('port'));
+    print('Express server listening on port ' + app.get('port'));
   });
 
-  return app;
+  print(78);
 
+  return app;
 };
 
-
 if (require.main === module) { // started via command line...
-  module.exports = startExpress(args[2]);
+  print(84);
+  module.exports = startExpress.apply({}, args);
+  print(86);
 } else { // started via require...
+  print(88);
   module.exports = startExpress;
+  print(90);
 }
 

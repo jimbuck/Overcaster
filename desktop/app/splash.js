@@ -3,87 +3,127 @@
 
 var fs = require('fs');
 var path = require('path');
+var cp = require('child_process');
 
 global.NodeWebkit = require('nw.gui');
+global.Path = require('path');
 
-var expressPort = require('./utils/settings-helper').getPort();
-var serverPath = './server/server.js';
+global.__dirname = path.dirname(process.execPath).replace(/\\/gi, '/');
 
-initGlobalVars();
-initWindow();
-initExpressServer();
-startApp();
+global.Overcaster = {};
 
-function startApp(){
-  if(global.Debug)
-  {
-    expressPort = 9000;
-  }
+global.settings = require('./utils/settings-helper');
 
-  window.location.href = 'http://localhost:' + expressPort + '/';
-}
+var expressPort = 9000;
+var serverPath = path.join(process.cwd(), './server/server.js');
 
-function initGlobalVars() {
-
-  global.App = global.NodeWebkit.App;
-  global.Args = global.NodeWebkit.App.argv;
-  global.Win = global.NodeWebkit.Window.get();
-
-  global.Debug = !!~global.Args.indexOf('--debug');
-}
-
-function initWindow() {
-
-  global.Win.maximize();
-
-  global.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
-    key: 'F11',
-    active: function () {
-      global.Win.toggleFullscreen();
-    },
-    failed: function (msg) {
-      console.log(msg);
+global.settings.load(function (err, data) {
+    if (err) {
+        console.error('Failed to load settings: ' + err);
+    } else {
+        expressPort = data.port;
     }
-  }));
 
-  if (global.Debug) {
-    global.Win.showDevTools();
+    initOvercaster(global.Overcaster, global.NodeWebkit);
+});
 
-    global.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
-      key: 'Ctrl+Shift+I',
-      active: function () {
-        global.Win.showDevTools();
-      },
-      failed: function (msg) {
-        console.log(msg);
-      }
-    }));
-  }
+function initGlobalVars(oc, nw) {
+
+    if (!oc.Core) {
+        oc.Core = nw.App;
+    }
+
+    if (!oc.Args) {
+        oc.Args = oc.Core.argv;
+    }
+
+    if (!oc.Window) {
+        oc.Window = nw.Window.get();
+    }
+
+    oc.Debug = !!~oc.Args.indexOf('--debug');
+
+    //oc.Window.showDevTools();
+    //alert('Close this dialog when dev tools has loaded...');
 }
 
-function initExpressServer() {
-  if (global.Debug) {
-    return;
-  }
+function initWindow(oc) {
 
-  if (!fs.existsSync(serverPath)) {
-    console.log('Unable to find internal server files!');
-    return;
-  }
+    oc.Window.maximize();
 
-  var spawn = require('child_process').fork;
-  global.Express = spawn('node', [serverPath, expressPort]);
+    if (oc.Debug) {
+        oc.Window.showDevTools();
+    }
 
-  (function (e, c) {
-    e.stdout.on('data', function (data) {
-      c.log('[EXPRESS]:', data);
+    global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
+        key: 'F11',
+        active: function () {
+            global.Overcaster.Window.toggleFullscreen();
+        },
+        failed: function (msg) {
+            console.log(msg);
+        }
+    }));
+
+    global.NodeWebkit.App.registerGlobalHotKey(new global.NodeWebkit.Shortcut({
+        key: 'Ctrl+Shift+I',
+        active: function () {
+            global.Overcaster.Window.showDevTools();
+        },
+        failed: function (msg) {
+            console.log(msg);
+        }
+    }));
+}
+
+function initExpressServer(oc) {
+    if (oc.Debug) {
+        return;
+    }
+
+    if (!fs.existsSync(serverPath))  {
+        alert('Unable to find internal server files!');
+        return;
+    }
+
+    var command = ['node', serverPath, expressPort, (oc.Debug ? 'debug' : '')].join(' ');
+    console.log('EXECUTING: "' + command + '"');
+    global.Express = cp.exec(command);
+
+    //global.Express = cp.fork(serverPath, [expressPort, (oc.Debug ? 'debug' : '')]);
+
+    global.Express.on('error', function (err) {
+        console.err('[EXPRESS]: |err| ' + err);
     });
 
-    e.on('exit', function (code) {
-      c.log('[EXPRESS]: Exited with code ' + code);
+    global.Express.on('exit', function (code) {
+        console.warn('[EXPRESS]: Exited with code ' + code);
     });
 
-  })(global.Express, console);
+    global.Express.on('close', function (code, signal) {
+        console.warn('[EXPRESS]: Closed with code ' + code + ' and signal ' + signal);
+    });
 
-  return;
+    global.Express.on('message', function (msg) {
+        console.log('[EXPRESS]: (msg) ' + msg);
+    });
+
+    global.Express.on('disconnect', function () {
+        console.warn('[EXPRESS]: |msg| Disconnected!');
+    });
+
+    return;
+}
+
+function initOvercaster(oc, nw) {
+
+    initGlobalVars(oc, nw);
+    initWindow(oc, nw);
+    initExpressServer(oc, nw);
+
+    var dest = 'http://localhost:' + expressPort + '/';
+
+    if(true || confirm('Continue to ' + dest + '?')) {
+        window.location.href = dest;
+    }
 }

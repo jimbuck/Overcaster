@@ -1,11 +1,23 @@
 # Test against this version of Node.js
 environment:
-  nodejs_version: "0.10"
+  matrix:
+  - nodejs_version: "0.11"
+  - nodejs_version: "1.0" # io.js
+
+platform:
+  - x86
+  - x64
+
+init:
+  - git config --global core.autocrlf true
 
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of Node.js or io.js
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
+  # Update npm to the latest possible version https://github.com/appveyor/ci/issues/102#issuecomment-69798303
+  - npm -g install npm
+  - set PATH=%APPDATA%\npm;%PATH%
   # install modules
   - npm install -g grunt-cli bower
   - npm install

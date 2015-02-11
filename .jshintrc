@@ -18,5 +18,10 @@
     "trailing": true,
     "smarttabs": true,
     "white": false,
-    "loopfunc": true
+    "loopfunc": true,
+    "globals": {
+      "alert": true,
+      "global": true,
+      "window": true
+    }
 }

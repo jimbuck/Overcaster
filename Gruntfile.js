@@ -3,6 +3,8 @@
 module.exports = function (grunt) {
   'use strict';
 
+  var os = require('os');
+
   // load all grunt tasks
   require('time-grunt')(grunt);
   require('load-grunt-tasks')(grunt);
@@ -22,8 +24,10 @@ module.exports = function (grunt) {
   grunt.initConfig({
     config: config,
     clean: {
-      dist: ['<%= config.dist %>/**/*', '<%= config.tmp %>/**/*'],
-      tmp: ['<%= config.tmp %>/**/*']
+      dist: [
+        '<%= config.dist %>/**',
+        '<%= config.tmp %>/**'
+      ]
     },
     wait: {
       pause: {
@@ -35,28 +39,36 @@ module.exports = function (grunt) {
     copy: {
       desktopToTmp: {
         cwd: '<%= config.desktop %>/',
-        src: ['**/'],
-        dest: '<%= config.tmp %>',
+        src: ['**'],
+        dest: '<%= config.tmp %>/',
+        expand: true
+      },
+       serverToTmp: {
+        cwd: '<%= config.server %>/',
+        src: ['server.js', 'routes.js', 'node_modules/**', 'public/**'],
+        dest: '<%= config.tmp %>/app/server',
+        expand: true
+      },
+      editToTmp:{
+        cwd: '<%= config.edit %>/dist/',
+        src: ['./**'],
+        dest: '<%= config.tmp %>/app/server/public/edit/',
+        expand: true
+      },
+      castToTmp: {
+        cwd: '<%= config.cast %>/',
+        src: ['app.css', 'app.js', 'index.html'],
+        dest: '<%= config.tmp %>/app/server/public/cast',
+        expand: true
+      },
+      tmpToDist: {
+        cwd: '<%= config.tmp %>/dist',
+        src: ['**'],
+        dest: '<%= config.dist %>/',
         expand: true
       }
     },
     shell: {
-      gruntEditCheck: {
-        command: 'grunt check',
-        options: {
-          execOptions: {
-            cwd: '<%= config.edit %>'
-          }
-        }
-      },
-      gruntEditBuild: {
-        command: 'grunt build',
-        options: {
-          execOptions: {
-            cwd: '<%= config.edit %>'
-          }
-        }
-      },
       bowerEditInstall: {
         command: 'bower install',
         options: {
@@ -74,73 +86,50 @@ module.exports = function (grunt) {
             maxBuffer: 1024 * 1024 * 64
           }
         }
-      },
-      gruntCastCheck: {
-        command: 'grunt check',
-        options: {
-          execOptions: {
-            cwd: '<%= config.cast %>'
-          }
-        }
-      },
-      gruntCastBuild: {
-        command: 'grunt build',
-        options: {
-          execOptions: {
-            cwd: '<%= config.cast %>'
-          }
-        }
-      },
-      gruntServerCheck: {
-        command: 'grunt check',
-        options: {
-          execOptions: {
-            cwd: '<%= config.server %>'
-          }
-        }
-      },
-      gruntServerDebug: {
-        command: 'grunt debug-server',
-        options: {
-          execOptions: {
-            cwd: '<%= config.server %>'
-          }
-        }
-      },
-      gruntDesktopCheck: {
-        command: 'grunt check',
-        options: {
-          execOptions: {
-            cwd: '<%= config.desktop %>'
-          }
-        }
-      },
-      gruntDesktopDebugWin: {
-        command: 'grunt debug-win',
-        options: {
-          execOptions: {
-            cwd: '<%= config.desktop %>'
-          }
-        }
       }
     },
     grunt: {
+      'server-debug':{
+        gruntfile: '<%= config.server %>/Gruntfile.js',
+        task:'debug'
+      },
+      'desktop-debug': {
+        gruntfile: '<%= config.desktop %>/Gruntfile.js',
+        task: 'debug'
+      },
       'edit-test-ci': {
-        gruntfile: 'edit/Gruntfile.js',
+        gruntfile: '<%= config.edit %>/Gruntfile.js',
         task: 'test-ci'
       },
       'edit-test':{
-        gruntfile: 'edit/Gruntfile.js',
+        gruntfile: '<%= config.edit %>/Gruntfile.js',
         task: 'test'
+      },
+      'edit-build': {
+        gruntfile: '<%= config.edit %>/Gruntfile.js',
+        task: 'build'
+      },
+       'tmp-dist-win': {
+        gruntfile: '<%= config.tmp %>/Gruntfile.js',
+        task: 'dist-win'
+      },
+      'tmp-dist-mac32': {
+        gruntfile: '<%= config.tmp %>/Gruntfile.js',
+        task: 'dist-mac32'
+      },
+      'tmp-dist-linux32': {
+        gruntfile: '<%= config.tmp %>/Gruntfile.js',
+        task: 'dist-linux32'
       }
     },
     concurrent: {
-      debug: ['shell:gruntServerDebug', 'shell:gruntDesktopDebugWin'],
+      debug: ['grunt:server-debug', 'grunt:desktop-debug'],
       prepEdit: ['shell:npmEditInstall', 'shell:bowerEditInstall']
     }
   });
 
-  grunt.registerTask('build', 'Builds the correct version based on current OS', function (target) {
+  grunt.registerTask('build', 'Builds the specified or current OS.', function (target) {
+
     if (typeof target === 'undefined') {
       switch (os.platform()) {
         case 'linux':
@@ -157,28 +146,22 @@ module.exports = function (grunt) {
       }
     }
 
+    console.log('Building for ' + target + '...');
+
     grunt.task.run([
-      // Clean dist
-      // Build edit
-      // Build cast
-      // Copy desktop to tmp
-      // Copy edit to tmp
-      // Copy cast to tmp
-      // Build desktop from tmp
+      'clean:dist',
+      'grunt:edit-build',
+      // build cast
+      'copy:desktopToTmp',
+      'copy:serverToTmp',
+      'copy:editToTmp',
+      'copy:castToTmp',
+      'grunt:tmp-dist-'+target,
+      'copy:tmpToDist'
     ]);
   });
 
-  // Register Tasks for each platform...
-  for (var p in platforms) {
-    var os = platforms[p];
-    grunt.registerTask('dist-' + os, [
-      'clean:dist',
-      'nodewebkit:' + os,
-      'fixDist'
-    ]);
-  }
-
-  grunt.registerTask('debug-win', [
+  grunt.registerTask('debug', [
     'concurrent:debug'
   ]);
 
@@ -193,12 +176,5 @@ module.exports = function (grunt) {
     'shell:npmEditInstall',
     'shell:bowerEditInstall',
     'grunt:edit-test-ci'
-  ]);
-
-  grunt.registerTask('check', [
-    'shell:gruntEditCheck',
-    'shell:gruntCastCheck',
-    'shell:gruntServerCheck',
-    'shell:gruntDesktopCheck'
   ]);
 };
