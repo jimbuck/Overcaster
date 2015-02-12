@@ -19,6 +19,7 @@ install:
   - npm install
 
 notifications:
+  email: false # disable the 8 billion email notifications...
   webhooks:
     urls:
       - https://webhooks.gitter.im/e/34bfcbb0206dacec394c
