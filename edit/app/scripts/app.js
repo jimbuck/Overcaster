@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var app = angular
   .module('overcasterApp', [
     'ngAnimate',
     'ngCookies',
@@ -19,8 +19,21 @@ angular
     'ngTouch',
     'ui.bootstrap',
     'ui.ace'
-  ])
-  .config(function ($locationProvider, $routeProvider) {
+  ]);
+
+    app.constant('path', require('path'));
+
+    app.constant('fs', require('fs'));
+
+    app.constant('mkdirp', require('mkdirp'));
+
+    // Require lodash (underscore).
+    app.constant('_', _);
+
+    // Require jQuery.
+    app.constant('$', $);
+
+  app.config(function ($locationProvider, $routeProvider) {
 
     $locationProvider.html5Mode(true);
 

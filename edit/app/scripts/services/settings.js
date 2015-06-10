@@ -1,7 +1,5 @@
 'use strict';
 
-var path = require('path');
-
 /**
  * @ngdoc service
  * @name overcasterApp.Settings
@@ -10,7 +8,7 @@ var path = require('path');
  * Factory in the overcasterApp.
  */
 angular.module('overcasterApp')
-  .factory('Settings', function (JsonDataStore) {
+  .factory('Settings', function (path, JsonRepository) {
 
     var options = {
       path: path.join(global.appData, 'settings.json'),
@@ -22,21 +20,5 @@ angular.module('overcasterApp')
       }
     };
 
-    var Settings = function(){
-      this.dataStore = new JsonDataStore(options);
-    };
-
-    Settings.prototype.get = function (key){
-      return this.dataStore.get(key);
-    };
-
-    Settings.prototype.set = function(key, value){
-      return this.dataStore.set(key, value);
-    };
-
-    Settings.prototype.delete = function(key) {
-      return this.dataStore.delete(key);
-    };
-
-    return new Settings();
+    return new JsonRepository(options);
   });

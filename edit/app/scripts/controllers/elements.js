@@ -8,9 +8,9 @@
  * Controller of the overcasterApp
  */
 angular.module('overcasterApp')
-  .controller('ElementsCtrl', function ($scope, ElementsRepository) {
+  .controller('ElementsCtrl', function ($scope, ElementRepository) {
 
-    var elementsRepo = new ElementsRepository();
+    var elementsRepo = new ElementRepository();
 
     $scope.elements = [];
 
